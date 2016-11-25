@@ -6,13 +6,13 @@
  
 ** Literals
  #+BEGIN_EXAMPLE
-   #+BEGIN_SRC emacs-lisp
-   #+BEGIN_SRC emacs-lisp -n 20  ;; Show line numbers starting from 20
-   #+BEGIN_SRC emacs-lisp +n 20  ;; Show line numbers ending with 20
-   #+BEGIN_SRC emacs-lisp -n -r  ;; -r supports references
+   ,#+BEGIN_SRC emacs-lisp
+   ,#+BEGIN_SRC emacs-lisp -n 20  ;; Show line numbers starting from 20
+   ,#+BEGIN_SRC emacs-lisp +n 20  ;; Show line numbers ending with 20
+   ,#+BEGIN_SRC emacs-lisp -n -r  ;; -r supports references
      (save-excursion                  (ref:sc)
        (goto-char (point-min)))       (ref:jump)
-   #+END_SRC
+   ,#+END_SRC
    In line [[(sc)]] we remember the current position.  [[(jump)][Line (jump)]]
    jumps to point-min.
  #+END_EXAMPLE
