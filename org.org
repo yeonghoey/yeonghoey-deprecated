@@ -1,4 +1,4 @@
-* Org mode
+* Org
 ** Link format
  #+BEGIN_EXAMPLE
    [[link][description]] or alternatively [[link]]
@@ -7,7 +7,7 @@
  - http://orgmode.org/manual/Link-format.html
  
 ** Literals
- #+BEGIN_EXAMPLE
+ #+BEGIN_SRC org
    ,#+NAME: <name>
    ,#+BEGIN_SRC <language> <switches> <header arguments>
       <body>
@@ -18,12 +18,12 @@
    ,#+BEGIN_SRC emacs-lisp +n 20  ;; Show line numbers ending with 20
 
    ,#+BEGIN_SRC emacs-lisp -n -r  ;; -r supports references
-     (save-excursion                  (ref:sc)
-       (goto-char (point-min)))       (ref:jump)
+     (save-excursion             (ref:sc)
+       (goto-char (point-min)))  (ref:jump)
    ,#+END_SRC
    In line [[(sc)]] we remember the current position.  [[(jump)][Line (jump)]]
    jumps to point-min.
- #+END_EXAMPLE
+ #+END_SRC
 
   - [[http://orgmode.org/manual/Structure-of-code-blocks.html]]
   - http://orgmode.org/worg/org-contrib/babel/languages.html
