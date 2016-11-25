@@ -1,11 +1,12 @@
-* Org
+* Org-mode
 ** Link format
  #+BEGIN_EXAMPLE
    [[link][description]] or alternatively [[link]]
  #+END_EXAMPLE
 
  - http://orgmode.org/manual/Link-format.html
- 
+   
+
 ** Literals
  #+BEGIN_SRC org
    ,#+NAME: <name>
