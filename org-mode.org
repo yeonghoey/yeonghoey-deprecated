@@ -1,0 +1,7 @@
+* Org mode
+** Link format
+#+BEGIN_SRC 
+[[link][description]] or alternatively [[link]]
+#+END_SRC
+
+[[http://orgmode.org/manual/Link-format.html]]
