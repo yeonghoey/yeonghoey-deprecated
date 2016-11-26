@@ -28,3 +28,5 @@
 
   - [[http://orgmode.org/manual/Structure-of-code-blocks.html]]
   - http://orgmode.org/worg/org-contrib/babel/languages.html
+
+http://orgmode.org/manual/Global-and-local-cycling.html#Global-and-local-cycling
