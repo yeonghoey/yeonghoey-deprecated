@@ -3,4 +3,4 @@
 - https://github.com/pashky/restclient.el
 - https://github.com/zweifisch/ob-http
 - ~, sS~
-- **Lines starting with # are considered comments AND also act as separators.**
+- *Lines starting with # are considered comments AND also act as separators.*
