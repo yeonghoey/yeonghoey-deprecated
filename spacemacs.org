@@ -9,6 +9,8 @@
 - https://github.com/pashky/restclient.el
 - https://github.com/zweifisch/ob-http
 - Lines starting with # are considered comments AND also act as separators.
+- ~SPC m sS~ to send 
+- ~SPC m y~ to copy as curl command
 
 #+BEGIN_EXAMPLE
   GET https://api.github.com
