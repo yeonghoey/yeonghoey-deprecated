@@ -12,13 +12,10 @@
 
 #+BEGIN_EXAMPLE
   GET https://api.github.com
-  User-Agent: Emacs Restclient
 
   #
 
   POST https://jira.atlassian.com/rest/api/2/search
-  Content-Type: application/json
-
   {
           "jql": "project = HSP",
           "startAt": 0,
@@ -31,6 +28,7 @@
   }
 #+END_EXAMPLE
 
+#+NAME: ob-http
 #+BEGIN_EXAMPLE
   ,#+BEGIN_SRC http :pretty
   GET https://api.github.com/repos/zweifisch/ob-http/languages
