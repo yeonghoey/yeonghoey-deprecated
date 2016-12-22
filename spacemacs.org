@@ -15,20 +15,12 @@
 
   #
 
-  POST https://jira.atlassian.com/rest/api/2/search
+  POST https://api.github.com
   {
-          "jql": "project = HSP",
-          "startAt": 0,
-          "maxResults": 15,
-          "fields": [
-                  "summary",
-                  "status",
-                  "assignee"
-          ]
+    "key": "value"
   }
 #+END_EXAMPLE
-
-#+NAME: ob-http
+*** ob-http
 #+BEGIN_EXAMPLE
   ,#+BEGIN_SRC http :pretty
   GET https://api.github.com/repos/zweifisch/ob-http/languages
