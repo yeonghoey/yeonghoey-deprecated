@@ -1,6 +1,44 @@
+#+TITLE: Spacemacs
+
+* Table of Contents :TOC_2_gh:
+ - [[#layers][Layers]]
+   - [[#restclient][restclient]]
+
 * Layers
 ** restclient
 - https://github.com/pashky/restclient.el
 - https://github.com/zweifisch/ob-http
-- ~, sS~
-- *Lines starting with # are considered comments AND also act as separators.*
+- Lines starting with # are considered comments AND also act as separators.
+
+#+BEGIN_EXAMPLE
+  GET https://api.github.com
+  User-Agent: Emacs Restclient
+
+  #
+
+  POST https://jira.atlassian.com/rest/api/2/search
+  Content-Type: application/json
+
+  {
+          "jql": "project = HSP",
+          "startAt": 0,
+          "maxResults": 15,
+          "fields": [
+                  "summary",
+                  "status",
+                  "assignee"
+          ]
+  }
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+  ,#+BEGIN_SRC http :pretty
+  GET https://api.github.com/repos/zweifisch/ob-http/languages
+  Accept: application/vnd.github.moondragon+json
+  ,#+END_SRC
+
+  ,#+RESULTS:
+  : {
+  :   "Emacs Lisp": 8170
+  : }
+#+END_EXAMPLE
