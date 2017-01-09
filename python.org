@@ -1,6 +1,0 @@
-* Python
-** Test
-  #+BEGIN_SRC python
-    def test():
-        print 'Hello, world!'
-  #+END_SRC
