@@ -1,0 +1,15 @@
+#+TITLE: Intro to HTML and CSS
+
+* Table of Contents :TOC_2_gh:
+ - [[#interview-with-jacques][Interview with Jacques]]
+
+* Interview with Jacques
+[[file:img/screenshot_2017-01-27_07-50-12.png]]
+
+(Udacity the lead front-end developer)
+
+#+BEGIN_QUOTE
+So I start out sort of understanding and cutting up the boxes that I'm going to use.
+And that starts with the big box that is your whole page.
+And from there I sort of split it up piece by piece and we work from big to small.
+#+END_QUOTE
