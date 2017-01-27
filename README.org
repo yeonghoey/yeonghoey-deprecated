@@ -1,2 +1,4 @@
-* Notes
-Study notes, reviews, articulated concepts and cheat sheets.
+#+TITLE: yeonghoey
+
+* yeonghoey
+A personal knowledge base
