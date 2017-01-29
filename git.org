@@ -7,6 +7,8 @@
  - [[#git-flow][git flow]]
    - [[#git-flow-release-finish][git flow release finish]]
    - [[#when-it-comes-to-code-review][When it comes to code review]]
+ - [[#purge-files-including-their-histories][Purge files including their histories]]
+   - [[#bfg-repo-cleaner][BFG Repo-Cleaner]]
 
 * tag
 ** prune local git tags that don't exist on remote
@@ -34,3 +36,16 @@ http://softwareengineering.stackexchange.com/questions/187723/code-review-with-g
 ~git flow feature finish~ just merges into develop without code review.
 To work around this, just don't use ~finish~ but make a pull request
 and delete the branch manually after it merged.
+* Purge files including their histories
+- https://help.github.com/articles/removing-sensitive-data-from-a-repository/
+
+** BFG Repo-Cleaner
+- https://rtyley.github.io/bfg-repo-cleaner/
+
+#+BEGIN_SRC shell
+git clone --mirror git@github.com:yeonghoey/yeonghoey.git
+java -jar ~/.local/bin/bfg.jar --strip-blobs-bigger-than 1M yeonghoey.git
+cd yeonghoey.git
+git reflog expire --expire=now --all && git gc --prune=now --aggressive
+git push
+#+END_SRC
