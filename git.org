@@ -1,0 +1,36 @@
+#+TITLE: Git
+
+* Table of Contents                                                :TOC_2_gh:
+ - [[#tag][tag]]
+   - [[#prune-local-git-tags-that-dont-exist-on-remote][prune local git tags that don't exist on remote]]
+ - [[#list-tree][list-tree]]
+ - [[#git-flow][git flow]]
+   - [[#git-flow-release-finish][git flow release finish]]
+   - [[#when-it-comes-to-code-review][When it comes to code review]]
+
+* tag
+** prune local git tags that don't exist on remote
+https://demisx.github.io/git/2014/11/02/git-prune-local-tags-dont-exist-remote.html
+#+BEGIN_SRC shell
+  $ git tag -l | xargs git tag -d # remove all local tags
+  $ git fetch -t                  # fetch remote tags
+#+END_SRC
+
+* list-tree
+#+BEGIN_SRC shell
+  # lists all of the already committed files being tracked by your git repo.
+  $ git ls-tree --full-tree -r HEAD
+#+END_SRC
+* git flow
+** git flow release finish
+Make sure the local ~develop~ and ~master~ branches are fresh.
+When trigger ~finish~, the merge flow is following:
+1. merges ~release/something~  into ~master~
+2. creates a tag on the ~master~ commit.
+3. merges ~master~ into ~develop~
+
+** When it comes to code review
+http://softwareengineering.stackexchange.com/questions/187723/code-review-with-git-flow-and-github
+~git flow feature finish~ just merges into develop without code review.
+To work around this, just don't use ~finish~ but make a pull request
+and delete the branch manually after it merged.

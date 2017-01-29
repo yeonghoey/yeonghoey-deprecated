@@ -1,0 +1,105 @@
+#+TITLE: Spacemacs
+
+* Table of Contents :TOC_2_gh:
+ - [[#emacs-concepts][Emacs concepts]]
+   - [[#indirect-buffers][Indirect Buffers]]
+ - [[#layers][Layers]]
+   - [[#auto-completion][auto-completion]]
+   - [[#restclient][restclient]]
+
+* Emacs concepts
+** Indirect Buffers
+- https://www.gnu.org/software/emacs/manual/html_node/emacs/Indirect-Buffers.html
+#+BEGIN_QUOTE
+An indirect buffer shares the text of some other buffer,
+which is called the base buffer of the indirect buffer.
+In some ways it is a buffer analogue of a symbolic link between files.
+#+END_QUOTE
+
+* Layers
+** auto-completion
+*** YASnippet
+**** Configuration
+#+BEGIN_SRC emacs-lisp
+  '((auto-completion :variables
+                     auto-completion-private-snippets-directory "~/.dotfiles/spacemacs/snippets")
+#+END_SRC
+
+**** Organization
+- https://joaotavora.github.io/yasnippet/snippet-organization.html
+#+BEGIN_EXAMPLE
+  snippets
+  |-- c-mode
+  |   |-- .yas-parents    # contains "cc-mode text-mode"
+  |   `-- printf
+  |-- cc-mode
+  |   |-- for
+  |   `-- while
+  |-- java-mode
+  |   |-- .yas-parents    # contains "cc-mode text-mode"
+  |   `-- println
+  `-- text-mode
+      |-- email
+      `-- time
+#+END_EXAMPLE
+
+**** Writing
+- https://joaotavora.github.io/yasnippet/snippet-development.html
+ 
+#+BEGIN_EXAMPLE
+  # name: mysnippet
+  # key: my_
+  # --
+  ${1:$(make-string (string-width yas-text) ?\=)}
+  ${1:Title}
+  ${1:$(make-string (string-width yas-text) ?\=)}
+
+  - (${1:id})${2:foo}
+  {
+      return $2;
+  }
+
+  - (void)set${2:$(capitalize yas-text)}:($1)aValue
+  {
+      [$2 autorelease];
+      $2 = [aValue retain];
+  }
+  $0
+#+END_EXAMPLE
+- The lines above ~# --~ is meta
+- ~$1~ or ~${1}~ is a tapstop
+- ~${1:<something>}~ for specifying a default value
+- ~$0~ is the exit point
+- A tapstop can show up multiple times, which mirrors the first occurance
+- Mirrors can be transformed with ~${2:$(elisp-code)~, with ~yas-text~ place holder
+
+** restclient
+- https://github.com/pashky/restclient.el
+- https://github.com/zweifisch/ob-http
+- Lines starting with # are considered comments AND also act as separators.
+- ~SPC m s~ to send 
+- ~SPC m y~ to copy as curl command
+
+#+BEGIN_EXAMPLE
+  GET https://api.github.com
+
+  #
+
+  POST https://api.github.com
+  {
+    "key": "value"
+  }
+#+END_EXAMPLE
+*** ob-http
+#+BEGIN_EXAMPLE
+  ,#+BEGIN_SRC http :pretty
+  GET https://api.github.com/repos/zweifisch/ob-http/languages
+  Accept: application/vnd.github.moondragon+json
+  ,#+END_SRC
+
+  ,#+RESULTS:
+  : {
+  :   "Emacs Lisp": 8170
+  : }
+#+END_EXAMPLE
+

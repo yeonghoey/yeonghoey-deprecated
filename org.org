@@ -1,0 +1,126 @@
+#+TITLE: Org
+
+* Table of Contents                                                :TOC_4_GH:
+ - [[#title][Title]]
+ - [[#format][Format]]
+   - [[#references][References]]
+ - [[#literals][Literals]]
+   - [[#basics][Basics]]
+     - [[#syntax][Syntax]]
+     - [[#examples][Examples]]
+     - [[#one-liner][One liner]]
+   - [[#language-specific-examples][Language specific examples]]
+     - [[#python][Python]]
+   - [[#references-1][References]]
+ - [[#links-and-snippets][Links and snippets]]
+ - [[#capture][Capture]]
+ - [[#timestamps][Timestamps]]
+   - [[#active-vs-inactive][Active vs Inactive]]
+
+* Title
+- http://orgmode.org/manual/Document-title.html
+
+#+BEGIN_EXAMPLE
+ #+TITLE: This is the title of the document
+#+END_EXAMPLE
+
+#+BEGIN_QUOTE
+If you are exporting only a subtree, its heading will become the title of the document.
+If the subtree has a property EXPORT_TITLE, that will take precedence.
+#+END_QUOTE
+
+* Format
+#+BEGIN_EXAMPLE
+  [[link][description]] or alternatively [[link]]
+  *bold*, /italic/, _underlined_, =verbatim= and ~code~, +strike-through+
+#+END_EXAMPLE
+
+** References
+- [[http://orgmode.org/manual/Link-format.html][Link format]]
+- [[http://orgmode.org/manual/Emphasis-and-monospace.html][Emphasis and monospace]]
+
+* Literals
+** Basics
+*** Syntax
+#+BEGIN_SRC org
+  ,#+NAME: <name>
+  ,#+BEGIN_SRC <language> <switches> <header arguments>
+     <body>
+  ,#+END_SRC
+#+END_SRC
+
+*** Examples
+#+BEGIN_SRC org
+  ,#+BEGIN_SRC emacs-lisp
+  ,#+BEGIN_SRC emacs-lisp -n 20  ;; Show line numbers starting from 20
+  ,#+BEGIN_SRC emacs-lisp +n 20  ;; Show line numbers ending with 20
+
+  ,#+BEGIN_SRC emacs-lisp -n -r  ;; -r supports references
+    (save-excursion             (ref:sc)
+      (goto-char (point-min)))  (ref:jump)
+  ,#+END_SRC
+  In line [[(sc)]] we remember the current position.  [[(jump)][Line (jump)]]
+  jumps to point-min.
+#+END_SRC
+
+*** One liner
+#+BEGIN_SRC org
+  Here is an example
+  : Some example from a text file.
+#+END_SRC
+
+** Language specific examples
+*** Python
+#+BEGIN_SRC org
+  ,#+begin_src python :results output
+  print "Hello, world!"
+  ,#+end_src python
+
+  ,#+tblname: data_table
+  | a | 1 |
+  | b | 2 |
+  | c | 3 |
+  ,#+begin_src python :var val=1 :var data=data_table
+  # Return row specified by val.
+  # In non-session mode, use return to return results.
+  return(data[val])
+  ,#+end_src
+
+  ,#+RESULTS:
+  | b | 2 |
+#+END_SRC
+
+** References
+  - [[http://orgmode.org/manual/Structure-of-code-blocks.html][Structure of code blocks]]
+  - [[http://orgmode.org/worg/org-contrib/babel/languages.html][Supported languages]]
+
+* TODO Links and snippets
+- http://orgmode.org/manual/Global-and-local-cycling.html#Global-and-local-cycling
+- http://orgmode.org/worg/org-configs/org-customization-guide.html
+
+#+begin_src ditaa :file ditaa-simpleboxes.png
++---------+
+|         |
+| Foo     |
+|         |
++----+----+---+
+|Bar |Baz     |
+|    |        |
++----+--------+
+#+end_src
+
+| Header1 | ID       | Header3 | Header4 | Header5 |
+|---------+----------+---------+---------+---------|
+|       1 | Warrior  |         |         |         |
+|       2 | Magician |         |         |         |
+|       3 | Fighter  |         |         |         |
+* Capture
+- http://orgmode.org/manual/Capture-templates.html#Capture-templates
+
+* Timestamps
+** Active vs Inactive
+#+BEGIN_EXAMPLE
+  <2006-11-01 Wed>
+  [2006-11-01 Wed]  # inactive timestamps, they do not trigger an entry to show up in the agenda.
+#+END_EXAMPLE
+
