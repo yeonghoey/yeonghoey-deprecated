@@ -11,6 +11,7 @@
  - [[#here-document][here-document]]
  - [[#pgrep][pgrep]]
  - [[#set][set]]
+ - [[#tar][tar]]
  - [[#xargs][xargs]]
 
 * The Art of Command Line
@@ -304,6 +305,115 @@ If you accidentally delete lost+found, don't re-create it with mkdir, use mklost
   set -x  # Print a trace of simple commands
 #+END_SRC
 
+* tar
+- http://www.tecmint.com/18-tar-command-examples-in-linux/
+- http://askubuntu.com/questions/122141/whats-the-difference-between-tar-gz-and-gz-or-tar-7z-and-7z
+
+| flag      | mnemonic         |
+|-----------+------------------|
+| ~-c~      | create           |
+| ~-x~      | extract          |
+| ~-t~      | list             |
+| ~-v~      | verbose          |
+| ~-C DIR~  | change directory |
+| ~-f FILE~ | target file      |
+
+
+#+BEGIN_EXAMPLE
+  $ pwd
+  /tmp
+
+  $ tree target
+  target
+  ├── a.txt
+  └── path
+      └── b.txt
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+  $ tar -cvf target1.tar /tmp/target
+  tar: Removing leading '/' from member names
+  a tmp/target
+  a tmp/target/a.txt
+  a tmp/target/path
+  a tmp/target/path/b.txt
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+  $ tar -xvf target1.tar
+  $ tree tmp
+  tmp
+  └── target
+      ├── a.txt
+      └── path
+          └── b.txt
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+  # Change directory
+
+  $ tar -C /tmp/target -cvf target2.tar .
+  a .
+  a ./a.txt
+  a ./path
+  a ./path/b.txt
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+  $ mkdir out
+  $ tar -C out -xvf target2.tar
+  $ tree out
+  out
+  ├── a.txt
+  └── path
+      └── b.txt
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+  # Exclude
+
+  $ tar -cvf target3.tar --exclude a.txt target
+  a target
+  a target/path
+  a target/path/b.txt
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+  # Compression
+
+  $ tar -cvzf target.tar.gz target
+  a target
+  a target/a.txt
+  a target/path
+  a target/path/b.txt
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+  # Don't need any option for extracting compressed tar
+
+  $ tar -xvf target.tar.gz
+  x target/
+  x target/a.txt
+  x target/path/
+  x target/path/b.txt
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+  # List
+
+  $ tar -tvf target.tar.gz
+  drwxr-xr-x  0 hoey   staff       0 Jan 30 10:26 target/
+  -rw-r--r--  0 hoey   staff       0 Jan 30 10:23 target/a.txt
+  drwxr-xr-x  0 hoey   staff       0 Jan 30 10:26 target/path/
+  -rw-r--r--  0 hoey   staff       0 Jan 30 10:23 target/path/b.txt
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+  # Untar a single file
+
+  $ tar -xvf target.tar.gz target/a.txt
+  x target/a.txt
+#+END_EXAMPLE
 * xargs
 #+BEGIN_SRC shell
   $ echo 1 2 3 4 | xargs echo
