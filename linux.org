@@ -11,6 +11,7 @@
  - [[#here-document][here-document]]
  - [[#pgrep][pgrep]]
  - [[#set][set]]
+ - [[#sort][sort]]
  - [[#tar][tar]]
  - [[#xargs][xargs]]
 
@@ -304,6 +305,32 @@ If you accidentally delete lost+found, don't re-create it with mkdir, use mklost
   set -e  # Exit immediately when a command fails
   set -x  # Print a trace of simple commands
 #+END_SRC
+
+* sort
+- http://ss64.com/bash/sort.html
+- http://www.skorks.com/2010/05/sort-files-like-a-master-with-the-linux-sort-command-bash/
+
+#+BEGIN_SRC shell
+  sort -nr numbers.txt # descending numeric order
+  sort -k3 output.txt  # key3, omitting the first and second fields.
+  sort -f names.txt    # ignore case
+  sort -s names.txt    # stable sort
+  sort -u names.txt    # unique
+  sort -t: /etc/passwd # use ':' as the field delimiter
+#+END_SRC
+
+#+BEGIN_SRC shell
+# Sort by column2 and then column4, numerically, delimited by '.'
+$ cat ips.txt | sort -t. -k 2,2n -k 4,4n
+127.0.0.3
+127.0.0.6
+127.0.0.12
+192.168.0.1
+192.168.0.5
+192.168.0.25
+#+END_SRC
+- ~-k2~  only specifies starting point is column2.
+- ~-k2,2~  specifies both starting, and ending point. which means exact column2.
 
 * tar
 - http://www.tecmint.com/18-tar-command-examples-in-linux/
