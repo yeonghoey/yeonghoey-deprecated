@@ -8,6 +8,7 @@
  - [[#apt][apt]]
  - [[#case][case]]
  - [[#grep][grep]]
+ - [[#here-document][here-document]]
  - [[#pgrep][pgrep]]
  - [[#set][set]]
  - [[#xargs][xargs]]
@@ -245,6 +246,43 @@ If you accidentally delete lost+found, don't re-create it with mkdir, use mklost
   $ echo hello world | grep -o hello
   hello
 #+END_SRC
+
+* here-document
+- https://en.wikipedia.org/wiki/Here_document
+
+#+BEGIN_SRC shell
+  tr a-z A-Z << END_TEXT
+  one two three
+  four five six
+  END_TEXT
+#+END_SRC
+#+BEGIN_EXAMPLE
+  ONE TWO THREE
+  FOUR FIVE SIX
+#+END_EXAMPLE
+
+
+#+BEGIN_SRC shell
+  # Ignore leading tabs
+  tr a-z A-Z <<- END_TEXT
+           one two three
+           four five six
+           END_TEXT
+#+END_SRC
+#+BEGIN_EXAMPLE
+  (Same as above)
+#+END_EXAMPLE
+
+
+#+BEGIN_SRC shell
+  # Disable string interpolation
+  cat << 'EOF'
+  \$ Working dir "$PWD" `pwd`
+  EOF
+#+END_SRC
+#+BEGIN_EXAMPLE
+  \$ Working dir "$PWD" `pwd`
+#+END_EXAMPLE
 
 * pgrep
 
