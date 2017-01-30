@@ -318,7 +318,7 @@ If you accidentally delete lost+found, don't re-create it with mkdir, use mklost
 | ~-C DIR~  | change directory |
 | ~-f FILE~ | target file      |
 
-
+-----
 #+BEGIN_SRC shell
   $ cd /tmp
   $ tree target
