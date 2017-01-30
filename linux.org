@@ -319,112 +319,101 @@ If you accidentally delete lost+found, don't re-create it with mkdir, use mklost
 | ~-f FILE~ | target file      |
 
 
-#+BEGIN_SRC shell
+#+BEGIN_EXAMPLE
   $ cd /tmp
   $ tree target
-#+END_SRC
-#+BEGIN_EXAMPLE
+
   target
   ├── a.txt
   └── path
       └── b.txt
 #+END_EXAMPLE
------
-#+BEGIN_SRC shell
-  $ tar -cvf target1.tar /tmp/target
-#+END_SRC
+
 #+BEGIN_EXAMPLE
+  $ tar -cvf target1.tar /tmp/target
+
   tar: Removing leading '/' from member names
   a tmp/target
   a tmp/target/a.txt
   a tmp/target/path
   a tmp/target/path/b.txt
 #+END_EXAMPLE
------
-#+BEGIN_SRC shell
+
+#+BEGIN_EXAMPLE
   $ tar -xvf target1.tar
   $ tree tmp
-#+END_SRC
-#+BEGIN_EXAMPLE
+
   tmp
   └── target
       ├── a.txt
       └── path
           └── b.txt
 #+END_EXAMPLE
------
-#+BEGIN_SRC shell
+
+#+BEGIN_EXAMPLE
   # Change directory
   $ tar -C /tmp/target -cvf target2.tar .
-#+END_SRC
-#+BEGIN_EXAMPLE
+
   a .
   a ./a.txt
   a ./path
   a ./path/b.txt
 #+END_EXAMPLE
------
-#+BEGIN_SRC shell
+
+#+BEGIN_EXAMPLE
   $ mkdir out
   $ tar -C out -xvf target2.tar
   $ tree out
-#+END_SRC
-#+BEGIN_EXAMPLE
+
   out
   ├── a.txt
   └── path
       └── b.txt
 #+END_EXAMPLE
------
-#+BEGIN_SRC shell
+
+#+BEGIN_EXAMPLE
   # Exclude
   $ tar -cvf target3.tar --exclude a.txt target
-#+END_SRC
-#+BEGIN_EXAMPLE
+
   a target
   a target/path
   a target/path/b.txt
 #+END_EXAMPLE
------
-#+BEGIN_SRC shell
-#+BEGIN_SRC shell
+
+#+BEGIN_EXAMPLE
   # Compression
   $ tar -cvzf target.tar.gz target
-#+END_SRC
-#+BEGIN_EXAMPLE
+
   a target
   a target/a.txt
   a target/path
   a target/path/b.txt
 #+END_EXAMPLE
------ 
-#+BEGIN_SRC shell
+
+#+BEGIN_EXAMPLE
   # Don't need any option for extracting compressed tar
   $ tar -xvf target.tar.gz
-#+END_SRC
-#+BEGIN_EXAMPLE
+
   x target/
   x target/a.txt
   x target/path/
   x target/path/b.txt
 #+END_EXAMPLE
------
-#+BEGIN_SRC shell
+
+#+BEGIN_EXAMPLE
   # List
   $ tar -tvf target.tar.gz
-#+END_SRC
-#+BEGIN_EXAMPLE
+
   drwxr-xr-x  0 hoey   staff       0 Jan 30 10:26 target/
   -rw-r--r--  0 hoey   staff       0 Jan 30 10:23 target/a.txt
   drwxr-xr-x  0 hoey   staff       0 Jan 30 10:26 target/path/
   -rw-r--r--  0 hoey   staff       0 Jan 30 10:23 target/path/b.txt
 #+END_EXAMPLE
------
-#+BEGIN_SRC shell
+
+#+BEGIN_EXAMPLE
   # Untar a single file
   $ tar -xvf target.tar.gz target/a.txt
-#+END_SRC
-#+BEGIN_EXAMPLE
+
   x target/a.txt
 #+END_EXAMPLE
 
