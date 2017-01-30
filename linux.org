@@ -495,6 +495,9 @@ $ cat ips.txt | sort -t. -k 2,2n -k 4,4n
   # Use null character as input terminator, useful when input contains white space.
   # For example, 'find -print0' supports this
   $ echo 1 2 3 4 | xargs -0 echo
+
+  # Delete files whose names contain 'conflicted'
+  $ find . -name '*conflicted*' -print0 | xargs -0 rm
 #+END_SRC
 
 - http://www.thegeekstuff.com/2013/12/xargs-examples
