@@ -329,7 +329,7 @@ If you accidentally delete lost+found, don't re-create it with mkdir, use mklost
   └── path
       └── b.txt
 #+END_EXAMPLE
-
+-----
 #+BEGIN_SRC shell
   $ tar -cvf target1.tar /tmp/target
 #+END_SRC
@@ -340,7 +340,7 @@ If you accidentally delete lost+found, don't re-create it with mkdir, use mklost
   a tmp/target/path
   a tmp/target/path/b.txt
 #+END_EXAMPLE
-
+-----
 #+BEGIN_SRC shell
   $ tar -xvf target1.tar
   $ tree tmp
@@ -352,7 +352,7 @@ If you accidentally delete lost+found, don't re-create it with mkdir, use mklost
       └── path
           └── b.txt
 #+END_EXAMPLE
-
+-----
 #+BEGIN_SRC shell
   # Change directory
   $ tar -C /tmp/target -cvf target2.tar .
@@ -363,7 +363,7 @@ If you accidentally delete lost+found, don't re-create it with mkdir, use mklost
   a ./path
   a ./path/b.txt
 #+END_EXAMPLE
-
+-----
 #+BEGIN_SRC shell
   $ mkdir out
   $ tar -C out -xvf target2.tar
@@ -375,7 +375,7 @@ If you accidentally delete lost+found, don't re-create it with mkdir, use mklost
   └── path
       └── b.txt
 #+END_EXAMPLE
-
+-----
 #+BEGIN_SRC shell
   # Exclude
   $ tar -cvf target3.tar --exclude a.txt target
@@ -385,7 +385,8 @@ If you accidentally delete lost+found, don't re-create it with mkdir, use mklost
   a target/path
   a target/path/b.txt
 #+END_EXAMPLE
-
+-----
+#+BEGIN_SRC shell
 #+BEGIN_SRC shell
   # Compression
   $ tar -cvzf target.tar.gz target
@@ -396,7 +397,7 @@ If you accidentally delete lost+found, don't re-create it with mkdir, use mklost
   a target/path
   a target/path/b.txt
 #+END_EXAMPLE
-
+----- 
 #+BEGIN_SRC shell
   # Don't need any option for extracting compressed tar
   $ tar -xvf target.tar.gz
@@ -407,7 +408,7 @@ If you accidentally delete lost+found, don't re-create it with mkdir, use mklost
   x target/path/
   x target/path/b.txt
 #+END_EXAMPLE
-
+-----
 #+BEGIN_SRC shell
   # List
   $ tar -tvf target.tar.gz
@@ -418,7 +419,7 @@ If you accidentally delete lost+found, don't re-create it with mkdir, use mklost
   drwxr-xr-x  0 hoey   staff       0 Jan 30 10:26 target/path/
   -rw-r--r--  0 hoey   staff       0 Jan 30 10:23 target/path/b.txt
 #+END_EXAMPLE
-
+-----
 #+BEGIN_SRC shell
   # Untar a single file
   $ tar -xvf target.tar.gz target/a.txt
@@ -426,6 +427,7 @@ If you accidentally delete lost+found, don't re-create it with mkdir, use mklost
 #+BEGIN_EXAMPLE
   x target/a.txt
 #+END_EXAMPLE
+
 * xargs
 #+BEGIN_SRC shell
   $ echo 1 2 3 4 | xargs echo
