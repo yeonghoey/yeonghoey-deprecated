@@ -2,9 +2,9 @@
 
 * Table of Contents                                                :TOC_1_gh:
  - [[#the-art-of-command-line][The Art of Command Line]]
+ - [[#prompt-a-user-for-yesno][Prompt a user for yes/no]]
  - [[#history-expasion][History Expasion]]
  - [[#mounting-a-volume][Mounting a Volume]]
- - [[#prompt-a-user-for-yesno][Prompt a user for yes/no]]
  - [[#apt][apt]]
  - [[#case][case]]
  - [[#grep][grep]]
@@ -65,6 +65,16 @@
   # sum of all numbers in the third column
   awk '{ x += $3 } END { print x }' myfile
 #+END_SRC
+
+* Prompt a user for yes/no
+#+BEGIN_SRC shell
+  read -p "Are you sure you want to continue? <y/N> " prompt
+  if [[ "$prompt" =~ [yY](es)* ]]
+  then
+  fi
+#+END_SRC
+- http://stackoverflow.com/questions/3231804/in-bash-how-to-add-are-you-sure-y-n-to-any-command-or-alias/3231821#3231821
+- http://stackoverflow.com/questions/226703/how-do-i-prompt-for-yes-no-cancel-input-in-a-linux-shell-script
 
 * History Expasion
 #+BEGIN_SRC shell
@@ -188,16 +198,6 @@ On many filesystems, the lost+found directory is a bit special
 because it preallocates a bit of space for fsck to deposit files there. (...)
 If you accidentally delete lost+found, don't re-create it with mkdir, use mklost+found if available.
 #+END_QUOTE
-
-* Prompt a user for yes/no
-#+BEGIN_SRC shell
-  read -p "Are you sure you want to continue? <y/N> " prompt
-  if [[ "$prompt" =~ [yY](es)* ]]
-  then
-  fi
-#+END_SRC
-- http://stackoverflow.com/questions/3231804/in-bash-how-to-add-are-you-sure-y-n-to-any-command-or-alias/3231821#3231821
-- http://stackoverflow.com/questions/226703/how-do-i-prompt-for-yes-no-cancel-input-in-a-linux-shell-script
 
 * apt
 **  Install java8
