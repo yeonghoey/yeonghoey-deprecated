@@ -9,6 +9,7 @@
  - [[#case][case]]
  - [[#grep][grep]]
  - [[#here-document][here-document]]
+ - [[#lsof][lsof]]
  - [[#pgrep][pgrep]]
  - [[#set][set]]
  - [[#sort][sort]]
@@ -284,6 +285,12 @@ If you accidentally delete lost+found, don't re-create it with mkdir, use mklost
 #+BEGIN_EXAMPLE
   \$ Working dir "$PWD" `pwd`
 #+END_EXAMPLE
+
+* lsof
+#+BEGIN_SRC shell
+  # numeric ip(-n) and port(-P)
+  $ lsof -n -P | less
+#+END_SRC
 
 * pgrep
 
