@@ -82,7 +82,7 @@ So we have to change it manually, and sync it with the terraform state.
 For syncing, you have to remove its state from ~tfstate~ and ~import~ it again.
 
 1. Stop the target instance and change its instance type to what you desire.
-[[file:img/screenshot_2017-01-31_13-33-29.png]]
+   [[file:img/screenshot_2017-01-31_13-33-29.png]]
 
 2. Remove the instance from ~terraform.tfstate~:
    #+BEGIN_EXAMPLE
