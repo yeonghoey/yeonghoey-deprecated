@@ -86,7 +86,7 @@ For syncing, you have to remove its state from ~tfstate~ and ~import~ it again.
 Follow the steps below:
 
 1. Stop the target instance and change its instance type to what you desire.
-   [[file:img/screenshot_2017-01-31_13-33-29.png]]
+   [[file:img/screenshot_2017-01-31_13-41-13.png]] 
 
 2. Remove the instance from ~terraform.tfstate~:
    #+BEGIN_EXAMPLE
