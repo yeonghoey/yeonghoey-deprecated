@@ -1,5 +1,9 @@
 #+TITLE: Terraform
 * Table of Contents                                                :TOC_2_gh:
+ - [[#use-cases][Use Cases]]
+   - [[#using-ignore_changes][Using ignore_changes]]
+   - [[#dynamic-interpolation-cant-be-used-over-count][Dynamic interpolation can't be used over ~count~]]
+   - [[#change-the-instance-type-of-an-aws-ec2-instance-without-destroying-recreating-it][Change the instance type of an AWS ec2 instance without destroying-recreating it]]
  - [[#concepts][Concepts]]
    - [[#terraform-files][Terraform files]]
    - [[#resources-and-data-sources][Resources and Data Sources]]
@@ -7,11 +11,107 @@
    - [[#variable-files][Variable files]]
    - [[#resource-addressing][Resource Addressing]]
    - [[#interpolation][Interpolation]]
- - [[#use-cases][Use Cases]]
-   - [[#dynamic-interpolation-cant-be-used-over-count][Dynamic interpolation can't be used over ~count~]]
-   - [[#using-ignore_changes][Using ignore_changes]]
  - [[#examples][Examples]]
    - [[#commands][Commands]]
+
+* Use Cases
+** Using ignore_changes
+There was a problem when I defined multiple ~aws_eip~ s which are associated to ~aws_instance~ s.
+
+#+BEGIN_EXAMPLE
+  resource "aws_instance" "foo" {
+    count = 10
+    ..
+  }
+
+  resource "aws_eip" "bar" {
+    count = 10
+    instance = "${element(aws_instance.foo.*.i, count.index}"
+  }
+#+END_EXAMPLE
+
+Terraform plans to change the all association when I only change the ~count~.
+To work around this, use ~ignore_changes~
+
+#+BEGIN_EXAMPLE
+  resource "aws_eip" "bar" {
+    count = 10
+    instance = "${element(aws_instance.foo.*.i, count.index}"
+    lifecycle {
+      ignore_changes = ["instance"]
+    }
+  }
+#+END_EXAMPLE
+
+- https://www.terraform.io/docs/configuration/resources.html
+- https://github.com/hashicorp/terraform/issues/4944
+
+** Dynamic interpolation can't be used over ~count~
+For now, you can't use interpolation for referencing other resources
+to specify ~count~ because of the way that terraform handles ~count~.
+
+#+BEGIN_EXAMPLE
+  variable my_count { 
+    default = 10
+  }
+
+  resource "something" "foo" {
+    count = "${var.my_count}"   # ok
+  }
+
+  resource "something" "bar" {
+    count = "${something.foo.count}"  # error
+  }
+#+END_EXAMPLE
+
+#+BEGIN_QUOTE
+We should definitely do this,
+the tricky part comes from the fact that count expansion is currently done statically,
+before the primary graph walk, which means we can't support "computed" counts right now.
+(A "computed" value in TF is one that's flagged as not known until all its dependencies are calculated.)
+#+END_QUOTE
+
+- https://github.com/hashicorp/terraform/issues/1497#issuecomment-105874601 
+
+** Change the instance type of an AWS ec2 instance without destroying-recreating it
+- https://github.com/hashicorp/terraform/issues/1579
+- https://github.com/hashicorp/terraform/issues/2423
+
+Terraform currently doesn't support changing the instance type without destroying-recreating it.
+So we have to change it manually, and sync it with the terraform state.
+For syncing, you have to remove its state from ~tfstate~ and ~import~ it again.
+
+1. Stop the target instance and change its instance type to what you desire.
+
+2. Remove the instance from ~terraform.tfstate~:
+   #+BEGIN_EXAMPLE
+     $ terraform state rm aws_instance.my_instance
+   #+END_EXAMPLE
+
+3. Update your ~tf~ file as you changed:
+  #+BEGIN_EXAMPLE
+    resource "aws_instance" "my_instance" {
+      (...)
+      instance_type = "t2.mirco"  # as you changed at step 1 
+      (...)
+    }
+  #+END_EXAMPLE
+
+4. Import your instance
+  #+BEGIN_EXAMPLE
+    $ terraform import aws_instance.my_instance i-abcdefg012345678
+  #+END_EXAMPLE
+
+5. Verify it with ~terraform plan~
+  #+BEGIN_EXAMPLE
+    $ terraform plan
+    (...)
+
+    No changes. Infrastructure is up-to-date. This means that Terraform
+    could not detect any differences between your configuration and
+    the real physical resources that exist. As a result, Terraform
+    doesn't need to do anything.
+  #+END_EXAMPLE
 
 * Concepts
 ** Terraform files
@@ -76,66 +176,6 @@ you can reference existing security groups, VPCs, and the like by defining them 
 #+END_EXAMPLE
 
 - https://www.terraform.io/docs/configuration/interpolation.html
-
-* Use Cases
-** Dynamic interpolation can't be used over ~count~
-For now, you can't use interpolation for referencing other resources
-to specify ~count~ because of the way that terraform handles ~count~.
-
-#+BEGIN_EXAMPLE
-  variable my_count { 
-    default = 10
-  }
-
-  resource "something" "foo" {
-    count = "${var.my_count}"   # ok
-  }
-
-  resource "something" "bar" {
-    count = "${something.foo.count}"  # error
-  }
-#+END_EXAMPLE
-
-#+BEGIN_QUOTE
-We should definitely do this,
-the tricky part comes from the fact that count expansion is currently done statically,
-before the primary graph walk, which means we can't support "computed" counts right now.
-(A "computed" value in TF is one that's flagged as not known until all its dependencies are calculated.)
-#+END_QUOTE
-
-- https://github.com/hashicorp/terraform/issues/1497#issuecomment-105874601 
-
-** Using ignore_changes
-There was a problem when I defined multiple ~aws_eip~ s which are associated to ~aws_instance~ s.
-
-#+BEGIN_EXAMPLE
-  resource "aws_instance" "foo" {
-    count = 10
-    ..
-  }
-
-  resource "aws_eip" "bar" {
-    count = 10
-    instance = "${element(aws_instance.foo.*.i, count.index}"
-  }
-#+END_EXAMPLE
-
-Terraform plans to change the all association when I only change the ~count~.
-To work around this, use ~ignore_changes~
-
-#+BEGIN_EXAMPLE
-  resource "aws_eip" "bar" {
-    count = 10
-    instance = "${element(aws_instance.foo.*.i, count.index}"
-    lifecycle {
-      ignore_changes = ["instance"]
-    }
-  }
-#+END_EXAMPLE
-
-- https://www.terraform.io/docs/configuration/resources.html
-- https://github.com/hashicorp/terraform/issues/4944
-
 
 * Examples
 ** Commands
