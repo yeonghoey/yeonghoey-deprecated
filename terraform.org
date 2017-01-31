@@ -3,7 +3,7 @@
  - [[#use-cases][Use Cases]]
    - [[#using-ignore_changes][Using ignore_changes]]
    - [[#dynamic-interpolation-cant-be-used-over-count][Dynamic interpolation can't be used over ~count~]]
-   - [[#change-the-instance-type-of-an-aws-ec2-instance-without-destroying-recreating-it][Change the instance type of an AWS ec2 instance without destroying-recreating it]]
+   - [[#change-an-aws-ec2-instance-type-without-destroying-recreating-it][Change an AWS ec2 instance type without destroying-recreating it]]
  - [[#concepts][Concepts]]
    - [[#terraform-files][Terraform files]]
    - [[#resources-and-data-sources][Resources and Data Sources]]
@@ -73,13 +73,17 @@ before the primary graph walk, which means we can't support "computed" counts ri
 
 - https://github.com/hashicorp/terraform/issues/1497#issuecomment-105874601 
 
-** Change the instance type of an AWS ec2 instance without destroying-recreating it
+** Change an AWS ec2 instance type without destroying-recreating it
 - https://github.com/hashicorp/terraform/issues/1579
 - https://github.com/hashicorp/terraform/issues/2423
 
 Terraform currently doesn't support changing the instance type without destroying-recreating it.
-So we have to change it manually, and sync it with the terraform state.
+
+We should change it manually, and sync it with the terraform state
+to change the instance type without destroying the instance.
+
 For syncing, you have to remove its state from ~tfstate~ and ~import~ it again.
+Follow the steps below:
 
 1. Stop the target instance and change its instance type to what you desire.
    [[file:img/screenshot_2017-01-31_13-33-29.png]]
