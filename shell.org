@@ -60,7 +60,7 @@
   cat a b | sort | uniq -d > c     # c is a intersect b
   cat a b b | sort | uniq -u > c   # c is set difference a - b
 
-  grep . * t   # overview for contents of current directory
+  grep . *     # overview for contents of current directory
   head -100 *  # same as above, with only first 100 lines
 
   # sum of all numbers in the third column
