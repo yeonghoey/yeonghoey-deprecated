@@ -1,7 +1,26 @@
 #+TITLE: Vim
 
 * Table of Contents                                                :TOC_2_gh:
+ - [[#fold][Fold]]
  - [[#get-the-name-of-the-current-file][Get the name of the current file]]
+
+* Fold
+- http://vimcasts.org/episodes/how-to-fold/
+
+| command | effect                              |
+|---------+-------------------------------------|
+| ~za~    | toggle current fold open/closed     |
+| ~zA~	  | recursively open/close current fold |
+| ~zo~	  | open current fold                   |
+| ~zO~	  | recursively open current fold       |
+| ~zc~	  | close current fold                  |
+| ~zC~	  | recursively close current fold      |
+| ~zR~	  | open all folds                      |
+| ~zM~    | close all folds                     |
+| ~zi~    | switch folding on or off            |
+| ~zr~	  | increase `foldlevel` by one         |
+| ~zm~	  | reduce `foldlevel` by one           |
+| ~zv~    | expand folds to reveal cursor       |
 
 * Get the name of the current file
 #+BEGIN_EXAMPLE
