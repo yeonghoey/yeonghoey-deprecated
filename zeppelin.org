@@ -5,6 +5,7 @@
 
 * zeppelin-env.sh
 - https://github.com/apache/zeppelin/blob/master/conf/zeppelin-env.sh.template
+
 #+BEGIN_SRC shell
   # Double the memory for zeppelin itself
   # '-XX:MaxPermSize=512m' is omitted because it's deprecated in Java8
