@@ -484,10 +484,10 @@ $ cat ips.txt | sort -t. -k 2,2n -k 4,4n
 #+END_SRC
 
 #+BEGIN_SRC shell
+  # Redirecting stdout is not affected by 'sudo'
   $ echo 'foo' >> file
   zsh: permission denied: file
 
-  # Redirecting stdout is not affected by 'sudo'
   # 'tee' can be used to work around this  
   $ echo "foo" | sudo tee -a file
 #+END_SRC
