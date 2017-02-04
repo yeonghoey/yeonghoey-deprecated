@@ -314,9 +314,6 @@ If you accidentally delete lost+found, don't re-create it with mkdir, use mklost
 #+END_SRC
 
 * sort
-- http://ss64.com/bash/sort.html
-- http://www.skorks.com/2010/05/sort-files-like-a-master-with-the-linux-sort-command-bash/
-
 #+BEGIN_SRC shell
   sort -nr numbers.txt # descending numeric order
   sort -k3 output.txt  # key3, omitting the first and second fields.
@@ -339,10 +336,10 @@ $ cat ips.txt | sort -t. -k 2,2n -k 4,4n
 - ~-k2~  only specifies starting point is column2.
 - ~-k2,2~  specifies both starting, and ending point. which means exact column2.
 
-* tar
-- http://www.tecmint.com/18-tar-command-examples-in-linux/
-- http://askubuntu.com/questions/122141/whats-the-difference-between-tar-gz-and-gz-or-tar-7z-and-7z
+- http://ss64.com/bash/sort.html
+- http://www.skorks.com/2010/05/sort-files-like-a-master-with-the-linux-sort-command-bash/
 
+* tar
 | flag      | mnemonic         |
 |-----------+------------------|
 | ~-c~      | create           |
@@ -462,9 +459,10 @@ $ cat ips.txt | sort -t. -k 2,2n -k 4,4n
   x target/a.txt
 #+END_EXAMPLE
 
-* tee
-- https://shapeshed.com/unix-tee/
+- http://www.tecmint.com/18-tar-command-examples-in-linux/
+- http://askubuntu.com/questions/122141/whats-the-difference-between-tar-gz-and-gz-or-tar-7z-and-7z
 
+* tee
 #+BEGIN_SRC shell
   $ echo 'foo' | tee foo.txt
   foo
@@ -491,6 +489,8 @@ $ cat ips.txt | sort -t. -k 2,2n -k 4,4n
   # 'tee' can be used to work around this  
   $ echo "foo" | sudo tee -a file
 #+END_SRC
+
+- https://shapeshed.com/unix-tee/
 
 * xargs
 #+BEGIN_SRC shell
