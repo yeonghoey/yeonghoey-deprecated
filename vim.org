@@ -18,8 +18,8 @@
 | ~zR~	  | open all folds                      |
 | ~zM~    | close all folds                     |
 | ~zi~    | switch folding on or off            |
-| ~zr~	  | increase `foldlevel` by one         |
-| ~zm~	  | reduce `foldlevel` by one           |
+| ~zr~	  | increase ~foldlevel~ by one         |
+| ~zm~	  | reduce ~foldlevel~ by one           |
 | ~zv~    | expand folds to reveal cursor       |
 
 * Get the name of the current file
