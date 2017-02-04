@@ -68,16 +68,19 @@
 #+END_SRC
 
 * Prompt a user for yes/no
+- http://stackoverflow.com/questions/3231804/in-bash-how-to-add-are-you-sure-y-n-to-any-command-or-alias/3231821#3231821
+- http://stackoverflow.com/questions/226703/how-do-i-prompt-for-yes-no-cancel-input-in-a-linux-shell-script
+ 
 #+BEGIN_SRC shell
   read -p "Are you sure you want to continue? <y/N> " prompt
   if [[ "$prompt" =~ [yY](es)* ]]
   then
   fi
 #+END_SRC
-- http://stackoverflow.com/questions/3231804/in-bash-how-to-add-are-you-sure-y-n-to-any-command-or-alias/3231821#3231821
-- http://stackoverflow.com/questions/226703/how-do-i-prompt-for-yes-no-cancel-input-in-a-linux-shell-script
 
 * History Expasion
+- http://www.thegeekstuff.com/2011/08/bash-history-expansion
+
 #+BEGIN_SRC shell
   $ history
   1 tar cvf etc.tar /etc/
@@ -131,7 +134,6 @@
 
   $ ls -l !!:$:p  # print without executing it
 #+END_SRC
-- http://www.thegeekstuff.com/2011/08/bash-history-expansion
 
 * Mounting a Volume
 - http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-using-volumes.html
@@ -224,6 +226,8 @@ If you accidentally delete lost+found, don't re-create it with mkdir, use mklost
   #+END_EXAMPLE
 
 * case
+- http://tldp.org/LDP/Bash-Beginners-Guide/html/sect_07_03.html
+
 #+BEGIN_SRC shell
   case "$1" in
     start)
@@ -238,7 +242,6 @@ If you accidentally delete lost+found, don't re-create it with mkdir, use mklost
       ;;
   esac
 #+END_SRC
-- http://tldp.org/LDP/Bash-Beginners-Guide/html/sect_07_03.html
 
 * grep
 #+BEGIN_SRC shell
@@ -294,8 +297,8 @@ If you accidentally delete lost+found, don't re-create it with mkdir, use mklost
 #+END_SRC
 
 * pgrep
-
 - Same usages, but ~pkill~ will kill match processes
+
 #+BEGIN_SRC shell
   $ pgrep pytho
   $ pgrep -f script.py  # match against full arugment lists
@@ -314,6 +317,9 @@ If you accidentally delete lost+found, don't re-create it with mkdir, use mklost
 #+END_SRC
 
 * sort
+- http://ss64.com/bash/sort.html
+- http://www.skorks.com/2010/05/sort-files-like-a-master-with-the-linux-sort-command-bash/
+
 #+BEGIN_SRC shell
   sort -nr numbers.txt # descending numeric order
   sort -k3 output.txt  # key3, omitting the first and second fields.
@@ -324,22 +330,23 @@ If you accidentally delete lost+found, don't re-create it with mkdir, use mklost
 #+END_SRC
 
 #+BEGIN_SRC shell
-# Sort by column2 and then column4, numerically, delimited by '.'
-$ cat ips.txt | sort -t. -k 2,2n -k 4,4n
-127.0.0.3
-127.0.0.6
-127.0.0.12
-192.168.0.1
-192.168.0.5
-192.168.0.25
-#+END_SRC
-- ~-k2~  only specifies starting point is column2.
-- ~-k2,2~  specifies both starting, and ending point. which means exact column2.
+  # Sort by column2 and then column4, numerically, delimited by '.'
+  # while -k2  only specifies starting point is column2
+  # -k2,2  specifies both starting, and ending point. which means exact column2.
 
-- http://ss64.com/bash/sort.html
-- http://www.skorks.com/2010/05/sort-files-like-a-master-with-the-linux-sort-command-bash/
+  $ cat ips.txt | sort -t. -k 2,2n -k 4,4n
+  127.0.0.3
+  127.0.0.6
+  127.0.0.12
+  192.168.0.1
+  192.168.0.5
+  192.168.0.25
+#+END_SRC
 
 * tar
+- http://www.tecmint.com/18-tar-command-examples-in-linux/
+- http://askubuntu.com/questions/122141/whats-the-difference-between-tar-gz-and-gz-or-tar-7z-and-7z
+ 
 | flag      | mnemonic         |
 |-----------+------------------|
 | ~-c~      | create           |
@@ -459,10 +466,9 @@ $ cat ips.txt | sort -t. -k 2,2n -k 4,4n
   x target/a.txt
 #+END_EXAMPLE
 
-- http://www.tecmint.com/18-tar-command-examples-in-linux/
-- http://askubuntu.com/questions/122141/whats-the-difference-between-tar-gz-and-gz-or-tar-7z-and-7z
-
 * tee
+- https://shapeshed.com/unix-tee/
+ 
 #+BEGIN_SRC shell
   $ echo 'foo' | tee foo.txt
   foo
@@ -490,9 +496,11 @@ $ cat ips.txt | sort -t. -k 2,2n -k 4,4n
   $ echo "foo" | sudo tee -a file
 #+END_SRC
 
-- https://shapeshed.com/unix-tee/
-
 * xargs
+- http://www.thegeekstuff.com/2013/12/xargs-examples
+- http://www.unixmantra.com/2013/12/xargs-all-in-one-tutorial-guide.html
+- https://www.cyberciti.biz/faq/linux-unix-bsd-xargs-construct-argument-lists-utility/
+
 #+BEGIN_SRC shell
   $ echo 1 2 3 4 | xargs echo
 
@@ -537,7 +545,3 @@ $ cat ips.txt | sort -t. -k 2,2n -k 4,4n
   # Delete files whose names contain 'conflicted'
   $ find . -name '*conflicted*' -print0 | xargs -0 rm
 #+END_SRC
-
-- http://www.thegeekstuff.com/2013/12/xargs-examples
-- http://www.unixmantra.com/2013/12/xargs-all-in-one-tutorial-guide.html
-- https://www.cyberciti.biz/faq/linux-unix-bsd-xargs-construct-argument-lists-utility/
