@@ -1,0 +1,12 @@
+#+TITLE: Apache Zeppelin
+
+* Table of Contents :TOC_2_gh:
+ - [[#zeppelin-envsh][zeppelin-env.sh]]
+
+* zeppelin-env.sh
+- https://github.com/apache/zeppelin/blob/master/conf/zeppelin-env.sh.template
+#+BEGIN_SRC shell
+  # Double the memory for zeppelin itself
+  # '-XX:MaxPermSize=512m' is omitted because it's deprecated in Java8
+  export ZEPPELIN_MEM='-Xms2048m -Xmx2048m'
+#+END_SRC
