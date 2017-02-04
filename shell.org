@@ -1,4 +1,4 @@
-#+TITLE: Linux
+#+TITLE: Shell
 
 * Table of Contents                                                :TOC_1_gh:
  - [[#the-art-of-command-line][The Art of Command Line]]
