@@ -14,6 +14,7 @@
  - [[#set][set]]
  - [[#sort][sort]]
  - [[#tar][tar]]
+ - [[#tee][tee]]
  - [[#xargs][xargs]]
 
 * The Art of Command Line
@@ -460,6 +461,36 @@ $ cat ips.txt | sort -t. -k 2,2n -k 4,4n
 #+BEGIN_EXAMPLE
   x target/a.txt
 #+END_EXAMPLE
+
+* tee
+- https://shapeshed.com/unix-tee/
+
+#+BEGIN_SRC shell
+  $ echo 'foo' | tee foo.txt
+  foo
+  $ cat foo.txt
+  foo
+
+#+END_SRC
+
+#+BEGIN_SRC shell
+  $ cat foo.txt
+  foo
+  $ echo 'bar' | tee -a foo.txt  # append
+  bar
+  $ cat foo.txt
+  foo
+  bar
+#+END_SRC
+
+#+BEGIN_SRC shell
+  $ echo 'foo' >> file
+  zsh: permission denied: file
+
+  # Redirecting stdout is not affected by 'sudo'
+  # 'tee' can be used to work around this  
+  $ echo "foo" | sudo tee -a file
+#+END_SRC
 
 * xargs
 #+BEGIN_SRC shell
