@@ -5,6 +5,7 @@
  - [[#branch][branch]]
  - [[#flow][flow]]
  - [[#list-tree][list-tree]]
+ - [[#log][log]]
  - [[#tag][tag]]
 
 * Purge files including their histories
@@ -75,6 +76,19 @@ and delete the branch manually after it merged.
   $ git ls-tree --full-tree -r HEAD
 #+END_SRC
 
+* log
+** Find deleted files
+- http://stackoverflow.com/questions/7203515/git-how-to-search-for-a-deleted-file-in-the-project-commit-history
+#+BEGIN_SRC shell
+  git log --all --full-history -- **/thefile.*
+  git log --all --full-history -- <path-to-file>  # if you know the exact path
+
+  # Reveal the content
+  git show <SHA> -- <path-to-file>
+
+  # checkout the file.  Note '^', because <SHA> has deleted the file
+  git checkout <SHA>^ -- <path-to-file>
+#+END_SRC
 * tag
 ** Prune local git tags that don't exist on remote
 - https://demisx.github.io/git/2014/11/02/git-prune-local-tags-dont-exist-remote.html
