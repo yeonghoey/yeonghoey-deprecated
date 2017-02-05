@@ -86,7 +86,8 @@ and delete the branch manually after it merged.
   # Reveal the content
   git show <SHA> -- <path-to-file>
 
-  # checkout the file.  Note '^', because <SHA> has deleted the file
+  # Note '^', checking out from the previous commit.
+  # There won't exist the file in <SHA> because it has been deleted.
   git checkout <SHA>^ -- <path-to-file>
 #+END_SRC
 * tag
