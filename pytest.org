@@ -48,6 +48,7 @@
 
 * Use Cases
 - http://doc.pytest.org/en/latest/assert.html#assertions-about-expected-exceptions
+- http://stackoverflow.com/questions/20274987/how-to-use-pytest-to-check-that-error-is-not-raised
 
 #+BEGIN_SRC python
   import pytest
@@ -55,6 +56,14 @@
   def test_zero_division():
       with pytest.raises(ZeroDivisionError):
           1 / 0
+#+END_SRC
+
+#+BEGIN_SRC python
+  def test_foo3():
+      try:
+          foo(7)
+      except MyError:
+          pytest.fail("Unexpected MyError ..")
 #+END_SRC
 
 * Good Integration Practices
