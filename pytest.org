@@ -2,6 +2,7 @@
 
 * Table of Contents :TOC_2_gh:
  - [[#usage][Usage]]
+ - [[#use-cases][Use Cases]]
  - [[#good-integration-practices][Good Integration Practices]]
    - [[#layouts][Layouts]]
 
@@ -43,6 +44,17 @@
 
   pytest --pdb           # drop into the PDB prompt
   pytest --durations=10  # To get a list of the slowest 10 test durations
+#+END_SRC
+
+* Use Cases
+- http://doc.pytest.org/en/latest/assert.html#assertions-about-expected-exceptions
+
+#+BEGIN_SRC python
+  import pytest
+
+  def test_zero_division():
+      with pytest.raises(ZeroDivisionError):
+          1 / 0
 #+END_SRC
 
 * Good Integration Practices
