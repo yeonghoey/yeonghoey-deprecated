@@ -2,9 +2,8 @@
 
 * Table of Contents :TOC_2_gh:
  - [[#usage][Usage]]
- - [[#use-cases][Use Cases]]
- - [[#good-integration-practices][Good Integration Practices]]
-   - [[#layouts][Layouts]]
+ - [[#raises-and-fail][raises and fail]]
+ - [[#test-layouts][Test Layouts]]
 
 * Usage
 - http://doc.pytest.org/en/latest/usage.html
@@ -46,7 +45,7 @@
   pytest --durations=10  # To get a list of the slowest 10 test durations
 #+END_SRC
 
-* Use Cases
+* raises and fail
 - http://doc.pytest.org/en/latest/assert.html#assertions-about-expected-exceptions
 - http://stackoverflow.com/questions/20274987/how-to-use-pytest-to-check-that-error-is-not-raised
 
@@ -66,11 +65,11 @@
           pytest.fail("Unexpected MyError ..")
 #+END_SRC
 
-* Good Integration Practices
+* Test Layouts
 - http://doc.pytest.org/en/latest/goodpractices.html
-** Layouts
-*** extra directory
-- Useful if you have many functional tests or for other reasons want to keep tests separate from actual application code (often a good idea):
+
+
+Useful if you have many functional tests or for other reasons want to keep tests separate from actual application code (often a good idea):
 #+BEGIN_EXAMPLE
   setup.py   # your setuptools Python package metadata
   mypkg/
@@ -81,7 +80,7 @@
       ...
 #+END_EXAMPLE
 
-- Useful if you have direct relation between (unit-)test and application modules and want to distribute your tests along with your application:
+Useful if you have direct relation between (unit-)test and application modules and want to distribute your tests along with your application:
 #+BEGIN_EXAMPLE
   setup.py   # your setuptools Python package metadata
   mypkg/
