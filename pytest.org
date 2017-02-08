@@ -2,8 +2,8 @@
 
 * Table of Contents :TOC_2_gh:
  - [[#usage][Usage]]
- - [[#raises-and-fail][raises and fail]]
  - [[#test-layouts][Test Layouts]]
+ - [[#raises-and-fail][raises and fail]]
 
 * Usage
 - http://doc.pytest.org/en/latest/usage.html
@@ -45,6 +45,41 @@
   pytest --durations=10  # To get a list of the slowest 10 test durations
 #+END_SRC
 
+* Test Layouts
+- http://doc.pytest.org/en/latest/goodpractices.html
+
+#+BEGIN_EXAMPLE
+  setup.py   # your setuptools Python package metadata
+  mypkg/
+      __init__.py
+      appmodule.py
+  tests/
+      test_app.py
+      ...
+#+END_EXAMPLE
+Useful if you have many functional tests or for other reasons want to keep tests separate from actual application code (often a good idea):
+
+
+#+BEGIN_EXAMPLE
+  setup.py   # your setuptools Python package metadata
+  mypkg/
+      __init__.py
+      appmodule.py
+      ...
+      test/
+          test_app.py
+          ...
+#+END_EXAMPLE
+Useful if you have direct relation between (unit-)test and application modules and want to distribute your tests along with your application:
+
+
+#+BEGIN_SRC shell
+  pytest tests/test_app.py       # for external test dirs
+  pytest mypkg/test/test_app.py  # for inlined test dirs
+  pytest mypkg                   # run tests in all below test directories
+  pytest                         # run all tests below current dir
+#+END_SRC
+
 * raises and fail
 - http://doc.pytest.org/en/latest/assert.html#assertions-about-expected-exceptions
 - http://stackoverflow.com/questions/20274987/how-to-use-pytest-to-check-that-error-is-not-raised
@@ -65,36 +100,3 @@
           pytest.fail("Unexpected MyError ..")
 #+END_SRC
 
-* Test Layouts
-- http://doc.pytest.org/en/latest/goodpractices.html
-
-
-Useful if you have many functional tests or for other reasons want to keep tests separate from actual application code (often a good idea):
-#+BEGIN_EXAMPLE
-  setup.py   # your setuptools Python package metadata
-  mypkg/
-      __init__.py
-      appmodule.py
-  tests/
-      test_app.py
-      ...
-#+END_EXAMPLE
-
-Useful if you have direct relation between (unit-)test and application modules and want to distribute your tests along with your application:
-#+BEGIN_EXAMPLE
-  setup.py   # your setuptools Python package metadata
-  mypkg/
-      __init__.py
-      appmodule.py
-      ...
-      test/
-          test_app.py
-          ...
-#+END_EXAMPLE
-
-#+BEGIN_SRC shell
-  pytest tests/test_app.py       # for external test dirs
-  pytest mypkg/test/test_app.py  # for inlined test dirs
-  pytest mypkg                   # run tests in all below test directories
-  pytest                         # run all tests below current dir
-#+END_SRC
