@@ -5,6 +5,7 @@
  - [[#prompt-a-user-for-yesno][Prompt a user for yes/no]]
  - [[#history-expasion][History Expasion]]
  - [[#mounting-a-volume][Mounting a Volume]]
+ - [[#glob-dotfiles][Glob dotfiles]]
  - [[#apt][apt]]
  - [[#case][case]]
  - [[#grep][grep]]
@@ -201,6 +202,24 @@ On many filesystems, the lost+found directory is a bit special
 because it preallocates a bit of space for fsck to deposit files there. (...)
 If you accidentally delete lost+found, don't re-create it with mkdir, use mklost+found if available.
 #+END_QUOTE
+
+* Glob dotfiles
+- http://stackoverflow.com/questions/20895502/bash-asterisk-omits-files-that-start-with
+- http://unix.stackexchange.com/questions/89749/cp-hidden-files-with-glob-patterns
+
+You can't just match dotfiles(whose names start with ~.~) with the wildcard(~*~).
+There are some workarounds:
+#+BEGIN_SRC shell
+  for item in .* *; do echo "$item"; done  # simplest
+
+  # for bash (shopt is bash specific)
+  shopt -s dotglob  # set dotglob
+  echo *
+  shopt -u dotglob  # unset dotglob
+
+  # for zsh (glob qualifier, GLOB_DOTS)
+  $ cp foo/*(D) .
+#+END_SRC
 
 * apt
 **  Install java8
