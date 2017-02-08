@@ -48,6 +48,8 @@
 * Test Layouts
 - http://doc.pytest.org/en/latest/goodpractices.html
 
+-----
+
 Useful if you have many functional tests or for other reasons want to keep tests separate from actual application code (often a good idea):
 #+BEGIN_EXAMPLE
   setup.py   # your setuptools Python package metadata
@@ -58,6 +60,8 @@ Useful if you have many functional tests or for other reasons want to keep tests
       test_app.py
       ...
 #+END_EXAMPLE
+
+-----
 
 Useful if you have direct relation between (unit-)test and application modules and want to distribute your tests along with your application:
 #+BEGIN_EXAMPLE
@@ -70,6 +74,8 @@ Useful if you have direct relation between (unit-)test and application modules a
           test_app.py
           ...
 #+END_EXAMPLE
+
+-----
 
 #+BEGIN_SRC shell
   pytest tests/test_app.py       # for external test dirs
