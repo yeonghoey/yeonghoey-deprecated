@@ -3,9 +3,8 @@
 * Table of Contents                                                :TOC_2_gh:
  - [[#based-on-windows-10][Based on Windows 10]]
  - [[#run-commands][Run commands]]
- - [[#working-with-linux-like-systems][Working with linux like systems]]
-   - [[#putty][Putty]]
-   - [[#vcxsrv][VcXsrv]]
+ - [[#openvpn-gui][OpenVPN GUI]]
+ - [[#vcxsrv][VcXsrv]]
 
 * Based on Windows 10
 I'm currently using Windows 10.  Most notes are tested against it.
@@ -15,9 +14,14 @@ I'm currently using Windows 10.  Most notes are tested against it.
   shell:startup  # Startup folder
 #+END_EXAMPLE
 
-* Working with linux like systems
-** Putty
-** VcXsrv
+* OpenVPN GUI
+- http://superuser.com/questions/547396/arguments-to-connect-using-open-vpn-windows-client
+
+#+BEGIN_EXAMPLE
+openvpn-gui.exe --connect "client.ovpn" --config_dir "C:\Users\Foo\Documents\protected_crypto_data"
+#+END_EXAMPLE
+
+* VcXsrv
 - https://sourceforge.net/projects/vcxsrv/
 
 Winodws X server for running ~Spacemacs~.
