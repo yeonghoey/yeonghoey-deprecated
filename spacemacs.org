@@ -6,6 +6,8 @@
  - [[#layers][Layers]]
    - [[#auto-completion][auto-completion]]
    - [[#restclient][restclient]]
+ - [[#customization][Customization]]
+   - [[#visual-pastes][Visual Pastes]]
 
 * Emacs concepts
 ** Indirect Buffers
@@ -103,3 +105,22 @@ In some ways it is a buffer analogue of a symbolic link between files.
   : }
 #+END_EXAMPLE
 
+* Customization
+** Visual Pastes
+- http://emacs.stackexchange.com/questions/14940/emacs-doesnt-paste-in-evils-visual-mode-with-every-os-clipboard/15054#15054
+- https://github.com/syl20bnr/spacemacs/issues/5070#issuecomment-184464650
+
+# Enable evil-visual pastes from system clipbaoard
+#+BEGIN_SRC emacs-lisp
+  (fset 'evil-visual-update-x-selection 'ignore)
+#+END_SRC
+
+# Support multiple visual pastes
+#+BEGIN_SRC emacs-lisp
+  (defun evil-paste-after-from-0 ()
+    (interactive)
+    (let ((evil-this-register ?0))
+      (call-interactively 'evil-paste-after)))
+
+  (define-key evil-visual-state-map "p" 'evil-paste-after-from-0)
+#+END_SRC
