@@ -26,5 +26,5 @@ openvpn-gui.exe --connect "client.ovpn" --config_dir "C:\Users\Foo\Documents\pro
 
 Winodws X server for running ~Spacemacs~.
 
-I had been using ~Xming~, but it hangs occasionally.
-I Found ~VcXsrv~ which is compiled with VC++ 2012, more fast and reliable.
+I had been using ~Xming~, but it hung occasionally.
+I found ~VcXsrv~ which is compiled with VC++ 2012, more fast and reliable.
