@@ -109,7 +109,7 @@ In some ways it is a buffer analogue of a symbolic link between files.
 ** Visual Pastes
 - http://emacs.stackexchange.com/questions/14940/emacs-doesnt-paste-in-evils-visual-mode-with-every-os-clipboard/15054#15054
 
-- Enable evil-visual pastes from system clipbaoard
+Enable evil-visual pastes from system clipbaoard
 #+BEGIN_SRC emacs-lisp
   (fset 'evil-visual-update-x-selection 'ignore)
 #+END_SRC
