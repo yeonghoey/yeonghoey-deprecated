@@ -11,6 +11,7 @@
    - [[#which-tool-should-use][Which tool should use?]]
    - [[#python-packaging-user-guide][Python Packaging User Guide]]
    - [[#setuppy][setup.py]]
+ - [[#dict][dict]]
  - [[#list][list]]
  - [[#multiprocessing][multiprocessing]]
  - [[#re][re]]
@@ -248,6 +249,32 @@ So in conclusion, out of all these options, I would recommend Setuptools, unless
   )
 #+END_SRC
 
+
+* dict
+#+BEGIN_EXAMPLE
+  dict()
+  dict(mapping)
+  dict(iterable)
+  dict(**kwargs)
+
+  D.items()  D.iteritems()  D.viewitems()
+  D.keys()   D.iterkeys()   D.viewkeys()
+  D.values() D.itervalues() D.viewvalues()
+
+  D.clear()
+  D.copy()               a shallow copy of D
+  D.fromkeys(S[,v])      new dict with keys from S and values equal to v(None).
+  D.get(k[,d])           D[k] if k in D, else d(None)
+  D.has_key(k)           True if D has a key k, else False
+  D.pop(k[,d]) -> v      remove specified key and return the corresponding value.
+                         d(KeyError) if key is not found
+  D.popitem() -> (k, v)  remove and return a (key, value) KeyError if empty
+  D.setdefault(k[,d])    D.get(k,d), also set D[k]=d if k not in D
+  D.update([E, ]**F)
+      If E present and has a .keys() method, does:     for k in E: D[k] = E[k]
+      If E present and lacks .keys() method, does:     for (k, v) in E: D[k] = v
+      In either case, this is followed by: for k in F: D[k] = F[k]
+#+END_EXAMPLE
 
 * list
 #+BEGIN_EXAMPLE
