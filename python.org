@@ -1,21 +1,32 @@
 #+TITLE: Python
 
 * Table of Contents                                                :TOC_2_gh:
- - [[#comparison][Comparison]]
  - [[#source-code-encodings][Source Code Encodings]]
- - [[#subprocess][subprocess]]
+ - [[#comparison][Comparison]]
+ - [[#execute-subprocesses][Execute subprocesses]]
    - [[#calling-an-external-command-in-python][Calling an external command in Python]]
    - [[#use-pipe-along-with-communicate][Use PIPE along with communicate()]]
    - [[#when-to-use-shelltrue][When to use shell=True]]
- - [[#multiprocessing][multiprocessing]]
-   - [[#pool-example][Pool example]]
- - [[#re][re]]
  - [[#packaging][Packaging]]
    - [[#which-tool-should-use][Which tool should use?]]
    - [[#python-packaging-user-guide][Python Packaging User Guide]]
    - [[#setuppy][setup.py]]
+ - [[#multiprocessing][multiprocessing]]
+ - [[#re][re]]
+ - [[#str][str]]
+
+* Source Code Encodings
+- [[https://www.python.org/dev/peps/pep-0263/][PEP 263]]
+ 
+#+BEGIN_SRC python
+  #!/usr/bin/python
+  # -*- coding: utf-8 -*-
+#+END_SRC
 
 * Comparison
+- https://docs.python.org/2/library/stdtypes.html#comparisons
+- http://michael-yxf.appspot.com/?p=251002
+
 #+BEGIN_SRC python
   >>> a = ['0', 9999, {}, [], False, ()]
   >>> a.sort()
@@ -25,21 +36,10 @@
 
 #+BEGIN_QUOTE
 CPython implementation detail: Objects of different types except numbers are ordered by their type names;
-objects of the same types that don’t support proper comparison are ordered by their address.
+objects of the same types that don't support proper comparison are ordered by their address.
 #+END_QUOTE
 
-- https://docs.python.org/2/library/stdtypes.html#comparisons
-- http://michael-yxf.appspot.com/?p=251002
-
-* Source Code Encodings
-- [[https://www.python.org/dev/peps/pep-0263/][PEP 263]]
- 
-#+BEGIN_SRC python
-  #!/usr/bin/env python
-  # -*- coding: utf-8 -*-
-#+END_SRC
-
-* subprocess
+* Execute subprocesses
 - https://docs.python.org/2/library/subprocess.html
  
 ** Calling an external command in Python
@@ -95,112 +95,6 @@ to avoid deadlocks due to any of the other OS pipe buffersfilling up and blockin
   - The string for the first argument is like the command you put into the shell prompt.
   - The command can use environment variables, globs, pipes.
   - It's very dangerous, not recommended.
-* multiprocessing
-** Pool example
-#+BEGIN_SRC python :results output
-  from multiprocessing import Pool
-  import time
-
-  def f(id_):
-      for _ in range(2):
-          print id_
-          time.sleep(1)
-
-
-  # pool must be created AFTER defining functions to apply
-  pool = Pool(processes=3)
-
-  for i in range(4):
-      pool.apply_async(f, (i,))
-
-  pool.close()  # Prevents any more tasks from being submitted to the pool
-  pool.join()
-#+END_SRC
-
-#+RESULTS:
-: 0
-: 1
-: 2
-: 1
-: 0
-: 2
-: 3
-: 3
-
-* re
-#+BEGIN_EXAMPLE
-  The special characters are:
-      "."      Matches any character except a newline.
-      "^"      Matches the start of the string.
-      "$"      Matches the end of the string or just before the newline at
-                the end of the string.
-      "*"      Matches 0 or more (greedy) repetitions of the preceding RE.
-                Greedy means that it will match as many repetitions as possible.
-      "+"      Matches 1 or more (greedy) repetitions of the preceding RE.
-      "?"      Matches 0 or 1 (greedy) of the preceding RE.
-      ,*?,+?,?? Non-greedy versions of the previous three special characters.
-      {m,n}    Matches from m to n repetitions of the preceding RE.
-      {m,n}?   Non-greedy version of the above.
-      "\\"     Either escapes special characters or signals a special sequence.
-      []       Indicates a set of characters.
-                A "^" as the first character indicates a complementing set.
-      "|"      A|B, creates an RE that will match either A or B.
-      (...)    Matches the RE inside the parentheses.
-                The contents can be retrieved or matched later in the string.
-      (?iLmsux) Set the I, L, M, S, U, or X flag for the RE (see below).
-      (?:...)  Non-grouping version of regular parentheses.
-      (?P<name>...) The substring matched by the group is accessible by name.
-      (?P=name)     Matches the text matched earlier by the group named name.
-      (?#...)  A comment; ignored.
-      (?=...)  Matches if ... matches next, but doesn't consume the string.
-      (?!...)  Matches if ... doesn't match next.
-      (?<=...) Matches if preceded by ... (must be fixed length).
-      (?<!...) Matches if not preceded by ... (must be fixed length).
-      (?(id/name)yes|no) Matches yes pattern if the group with id/name matched,
-                          the (optional) no pattern otherwise.
-
-  The special sequences consist of "\\" and a character from the list
-  below.  If the ordinary character is not on the list, then the
-  resulting RE will match the second character.
-      \number  Matches the contents of the group of the same number.
-      \A       Matches only at the start of the string.
-      \Z       Matches only at the end of the string.
-      \b       Matches the empty string, but only at the start or end of a word.
-      \B       Matches the empty string, but not at the start or end of a word.
-      \d       Matches any decimal digit; equivalent to the set [0-9].
-      \D       Matches any non-digit character; equivalent to the set [^0-9].
-      \s       Matches any whitespace character; equivalent to [ \t\n\r\f\v].
-      \S       Matches any non-whitespace character; equiv. to [^ \t\n\r\f\v].
-      \w       Matches any alphanumeric character; equivalent to [a-zA-Z0-9_].
-                With LOCALE, it will match the set [0-9_] plus characters defined
-                as letters for the current locale.
-      \W       Matches the complement of \w.
-      \\       Matches a literal backslash.
-
-  This module exports the following functions:
-      match    Match a regular expression pattern to the beginning of a string.
-      search   Search a string for the presence of a pattern.
-      sub      Substitute occurrences of a pattern found in a string.
-      subn     Same as sub, but also return the number of substitutions made.
-      split    Split a string by the occurrences of a pattern.
-      findall  Find all occurrences of a pattern in a string.
-      finditer Return an iterator yielding a match object for each match.
-      compile  Compile a pattern into a RegexObject.
-      purge    Clear the regular expression cache.
-      escape   Backslash all non-alphanumerics in a string.
-
-  Some of the functions in this module takes flags as optional parameters:
-      I  IGNORECASE  Perform case-insensitive matching.
-      L  LOCALE      Make \w, \W, \b, \B, dependent on the current locale.
-      M  MULTILINE   "^" matches the beginning of lines (after a newline)
-                      as well as the string.
-                      "$" matches the end of lines (before a newline) as well
-                      as the end of the string.
-      S  DOTALL      "." matches any character at all, including the newline.
-      X  VERBOSE     Ignore whitespace and comments for nicer looking RE's.
-      U  UNICODE     Make \w, \W, \b, \B, dependent on the Unicode locale.
-#+END_EXAMPLE
-
 * Packaging
 ** Which tool should use?
 - http://stackoverflow.com/questions/6344076/differences-between-distribute-distutils-setuptools-and-distutils2
@@ -351,3 +245,154 @@ So in conclusion, out of all these options, I would recommend Setuptools, unless
       ...
   )
 #+END_SRC
+
+
+* multiprocessing
+- https://docs.python.org/2/library/multiprocessing.html
+
+#+BEGIN_SRC python :results output
+  from multiprocessing import Pool
+  import time
+
+  def f(id_):
+      for _ in range(2):
+          print id_
+          time.sleep(1)
+
+
+  # pool must be created AFTER defining functions to apply
+  pool = Pool(processes=3)
+
+  for i in range(4):
+      pool.apply_async(f, (i,))
+
+  pool.close()  # Prevents any more tasks from being submitted to the pool
+  pool.join()
+#+END_SRC
+
+#+RESULTS:
+: 0
+: 1
+: 2
+: 1
+: 0
+: 2
+: 3
+: 3
+
+* re
+- https://docs.python.org/2/library/re.html
+#+BEGIN_EXAMPLE
+  The special characters are:
+      "."      Matches any character except a newline.
+      "^"      Matches the start of the string.
+      "$"      Matches the end of the string or just before the newline at
+                the end of the string.
+      "*"      Matches 0 or more (greedy) repetitions of the preceding RE.
+                Greedy means that it will match as many repetitions as possible.
+      "+"      Matches 1 or more (greedy) repetitions of the preceding RE.
+      "?"      Matches 0 or 1 (greedy) of the preceding RE.
+      ,*?,+?,?? Non-greedy versions of the previous three special characters.
+      {m,n}    Matches from m to n repetitions of the preceding RE.
+      {m,n}?   Non-greedy version of the above.
+      "\\"     Either escapes special characters or signals a special sequence.
+      []       Indicates a set of characters.
+                A "^" as the first character indicates a complementing set.
+      "|"      A|B, creates an RE that will match either A or B.
+      (...)    Matches the RE inside the parentheses.
+                The contents can be retrieved or matched later in the string.
+      (?iLmsux) Set the I, L, M, S, U, or X flag for the RE (see below).
+      (?:...)  Non-grouping version of regular parentheses.
+      (?P<name>...) The substring matched by the group is accessible by name.
+      (?P=name)     Matches the text matched earlier by the group named name.
+      (?#...)  A comment; ignored.
+      (?=...)  Matches if ... matches next, but doesn't consume the string.
+      (?!...)  Matches if ... doesn't match next.
+      (?<=...) Matches if preceded by ... (must be fixed length).
+      (?<!...) Matches if not preceded by ... (must be fixed length).
+      (?(id/name)yes|no) Matches yes pattern if the group with id/name matched,
+                          the (optional) no pattern otherwise.
+
+  The special sequences consist of "\\" and a character from the list
+  below.  If the ordinary character is not on the list, then the
+  resulting RE will match the second character.
+      \number  Matches the contents of the group of the same number.
+      \A       Matches only at the start of the string.
+      \Z       Matches only at the end of the string.
+      \b       Matches the empty string, but only at the start or end of a word.
+      \B       Matches the empty string, but not at the start or end of a word.
+      \d       Matches any decimal digit; equivalent to the set [0-9].
+      \D       Matches any non-digit character; equivalent to the set [^0-9].
+      \s       Matches any whitespace character; equivalent to [ \t\n\r\f\v].
+      \S       Matches any non-whitespace character; equiv. to [^ \t\n\r\f\v].
+      \w       Matches any alphanumeric character; equivalent to [a-zA-Z0-9_].
+                With LOCALE, it will match the set [0-9_] plus characters defined
+                as letters for the current locale.
+      \W       Matches the complement of \w.
+      \\       Matches a literal backslash.
+
+  This module exports the following functions:
+      match    Match a regular expression pattern to the beginning of a string.
+      search   Search a string for the presence of a pattern.
+      sub      Substitute occurrences of a pattern found in a string.
+      subn     Same as sub, but also return the number of substitutions made.
+      split    Split a string by the occurrences of a pattern.
+      findall  Find all occurrences of a pattern in a string.
+      finditer Return an iterator yielding a match object for each match.
+      compile  Compile a pattern into a RegexObject.
+      purge    Clear the regular expression cache.
+      escape   Backslash all non-alphanumerics in a string.
+
+  Some of the functions in this module takes flags as optional parameters:
+      I  IGNORECASE  Perform case-insensitive matching.
+      L  LOCALE      Make \w, \W, \b, \B, dependent on the current locale.
+      M  MULTILINE   "^" matches the beginning of lines (after a newline)
+                      as well as the string.
+                      "$" matches the end of lines (before a newline) as well
+                      as the end of the string.
+      S  DOTALL      "." matches any character at all, including the newline.
+      X  VERBOSE     Ignore whitespace and comments for nicer looking RE's.
+      U  UNICODE     Make \w, \W, \b, \B, dependent on the Unicode locale.
+#+END_EXAMPLE
+
+* str
+- https://docs.python.org/2/library/stdtypes.html#string-methods
+
+| ~S.capitalize() -> string~                        |                                               |
+| ~S.center(width[, fillchar]) -> string~           | fillchar=' '                                  |
+| ~S.count(sub[, start[, end]]) -> int~             |                                               |
+| ~S.decode([encoding[,errors]]) -> object~         |                                               |
+| ~S.encode([encoding[,errors]]) -> object~         |                                               |
+| ~S.endswith(suffix[, start[, end]]) -> bool~      | suffix can also be a tuple of strings         |
+| ~S.expandtabs([tabsize]) -> string~               | tabsize=8                                     |
+| ~S.find(sub [,start [,end]]) -> int~              | Return -1 on failure                          |
+| ~S.format(*args, **kwargs) -> string~             |                                               |
+| ~S.index(sub [,start [,end]]) -> int~             | raise ValueError on failure                   |
+| ~S.isalnum() -> bool~                             |                                               |
+| ~S.isalpha() -> bool~                             |                                               |
+| ~S.isdigit() -> bool~                             |                                               |
+| ~S.islower() -> bool~                             |                                               |
+| ~S.isspace() -> bool~                             |                                               |
+| ~S.istitle() -> bool~                             |                                               |
+| ~S.isupper() -> bool~                             |                                               |
+| ~S.join(iterable) -> string~                      |                                               |
+| ~S.ljust(width[, fillchar]) -> string~            | fillchar=' '                                  |
+| ~S.lower() -> string~                             |                                               |
+| ~S.lstrip([chars]) -> string or unicode~          | like ~S.strip()~                              |
+| ~S.partition(sep) -> (head, sep, tail)~           | If sep is not found, return (S, '', '')       |
+| ~S.replace(old, new[, count]) -> string~          |                                               |
+| ~S.rfind(sub [,start [,end]]) -> int~             | like ~S.find()~                               |
+| ~S.rindex(sub [,start [,end]]) -> int~            | like ~S.index()~                              |
+| ~S.rjust(width[, fillchar]) -> string~            | fillchar=' '                                  |
+| ~S.rpartition(sep) -> (head, sep, tail)~          | like ~S.partition()~                          |
+| ~S.rsplit([sep [,maxsplit]]) -> list of strings~  | sep=' '                                       |
+| ~S.rstrip([chars]) -> string or unicode~          | like ~S.strip()~                              |
+| ~S.split([sep [,maxsplit]]) -> list of strings~   | like ~S.rsplit()~                             |
+| ~S.splitlines(keepends=False) -> list of strings~ |                                               |
+| ~S.startswith(prefix[, start[, end]]) -> bool~    | like ~S.endswith()~                           |
+| ~S.strip([chars]) -> string or unicode~           | remove leading whitespace(or chars)           |
+| ~S.swapcase() -> string~                          |                                               |
+| ~S.title() -> string~                             |                                               |
+| ~S.translate(table [,deletechars]) -> string~     |                                               |
+| ~S.upper() -> string~                             | see also ~string.maketrans()~                 |
+| ~S.zfill(width) -> string~                        | Pad a numeric string S with zeros on the left |
