@@ -251,15 +251,15 @@ So in conclusion, out of all these options, I would recommend Setuptools, unless
 
 * list
 #+BEGIN_EXAMPLE
-L.append(object)
-L.count(value) -> integer
-L.extend(iterable)
-L.index(value, [start, [stop]])             integer|return first index of value. Raises ValueError if the value is not present.
-L.insert(index, object)                     insert object before index
-L.pop([index]) -> item                      remove and return item at index (default last). Raises IndexError if list is empty or index is out of range.
-L.remove(value)                             remove first occurrence of value. Raises ValueError if the value is not present.
-L.reverse()                                 reverse *IN PLACE*
-L.sort(cmp=None, key=None, reverse=False)   stable sort *IN PLACE*; cmp(x, y) -> -1, 0, 1
+  L.append(object)
+  L.count(value) -> integer
+  L.extend(iterable)
+  L.index(value, [start, [stop]])             integer|return first index of value. Raises ValueError if the value is not present.
+  L.insert(index, object)                     insert object before index
+  L.pop([index]) -> item                      remove and return item at index (default last). Raises IndexError if list is empty or index is out of range.
+  L.remove(value)                             remove first occurrence of value. Raises ValueError if the value is not present.
+  L.reverse()                                 reverse *IN PLACE*
+  L.sort(cmp=None, key=None, reverse=False)   stable sort *IN PLACE*; cmp(x, y) -> -1, 0, 1
 #+END_EXAMPLE
 
 * multiprocessing
@@ -371,6 +371,25 @@ L.sort(cmp=None, key=None, reverse=False)   stable sort *IN PLACE*; cmp(x, y) ->
 #+END_EXAMPLE
 
 * set
+#+BEGIN_EXAMPLE
+  add(...)
+  clear(...)
+  copy(...)
+  difference(...)
+  difference_update(...)
+  discard(...)
+  intersection(...)
+  intersection_update(...)
+  isdisjoint(...)
+  issubset(...)
+  issuperset(...)
+  pop(...)                          remove and return an arbitrary elem; raises KeyError if empty
+  remove(...)                       remove an elem; raises KeyError if elem is not a member
+  symmetric_difference(...)
+  symmetric_difference_update(...)  all elems that are in exactly one of the sets
+  union(...)
+  update(...)
+#+END_EXAMPLE
 
 * str
 - https://docs.python.org/2/library/stdtypes.html#string-methods
