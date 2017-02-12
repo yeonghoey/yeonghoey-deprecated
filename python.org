@@ -363,15 +363,15 @@ So in conclusion, out of all these options, I would recommend Setuptools, unless
 
 #+BEGIN_EXAMPLE
   S.capitalize() -> string
-  S.center(width[, fillchar]) -> string           fillchar=' '
+  S.center(width[, fillchar]) -> string            fillchar=' '
   S.count(sub[, start[, end]]) -> int
   S.decode([encoding[,errors]]) -> object
   S.encode([encoding[,errors]]) -> object
-  S.endswith(suffix[, start[, end]]) -> bool      suffix can also be a tuple of strings
-  S.expandtabs([tabsize]) -> string               tabsize=8
-  S.find(sub [,start [,end]]) -> int              return -1 on failure
+  S.endswith(suffix[, start[, end]]) -> bool       suffix can also be a tuple of strings
+  S.expandtabs([tabsize]) -> string                tabsize=8
+  S.find(sub [,start [,end]]) -> int               return -1 on failure
   S.format(*args, **kwargs) -> string
-  S.index(sub [,start [,end]]) -> int             raise ValueError on failure
+  S.index(sub [,start [,end]]) -> int              raise ValueError on failure
   S.isalnum() -> bool
   S.isalpha() -> bool
   S.isdigit() -> bool
@@ -380,24 +380,24 @@ So in conclusion, out of all these options, I would recommend Setuptools, unless
   S.istitle() -> bool
   S.isupper() -> bool
   S.join(iterable) -> string
-  S.ljust(width[, fillchar]) -> string            fillchar=' '
+  S.ljust(width[, fillchar]) -> string             fillchar=' '
   S.lower() -> string
-  S.lstrip([chars]) -> string or unicode          like S.strip()
-  S.partition(sep) -> (head, sep, tail)           If sep is not found, return (S, '', '')
+  S.lstrip([chars]) -> string or unicode           like S.strip()
+  S.partition(sep) -> (head, sep, tail)            If sep is not found, return (S, '', '')
   S.replace(old, new[, count]) -> string
-  S.rfind(sub [,start [,end]]) -> int             like S.find()
-  S.rindex(sub [,start [,end]]) -> int            like S.index()
-  S.rjust(width[, fillchar]) -> string            fillchar=' '
-  S.rpartition(sep) -> (head, sep, tail)          like S.partition()
-  S.rsplit([sep [,maxsplit]]) -> list of strings  sep=' '
-  S.rstrip([chars]) -> string or unicode          like S.strip()
-  S.split([sep [,maxsplit]]) -> list of strings   like S.rsplit()
-  S.splitlines(keepends=False) -> list of strings
-  S.startswith(prefix[, start[, end]]) -> bool    like S.endswith()
-  S.strip([chars]) -> string or unicode           remove leading whitespace(or chars)
+  S.rfind(sub [,start [,end]]) -> int              like S.find()
+  S.rindex(sub [,start [,end]]) -> int             like S.index()
+  S.rjust(width[, fillchar]) -> string             fillchar=' '
+  S.rpartition(sep) -> (head, sep, tail)           like S.partition()
+  S.rsplit([sep [,maxsplit]]) -> list of strings   sep=' '
+  S.rstrip([chars]) -> string or unicode           like S.strip()
+  S.split([sep [,maxsplit]]) -> list of strings    like S.rsplit()
+  S.splitlines(keepends=False) -> list of strings 
+  S.startswith(prefix[, start[, end]]) -> bool     like S.endswith()
+  S.strip([chars]) -> string or unicode            remove leading whitespace(or chars)
   S.swapcase() -> string
   S.title() -> string
   S.translate(table [,deletechars]) -> string
-  S.upper() -> string                             see also string.maketrans()
-  S.zfill(width) -> string                        zero padding for numeric string
+  S.upper() -> string                              see also string.maketrans()
+  S.zfill(width) -> string                         zero padding for numeric string
 #+END_EXAMPLE
