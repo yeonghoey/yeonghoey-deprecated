@@ -1,0 +1,12 @@
+#+TITLE: HTML/CSS
+
+* Table of Contents :TOC_2_gh:
+ - [[#the-best-place-to-put-script-tags-in-html][The best place to put <script> tags in HTML]]
+ - [[#style-guides][Style Guides]]
+
+* TODO The best place to put <script> tags in HTML
+- http://stackoverflow.com/questions/436411/where-is-the-best-place-to-put-script-tags-in-html-markup
+ 
+* TODO Style Guides
+- http://www.w3schools.com/html/html5_syntax.asp
+- https://google.github.io/styleguide/htmlcssguide.xml
