@@ -284,6 +284,8 @@ If ~str()~ or ~unicode()~ is called on an instance of this class(~BaseException~
 *the representation of the argument(s) to the instance are returned*,
 or the empty string when there were no arguments.
 
+~BaseException.args~: The tuple of arguments given to the exception constructor.
+
 #+BEGIN_EXAMPLE
   BaseException
    +-- SystemExit
