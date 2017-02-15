@@ -32,12 +32,12 @@ Stage it:
   $ git add guide.md
 #+END_SRC
 
-*** Case1) commit when merging
+*** Case1. commit when merging
 #+BEGIN_SRC shell
   $ git commit -m "Resolved merge conflict"
 #+END_SRC
 
-*** Case2) rebase --continue when rebasing
+*** Case2. rebase --continue when rebasing
 #+BEGIN_SRC shell
   $ git rebase --continue
 #+END_SRC
