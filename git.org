@@ -1,12 +1,46 @@
 #+TITLE: Git
 
 * Table of Contents                                                :TOC_1_gh:
+ - [[#resolve-conflicts][Resolve conflicts]]
  - [[#purge-files-including-their-histories][Purge files including their histories]]
  - [[#branch][branch]]
  - [[#flow][flow]]
  - [[#list-tree][list-tree]]
  - [[#log][log]]
  - [[#tag][tag]]
+
+* Resolve conflicts
+- https://help.github.com/articles/resolving-a-merge-conflict-using-the-command-line/
+- https://backlogtool.com/git-guide/en/stepup/stepup2_8.html
+
+#+BEGIN_EXAMPLE
+  If you have questions, please
+  <<<<<<< HEAD
+  open an issue
+  =======
+  ask your question in IRC.
+  >>>>>>> branch-a
+#+END_EXAMPLE
+
+Fix the conflict like this:
+#+BEGIN_EXAMPLE
+  If you have questions, please open an issue or ask in our IRC channel if it's more urgent
+#+END_EXAMPLE
+
+Stage it:
+#+BEGIN_SRC shell
+  $ git add guide.md
+#+END_SRC
+
+** Commit when merging
+#+BEGIN_SRC shell
+  $ git commit -m "Resolved merge conflict"
+#+END_SRC
+
+** Don't commit, just rebase --continue when rebasing
+#+BEGIN_SRC shell
+  $ git rebase --continue
+#+END_SRC
 
 * Purge files including their histories
 - https://help.github.com/articles/removing-sensitive-data-from-a-repository/
@@ -93,9 +127,8 @@ and delete the branch manually after it merged.
 * tag
 ** Prune local git tags that don't exist on remote
 - https://demisx.github.io/git/2014/11/02/git-prune-local-tags-dont-exist-remote.html
- 
+
 #+BEGIN_SRC shell
   $ git tag -l | xargs git tag -d # remove all local tags
   $ git fetch -t                  # fetch remote tags
 #+END_SRC
-
