@@ -72,7 +72,7 @@ git push
 
 #+BEGIN_SRC shell
   # Delete all merged, except master
-  $ git branch --merged | grep -v master | xargs git branch -d
+  $ git branch --merged | grep -vE '(master|develop)' | xargs git branch -d
 #+END_SRC
 
 ** Cleanup remote branch references
