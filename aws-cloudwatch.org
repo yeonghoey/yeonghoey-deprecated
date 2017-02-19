@@ -10,7 +10,7 @@
 
 Metrics consist of  ~Minimum~, ~Maximum~, ~Sum~, ~Average~, ~SampleCount~, ~pNN.NN~.
 To interpret them clearly, we need to know the *sampling rate*.
-Mostly, the metrics explicitly state their *sampling rate* on their documentation.
+Mostly, metrics explicitly state their *sampling rate* on their documentation.
 
 #+BEGIN_QUOTE
 Amazon Elastic Compute Cloud (Amazon EC2) sends metrics to CloudWatch for your EC2 instances.
