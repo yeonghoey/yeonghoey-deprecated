@@ -12,7 +12,7 @@
 
 ** System Status Checks
 #+BEGIN_QUOTE
-(...) require AWS involvement to repair.
+require AWS involvement to repair. (...)
 *wait for AWS to fix the issue*, or you can *resolve it yourself*.
 (by /stopping and starting an instance/, or by /terminating and replacing an instance/).
 #+END_QUOTE
@@ -24,7 +24,7 @@
 
 ** Instance Status Checks
 #+BEGIN_QUOTE
-(...) require *your involvement to repair*.
+require *your involvement to repair*. (...)
 (by /rebooting the instance/ or by /making instance configuration changes/).
 #+END_QUOTE
 
