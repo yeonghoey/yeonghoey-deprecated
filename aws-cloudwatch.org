@@ -8,17 +8,9 @@
 ** Metrics
 - http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html
 
-
-- Minimum
-- Maximum
-- Sum
-- Average
-- SampleCount
-- pNN.NN
-
-~Sum~ and ~Average~ rely on ~SampleCount~.
-To understand how to interpret metrics, we need to know the ~SampleCount~.
-Mostly, the metrics explicitly state their sampling rate on their documentation.
+Metrics consist of  ~Minimum~, ~Maximum~, ~Sum~, ~Average~, ~SampleCount~, ~pNN.NN~.
+To interpret them clearly, we need to know the *sampling rate*.
+Mostly, the metrics explicitly state their *sampling rate* on their documentation.
 
 #+BEGIN_QUOTE
 Amazon Elastic Compute Cloud (Amazon EC2) sends metrics to CloudWatch for your EC2 instances.
