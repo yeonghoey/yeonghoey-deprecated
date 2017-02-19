@@ -1,0 +1,15 @@
+#+TITLE: AWS IAM
+
+* Table of Contents :TOC_2_gh:
+ - [[#basics][Basics]]
+
+* Basics
+- http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html
+
+[[file:img/screenshot_2017-02-19_14-05-01.png]]
+
+The enforcement code evaluates all user-based and resource-based policies
+that are applicable to the request(based on the resource, principal, action, and conditions).
+*The order in which the enforcement code evaluates the policies is not important*.
+
+[[file:img/screenshot_2017-02-19_14-06-20.png]]
