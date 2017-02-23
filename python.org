@@ -461,25 +461,43 @@ or the empty string when there were no arguments.
 #+END_EXAMPLE
 
 * set
+- https://docs.python.org/2/library/stdtypes.html#set-types-set-frozenset
+
 #+BEGIN_EXAMPLE
-  add(...)
-  clear(...)
-  copy(...)
-  difference(...)
-  difference_update(...)
-  discard(...)
-  intersection(...)
-  intersection_update(...)
-  isdisjoint(...)
-  issubset(...)
-  issuperset(...)
-  pop(...)                          remove and return an arbitrary elem; KeyError if empty
-  remove(...)                       remove an elem; KeyError if elem is not a member
-  symmetric_difference(...)
-  symmetric_difference_update(...)  all elems that are in exactly one of the sets
-  union(...)
-  update(...)
+  x in set
+  x not in set
+  set.isdisjoint(other)
+  set <= other           set.issubset(other)
+  set < other            set <= other and set != other
+  set >= other           set.issuperset(other)
+  set > other            set >= other and set != other
+  set | other | ...      set.union(*others)
+  set & other & ...      set.intersection(*others)
+  set - other - ...      set.difference(*others)
+  set ^ other            set.symmetric_difference(other)  (either the set or other but not both)
+  set.copy()                                              (a shallow copy of s)
+
+  # only for set, not frozenset
+  set |= other | ...     set.update(*others)
+  set &= other & ...     set.intersection_update(*others)
+  set -= other | ...     set.difference_update(*others)
+  set ^= other           set.symmetric_difference_update(other)
+  set.add(elem)
+  set.remove(elem)                                        (remove elem. KeyError if elem doesn't exist)
+  set.discard(elem                                        (remove elem if it is present)
+  set.pop()                                               (remove and return an arbitrary elem. KeyError if empty)
+  clear()
 #+END_EXAMPLE
+
+#+BEGIN_QUOTE
+non-operator versions of union(), intersection(), difference(), and symmetric_difference(), issubset(), and issuperset()
+methods *will accept any iterable* as an argument.
+In contrast, their *operator based counterparts require their arguments to be sets*.
+#+END_QUOTE
+
+#+BEGIN_QUOTE
+~set('abc') == frozenset('abc')~ returns ~True~ and so does ~set('abc') in set([frozenset('abc')])~.
+#+END_QUOTE
 
 * str
 - https://docs.python.org/2/library/stdtypes.html#string-methods
