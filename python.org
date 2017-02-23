@@ -474,8 +474,9 @@ or the empty string when there were no arguments.
   set | other | ...      set.union(*others)
   set & other & ...      set.intersection(*others)
   set - other - ...      set.difference(*others)
-  set ^ other            set.symmetric_difference(other)  (either the set or other but not both)
-  set.copy()                                              (a shallow copy of s)
+  set ^ other            set.symmetric_difference(other)
+                         (either the set or other but not both)
+  set.copy()             (a shallow copy of s)
 
   # only for set, not frozenset
   set |= other | ...     set.update(*others)
@@ -483,9 +484,9 @@ or the empty string when there were no arguments.
   set -= other | ...     set.difference_update(*others)
   set ^= other           set.symmetric_difference_update(other)
   set.add(elem)
-  set.remove(elem)                                        (remove elem. KeyError if elem doesn't exist)
-  set.discard(elem                                        (remove elem if it is present)
-  set.pop()                                               (remove and return an arbitrary elem. KeyError if empty)
+  set.remove(elem)       (remove elem. KeyError if elem doesn't exist)
+  set.discard(elem       (remove elem if it is present)
+  set.pop()              (remove and return an arbitrary elem. KeyError if empty)
   clear()
 #+END_EXAMPLE
 
