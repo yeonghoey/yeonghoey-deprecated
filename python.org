@@ -21,7 +21,7 @@
 
 * Source Code Encodings
 - [[https://www.python.org/dev/peps/pep-0263/][PEP 263]]
- 
+
 #+BEGIN_SRC python
   #!/usr/bin/python
   # -*- coding: utf-8 -*-
@@ -45,11 +45,11 @@ objects of the same types that don't support proper comparison are ordered by th
 
 * Execute subprocesses
 - https://docs.python.org/2/library/subprocess.html
- 
+
 ** Calling an external command in Python
 - http://stackoverflow.com/questions/89228/calling-an-external-command-in-python
 - https://docs.python.org/2/library/subprocess.html#subprocess.call
- 
+
 #+BEGIN_SRC python
   # Simply exectus shell commands
   os.system("some_command < input_file | another_command > output_file")
@@ -206,7 +206,7 @@ So in conclusion, out of all these options, I would recommend Setuptools, unless
 
 
 *** install_requires vs requirements.txt
-- https://packaging.python.org/requirements/#requirements-files  
+- https://packaging.python.org/requirements/#requirements-files
 
 [[file:img/screenshot_2017-01-29_09-46-07.png]]
 
@@ -340,7 +340,27 @@ or the empty string when there were no arguments.
 #+END_EXAMPLE
 
 * list
+- https://docs.python.org/2/library/stdtypes.html#mutable-sequence-types
+- https://docs.python.org/2/library/stdtypes.html#sequence-types-str-unicode-list-tuple-bytearray-buffer-xrange
+
 #+BEGIN_EXAMPLE
+  x in s
+  x not in s
+  s + t         the concatenation of s and t
+  s * n, n * s  equivalent to adding s to itself n times
+  s[i]
+  s[i:j]
+  s[i:j:k]
+  s[i] = x
+  s[i:j] = t    slice of s from i to j is replaced by the contents of the iterable t
+  del s[i:j]    same as s[i:j] = []
+  s[i:j:k] = t  the elements of s[i:j:k] are replaced by those of t
+  del s[i:j:k]  removes the elements of s[i:j:k] from the list
+  s *= n        updates s with its contents repeated n times
+  len(s)
+  min(s)
+  max(s)
+
   L.append(object)
   L.count(value) -> integer
   L.extend(iterable)
@@ -534,7 +554,7 @@ In contrast, their *operator based counterparts require their arguments to be se
   S.rsplit([sep [,maxsplit]]) -> list of strings    sep=' '
   S.rstrip([chars]) -> string or unicode            like S.strip()
   S.split([sep [,maxsplit]]) -> list of strings     like S.rsplit()
-  S.splitlines(keepends=False) -> list of strings  
+  S.splitlines(keepends=False) -> list of strings
   S.startswith(prefix[, start[, end]]) -> bool      like S.endswith()
   S.strip([chars]) -> string or unicode             remove leading whitespace(or chars)
   S.swapcase() -> string
