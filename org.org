@@ -4,6 +4,7 @@
  - [[#title][Title]]
  - [[#format][Format]]
    - [[#references][References]]
+ - [[#easy-templates][Easy Templates]]
  - [[#literals][Literals]]
    - [[#basics][Basics]]
      - [[#syntax][Syntax]]
@@ -15,7 +16,6 @@
  - [[#links-and-snippets][Links and snippets]]
  - [[#capture][Capture]]
  - [[#timestamps][Timestamps]]
-   - [[#active-vs-inactive][Active vs Inactive]]
 
 * Title
 - http://orgmode.org/manual/Document-title.html
@@ -38,6 +38,25 @@ If the subtree has a property EXPORT_TITLE, that will take precedence.
 ** References
 - [[http://orgmode.org/manual/Link-format.html][Link format]]
 - [[http://orgmode.org/manual/Emphasis-and-monospace.html][Emphasis and monospace]]
+
+* Easy Templates
+- http://orgmode.org/manual/Easy-Templates.html
+
+#+BEGIN_EXAMPLE
+  s #+BEGIN_SRC ... #+END_SRC
+  e #+BEGIN_EXAMPLE ... #+END_EXAMPLE
+  q #+BEGIN_QUOTE ... #+END_QUOTE
+  v #+BEGIN_VERSE ... #+END_VERSE
+  c #+BEGIN_CENTER ... #+END_CENTER
+  l #+BEGIN_LaTeX ... #+END_LaTeX
+  L #+LaTeX:
+  h #+BEGIN_HTML ... #+END_HTML
+  H #+HTML:
+  a #+BEGIN_ASCII ... #+END_ASCII
+  A #+ASCII:
+  i #+INDEX: line
+  I #+INCLUDE: lin
+#+END_EXAMPLE
 
 * Literals
 ** Basics
@@ -118,9 +137,7 @@ If the subtree has a property EXPORT_TITLE, that will take precedence.
 - http://orgmode.org/manual/Capture-templates.html#Capture-templates
 
 * Timestamps
-** Active vs Inactive
 #+BEGIN_EXAMPLE
   <2006-11-01 Wed>
   [2006-11-01 Wed]  # inactive timestamps, they do not trigger an entry to show up in the agenda.
 #+END_EXAMPLE
-
