@@ -1,20 +1,19 @@
 #+TITLE: Markdown
 
 * Table of Contents                                                :TOC_2_gh:
- - [[#example][Example]]
-   - [[#headers][Headers]]
-   - [[#emphasis][Emphasis]]
-   - [[#lists][Lists]]
-   - [[#links][Links]]
-   - [[#images][Images]]
-   - [[#code][Code]]
-   - [[#tables][Tables]]
-   - [[#quotes][Quotes]]
-   - [[#html][HTML]]
-   - [[#horizontal-rule][Horizontal Rule]]
+ - [[#headers][Headers]]
+ - [[#emphasis][Emphasis]]
+ - [[#lists][Lists]]
+ - [[#links][Links]]
+ - [[#images][Images]]
+ - [[#code][Code]]
+ - [[#tables][Tables]]
+ - [[#quotes][Quotes]]
+ - [[#html][HTML]]
+ - [[#horizontal-rule][Horizontal Rule]]
+ - [[#references][References]]
 
-* Example
-** Headers
+* Headers
 #+BEGIN_EXAMPLE
   # H1
   ## H2
@@ -32,7 +31,7 @@
   ------
 #+END_EXAMPLE
 
-** Emphasis
+* Emphasis
 #+BEGIN_EXAMPLE
   Emphasis, aka italics, with *asterisks* or _underscores_.
 
@@ -43,7 +42,7 @@
   Strikethrough uses two tildes. ~~Scratch this.~~
 #+END_EXAMPLE
 
-** Lists
+* Lists
 #+BEGIN_EXAMPLE
   1. First ordered list item
   2. Another item
@@ -63,7 +62,7 @@
   + Or pluses
 #+END_EXAMPLE
 
-** Links
+* Links
 #+BEGIN_EXAMPLE
   [I'm an inline-style link](https://www.google.com)
 
@@ -88,7 +87,7 @@
   [link text itself]: http://www.reddit.com
 #+END_EXAMPLE
 
-** Images
+* Images
 #+BEGIN_EXAMPLE
   Inline-style: 
   ![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
@@ -99,7 +98,7 @@
   [logo]: https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 2"
 #+END_EXAMPLE
 
-** Code
+* Code
 #+BEGIN_EXAMPLE
   Inline `code` has `back-ticks around` it.
 
@@ -120,7 +119,7 @@
   ```
 #+END_EXAMPLE
 
-** Tables
+* Tables
 #+BEGIN_EXAMPLE
   Colons can be used to align columns.
 
@@ -140,7 +139,7 @@
   1 | 2 | 3
 #+END_EXAMPLE
 
-** Quotes
+* Quotes
 #+BEGIN_EXAMPLE
   > Blockquotes are very handy in email to emulate reply text.
   > This line is part of the same quote.
@@ -150,7 +149,7 @@
   > This is a very long line that will still be quoted properly when it wraps. Oh boy let's keep writing to make sure this is long enough to actually wrap for everyone. Oh, you can *put* **Markdown** into a blockquote.
 #+END_EXAMPLE
 
-** HTML
+* HTML
 #+BEGIN_EXAMPLE
   <dl>
     <dt>Definition list</dt>
@@ -161,7 +160,7 @@
   </dl>
 #+END_EXAMPLE
 
-** Horizontal Rule
+* Horizontal Rule
 #+BEGIN_EXAMPLE
   Three or more...
 
@@ -178,4 +177,5 @@
   Underscores
 #+END_EXAMPLE
 
-- Extracted from https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet
+* References
+- https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet
