@@ -7,6 +7,7 @@
  - [[#babel][Babel]]
  - [[#export][Export]]
  - [[#agenda][Agenda]]
+ - [[#plugins][Plugins]]
 
 * Settings 
 - https://github.com/fniessen/refcard-org-mode
@@ -216,4 +217,13 @@ delimited by whitespace or punctuation.
 #+BEGIN_EXAMPLE
   <2006-11-01 Wed>
   [2006-11-01 Wed]  # inactive timestamps, they do not trigger an entry to show up in the agenda.
+#+END_EXAMPLE
+* Plugins
+** toc-org
+- https://github.com/snosov1/toc-org
+
+#+BEGIN_EXAMPLE
+  :TOC_2:
+  :TOC_2_gh:   (github style, [[#heading][heading]])
+  :TOC_2_org:  (org style,    [[heading][heading]])
 #+END_EXAMPLE
