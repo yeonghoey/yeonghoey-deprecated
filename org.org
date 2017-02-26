@@ -1,9 +1,9 @@
 #+TITLE: Org
 
 * Table of Contents                                                :TOC_4_GH:
- - [[#title][Title]]
- - [[#format][Format]]
+ - [[#markup][Markup]]
    - [[#references][References]]
+ - [[#title][Title]]
  - [[#easy-templates][Easy Templates]]
  - [[#literals][Literals]]
    - [[#basics][Basics]]
@@ -17,6 +17,61 @@
  - [[#capture][Capture]]
  - [[#timestamps][Timestamps]]
 
+* Markup
+- http://orgmode.org/manual/Markup.html#Markup
+- http://ergoemacs.org/emacs/emacs_org_markup.html
+- http://orgmode.org/manual/External-links.html#External-links
+
+#+BEGIN_EXAMPLE
+  ,* 1st level heading
+  ,** this is 2nd level heading
+  ,*** this is 3rd level heading
+
+  ,*bold*
+  /italic/
+  _underlined_
+  =verbatim=
+  ~code~
+  +strike-through+
+
+  - 1st item
+  - another item
+  - and 3rd item
+
+  + 1st item
+  + another item
+  + and 3rd item
+
+  1. 1st item
+  2. another item
+  3. and 3rd item
+
+  [[http://example.com/]]
+  [[http://example.com/][description]]
+
+  -----
+  (a horizontal rule, 5 or more only dashes)
+
+  ,#+BEGIN_EXAMPLE
+    verbatime example
+  ,#+END_EXAMPLE
+
+  ,#+BEGIN_SOURCE python
+    print 'hello, world!'
+  ,#+END+SOURCE
+
+  : a single line example
+    : can be indented
+  (start the example lines with a colon followed by a space.)
+#+END_EXAMPLE
+
+- To enforce a line break, use ~\\~ at the end of a line.
+- R_{sub}, R_sub, R^sup, R^{sup}
+
+
+** References
+- [[http://orgmode.org/manual/Link-format.html][Link format]]
+
 * Title
 - http://orgmode.org/manual/Document-title.html
 
@@ -28,16 +83,6 @@
 If you are exporting only a subtree, its heading will become the title of the document.
 If the subtree has a property EXPORT_TITLE, that will take precedence.
 #+END_QUOTE
-
-* Format
-#+BEGIN_EXAMPLE
-  [[link][description]] or alternatively [[link]]
-  *bold*, /italic/, _underlined_, =verbatim= and ~code~, +strike-through+
-#+END_EXAMPLE
-
-** References
-- [[http://orgmode.org/manual/Link-format.html][Link format]]
-- [[http://orgmode.org/manual/Emphasis-and-monospace.html][Emphasis and monospace]]
 
 * Easy Templates
 - http://orgmode.org/manual/Easy-Templates.html
