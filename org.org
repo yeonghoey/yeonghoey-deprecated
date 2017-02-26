@@ -115,6 +115,16 @@ If the subtree has a property EXPORT_TITLE, that will take precedence.
 - http://stackoverflow.com/questions/18991981/difference-between-code-and-verbatim-in-org-mode
 - There are some differences in ~Latex~ related things, but *identical others*.
 
+** Can't stylize part of a word
+- http://stackoverflow.com/questions/1218238/how-to-make-part-of-a-word-bold-in-org-mode
+
+#+BEGIN_QUOTE
+Org-mode relies on heuristics to distinguish emphasis from
+normal text, and one of the most important parts of this
+heuristics method is *assuming that emphasis is on whole words*,
+delimited by whitespace or punctuation.
+#+END_QUOTE
+
 * Easy Templates
 - http://orgmode.org/manual/Easy-Templates.html
 
