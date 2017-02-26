@@ -1,15 +1,15 @@
 #+TITLE: Org
 
 * Table of Contents                                                :TOC_1_GH:
- - [[#settings-][Settings ]]
+ - [[#settings][Settings]]
  - [[#markup][Markup]]
  - [[#easy-templates][Easy Templates]]
  - [[#babel][Babel]]
  - [[#export][Export]]
  - [[#agenda][Agenda]]
- - [[#plugins][Plugins]]
+ - [[#add-ons][Add-ons]]
 
-* Settings 
+* Settings
 - https://github.com/fniessen/refcard-org-mode
 - http://orgmode.org/manual/Structural-markup-elements.html
 - http://orgmode.org/manual/Export-settings.html
@@ -173,7 +173,7 @@ delimited by whitespace or punctuation.
 * Babel
 - http://orgmode.org/worg/org-contrib/babel/languages.html
 - http://orgmode.org/manual/Structure-of-code-blocks.html
- 
+
 ** Basics
 #+BEGIN_SRC org
   ,#+NAME: <name>
@@ -213,12 +213,12 @@ delimited by whitespace or punctuation.
 
 * Agenda
 - http://orgmode.org/manual/Capture-templates.html#Capture-templates
- 
+
 #+BEGIN_EXAMPLE
   <2006-11-01 Wed>
   [2006-11-01 Wed]  # inactive timestamps, they do not trigger an entry to show up in the agenda.
 #+END_EXAMPLE
-* Plugins
+* Add-ons
 ** toc-org
 - https://github.com/snosov1/toc-org
 
@@ -227,3 +227,15 @@ delimited by whitespace or punctuation.
   :TOC_2_gh:   (github style, [[#heading][heading]])
   :TOC_2_org:  (org style,    [[heading][heading]])
 #+END_EXAMPLE
+
+** org-reveal
+- https://github.com/yjwen/org-reveal/
+- ~, e R B~ to generate and preview
+- ~#+REVEAL_ROOT: http://cdn.jsdelivr.net/reveal.js/3.0.0/~
+
+** ox-twbs
+- https://github.com/marsmining/ox-twbs
+- Export org as HTML compatible with Twitter Bootstrap.
+- I tried to use this, but there were some inconsistencies. I don't use it now.
+  - Some colors are indistinguishable.
+  - Image links are broken if I segregate htmls from orgs
