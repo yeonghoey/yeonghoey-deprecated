@@ -154,16 +154,20 @@ If the subtree has a property EXPORT_TITLE, that will take precedence.
 #+BEGIN_SRC org
   ,#+BEGIN_SRC python :results output
   print "Hello, world!"
-  ,#+END_SRC python
+  ,#+END_SRC
+
+  ,#+RESULTS:
+  : Hello, world!
 
   ,#+TBLNAME: data_table
   | a | 1 |
   | b | 2 |
   | c | 3 |
+
   ,#+BEGIN_SRC python :var val=1 :var data=data_table
   # Return row specified by val.
   # In non-session mode, use return to return results.
-  return(data[val])
+  return data[val]
   ,#+END_SRC
 
   ,#+RESULTS:
