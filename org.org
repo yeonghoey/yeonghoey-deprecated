@@ -1,20 +1,64 @@
 #+TITLE: Org
 
-* Table of Contents                                                :TOC_4_GH:
+* Table of Contents                                                :TOC_1_GH:
+ - [[#document-meta][Document Meta]]
  - [[#markup][Markup]]
- - [[#title][Title]]
  - [[#easy-templates][Easy Templates]]
- - [[#literals][Literals]]
-   - [[#basics][Basics]]
-     - [[#syntax][Syntax]]
-     - [[#examples][Examples]]
-     - [[#one-liner][One liner]]
-   - [[#language-specific-examples][Language specific examples]]
-     - [[#python][Python]]
-   - [[#references][References]]
- - [[#links-and-snippets][Links and snippets]]
- - [[#capture][Capture]]
- - [[#timestamps][Timestamps]]
+ - [[#babel][Babel]]
+ - [[#agenda][Agenda]]
+
+* Document Meta
+- http://orgmode.org/manual/Structural-markup-elements.html
+
+#+BEGIN_EXAMPLE
+  ,#+TITLE: This is the title of the document
+  ,#+OPTIONS: toc:2    (only inlcude two levels in TOC)
+  ,#+OPTIONS: toc:nil  (no default TOC at all)
+
+  ,#+TOC: headlines 2        (insert TOC here)
+  ,#+TOC: headlines 1 local  (insert local TOC, direct children only)
+  ,#+TOC: listings           (build a list of listings)
+  ,#+TOC: tables             (build a list of tables)
+
+  ,#+INCLUDE: "~/.emacs" src emacs-lisp
+  ,#+INCLUDE: "~/my-book/chapter2.org" :minlevel 1
+  ,#+INCLUDE: "~/.emacs" :lines "5-10"                 [5 to 10)
+  ,#+INCLUDE: "~/.emacs" :lines "-10"                  [1 to 10)
+  ,#+INCLUDE: "~/.emacs" :lines "10-"                  [10 to EOF)
+  ,#+INCLUDE: "./paper.org::#theory" :only-contents t  (custom-id)
+  ,#+INCLUDE: "./paper.org::mytable"                   (named element)
+  ,#+INCLUDE: "./paper.org::*conclusion" :lines 1-20   (headline named 'conclusion')
+
+  ,#+MACRO: name   replacement text $1, $2 are arguments
+  {{{name(arg1, arg2)}}}
+  {{{title}}}
+  {{{author}}}
+  {{{email}}}
+  {{{date}}}
+  {{{date(FORMAT)}}}
+  {{{time(FORMAT)}}}
+  {{{modification-time(FORMAT, VC)}}}
+  {{{input-file}}}
+  {{{property(PROPERTY-NAME)}}}
+  {{{property(PROPERTY-NAME,SEARCH-OPTION)}}}
+
+  ,* Goldberg Variations
+  :PROPERTIES:
+  :Title:     Goldberg Variations
+  :Composer:  J.S. Bach
+  :Artist:    Glen Gould
+  :Publisher: Deutsche Grammophon
+  :NDisks:    1
+  :END:
+#+END_EXAMPLE
+
+** Omitting #+TITLE
+- http://orgmode.org/manual/Document-title.html#Document-title
+#+BEGIN_QUOTE
+If you are exporting only a subtree,
+*its heading will become the title of the document.
+If the subtree has a property EXPORT_TITLE, that will take precedence.
+#+END_QUOTE
 
 * Markup
 - http://orgmode.org/manual/Markup.html#Markup
@@ -22,63 +66,54 @@
 - http://orgmode.org/manual/External-links.html#External-links
 
 #+BEGIN_EXAMPLE
-  ,* 1st level heading
-  ,** this is 2nd level heading
-  ,*** this is 3rd level heading
+    ,* 1st level heading
+    ,** this is 2nd level heading
+    ,*** this is 3rd level heading
 
-  ,*bold*
-  /italic/
-  _underlined_
-  =verbatim=
-  ~code~
-  +strike-through+
-  X_{subscript}, X^{superscript}
+    ,*bold*
+    /italic/
+    _underlined_
+    =verbatim=
+    ~code~
+    +strike-through+
+    X_{subscript}, X^{superscript}
 
-  Hello, \\  (enforce line break within a paragraph)
-  World.
+    Hello, \\  (enforce line break within a paragraph)
+    World.
 
-  - 1st item
-  - another item
-  - and 3rd item
+    - 1st item
+    ,* another item
+    + and 3rd item :: this is a description
 
-  + 1st item
-  + another item
-  + and 3rd item
+    1. 1st item
+    2) another item
 
-  1. 1st item
-  2. another item
-  3. and 3rd item
+    20. [@20] Test
+    21. xargs
+    22. bcadf
 
-  [[http://example.com/]]
-  [[http://example.com/][description]]
+    [[http://example.com/]]
+    [[http://example.com/][description]]
 
-  -----
-  (a horizontal rule, 5 or more only dashes)
+    -----
+    (a horizontal rule, 5 or more only dashes)
 
-  ,#+BEGIN_EXAMPLE
-    verbatime example
-  ,#+END_EXAMPLE
+    ,#+BEGIN_EXAMPLE
+      verbatime example
+    ,#+END_EXAMPLE
 
-  ,#+BEGIN_SOURCE python
-    print 'hello, world!'
-  ,#+END+SOURCE
+    ,#+BEGIN_SOURCE python
+      print 'hello, world!'
+    ,#+END+SOURCE
 
-  : a single line example
-    : can be indented
-  (start the example lines with a colon followed by a space.)
+    : a single line example
+      : can be indented
+    (start the example lines with a colon followed by a space.)
 #+END_EXAMPLE
 
-* Title
-- http://orgmode.org/manual/Document-title.html
-
-#+BEGIN_EXAMPLE
- #+TITLE: This is the title of the document
-#+END_EXAMPLE
-
-#+BEGIN_QUOTE
-If you are exporting only a subtree, its heading will become the title of the document.
-If the subtree has a property EXPORT_TITLE, that will take precedence.
-#+END_QUOTE
+** code(~~) vs verbatim(==)
+- http://stackoverflow.com/questions/18991981/difference-between-code-and-verbatim-in-org-mode
+- There are some differences in ~Latex~ related things, but *identical others*.
 
 * Easy Templates
 - http://orgmode.org/manual/Easy-Templates.html
@@ -99,18 +134,17 @@ If the subtree has a property EXPORT_TITLE, that will take precedence.
   I #+INCLUDE: lin
 #+END_EXAMPLE
 
-* Literals
+* Babel
+- http://orgmode.org/worg/org-contrib/babel/languages.html
+- http://orgmode.org/manual/Structure-of-code-blocks.html
+ 
 ** Basics
-*** Syntax
 #+BEGIN_SRC org
   ,#+NAME: <name>
   ,#+BEGIN_SRC <language> <switches> <header arguments>
      <body>
   ,#+END_SRC
-#+END_SRC
 
-*** Examples
-#+BEGIN_SRC org
   ,#+BEGIN_SRC emacs-lisp
   ,#+BEGIN_SRC emacs-lisp -n 20  ;; Show line numbers starting from 20
   ,#+BEGIN_SRC emacs-lisp +n 20  ;; Show line numbers ending with 20
@@ -119,18 +153,17 @@ If the subtree has a property EXPORT_TITLE, that will take precedence.
     (save-excursion             (ref:sc)
       (goto-char (point-min)))  (ref:jump)
   ,#+END_SRC
-  In line [[(sc)]] we remember the current position.  [[(jump)][Line (jump)]]
+  In line [[(sc)]] we remember the current position.
+  [[(jump)][Line (jump)]]
   jumps to point-min.
 #+END_SRC
 
-*** One liner
-#+BEGIN_SRC org
-  Here is an example
-  : Some example from a text file.
+#+BEGIN_SRC emacs-lisp -n -r 
+  (save-excursion               (ref:sc)
+      (goto-char (point-min)))  (ref:jump)
 #+END_SRC
 
-** Language specific examples
-*** Python
+** Python
 #+BEGIN_SRC org
   ,#+begin_src python :results output
   print "Hello, world!"
@@ -150,34 +183,9 @@ If the subtree has a property EXPORT_TITLE, that will take precedence.
   | b | 2 |
 #+END_SRC
 
-** References
-  - [[http://orgmode.org/manual/Structure-of-code-blocks.html][Structure of code blocks]]
-  - [[http://orgmode.org/worg/org-contrib/babel/languages.html][Supported languages]]
-
-* TODO Links and snippets
-- http://orgmode.org/manual/Global-and-local-cycling.html#Global-and-local-cycling
-- http://orgmode.org/worg/org-configs/org-customization-guide.html
-
-#+begin_src ditaa :file ditaa-simpleboxes.png
-+---------+
-|         |
-| Foo     |
-|         |
-+----+----+---+
-|Bar |Baz     |
-|    |        |
-+----+--------+
-#+end_src
-
-| Header1 | ID       | Header3 | Header4 | Header5 |
-|---------+----------+---------+---------+---------|
-|       1 | Warrior  |         |         |         |
-|       2 | Magician |         |         |         |
-|       3 | Fighter  |         |         |         |
-* Capture
+* Agenda
 - http://orgmode.org/manual/Capture-templates.html#Capture-templates
-
-* Timestamps
+ 
 #+BEGIN_EXAMPLE
   <2006-11-01 Wed>
   [2006-11-01 Wed]  # inactive timestamps, they do not trigger an entry to show up in the agenda.
