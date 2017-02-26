@@ -1,17 +1,27 @@
 #+TITLE: Org
 
 * Table of Contents                                                :TOC_1_GH:
- - [[#document-meta][Document Meta]]
+ - [[#settings-][Settings ]]
  - [[#markup][Markup]]
  - [[#easy-templates][Easy Templates]]
  - [[#babel][Babel]]
  - [[#agenda][Agenda]]
 
-* Document Meta
+* Settings 
+- https://github.com/fniessen/refcard-org-mode
 - http://orgmode.org/manual/Structural-markup-elements.html
+- http://orgmode.org/manual/Export-settings.html
 
 #+BEGIN_EXAMPLE
-  ,#+TITLE: This is the title of the document
+  ,#+TITLE:  Org Document Settings Cheatsheet
+  ,#+AUTHOR: Yeongho Kim
+  ,#+EMAIL:  yeonghoey@gmail.com
+  ,#+DESCRIPTION: a description
+  ,#+KEYWORDS:    org
+  ,#+LANGUAGE:    en
+
+  ,#+OPTIONS: H:4      (section numbering)
+  ,#+OPTIONS: num:nil  (no number)
   ,#+OPTIONS: toc:2    (only inlcude two levels in TOC)
   ,#+OPTIONS: toc:nil  (no default TOC at all)
 
@@ -50,6 +60,20 @@
   :Publisher: Deutsche Grammophon
   :NDisks:    1
   :END:
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+  ,#+TITLE: Test
+  ,#+OPTIONS: ':t
+  ,#+OPTIONS: num:nil
+  ,#+OPTIONS: author:nil
+  ,#+OPTIONS: email:nil
+  ,#+OPTIONS: date:nil
+
+  ,* A
+  ,** B
+  ,*** C
+  "Hello, world!"
 #+END_EXAMPLE
 
 ** Omitting #+TITLE
