@@ -2,7 +2,6 @@
 
 * Table of Contents                                                :TOC_4_GH:
  - [[#markup][Markup]]
-   - [[#references][References]]
  - [[#title][Title]]
  - [[#easy-templates][Easy Templates]]
  - [[#literals][Literals]]
@@ -12,7 +11,7 @@
      - [[#one-liner][One liner]]
    - [[#language-specific-examples][Language specific examples]]
      - [[#python][Python]]
-   - [[#references-1][References]]
+   - [[#references][References]]
  - [[#links-and-snippets][Links and snippets]]
  - [[#capture][Capture]]
  - [[#timestamps][Timestamps]]
@@ -33,6 +32,10 @@
   =verbatim=
   ~code~
   +strike-through+
+  X_{subscript}, X^{superscript}
+
+  Hello, \\  (enforce line break within a paragraph)
+  World.
 
   - 1st item
   - another item
@@ -64,13 +67,6 @@
     : can be indented
   (start the example lines with a colon followed by a space.)
 #+END_EXAMPLE
-
-- To enforce a line break, use ~\\~ at the end of a line.
-- R_{sub}, R_sub, R^sup, R^{sup}
-
-
-** References
-- [[http://orgmode.org/manual/Link-format.html][Link format]]
 
 * Title
 - http://orgmode.org/manual/Document-title.html
