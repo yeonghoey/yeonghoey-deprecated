@@ -230,12 +230,14 @@ delimited by whitespace or punctuation.
 
 ** org-reveal
 - https://github.com/yjwen/org-reveal/
+- https://github.com/hakimel/reveal.js/
 - ~, e R B~ to generate and preview
 - ~#+REVEAL_ROOT: http://cdn.jsdelivr.net/reveal.js/3.0.0/~
+- ~#+REVEAL_THEME: <theme>~ :: [[https://github.com/hakimel/reveal.js/tree/master/css/theme][reveal.js/css/theme]] 
 
 ** ox-twbs
 - https://github.com/marsmining/ox-twbs
 - Export org as HTML compatible with Twitter Bootstrap.
-- I tried to use this, but there were some inconsistencies. I don't use it now.
+- I tried to use this, but *there were some inconsistencies*. I don't use it now.
   - Some colors are indistinguishable.
   - Image links are broken if I segregate htmls from orgs
