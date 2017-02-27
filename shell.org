@@ -6,7 +6,7 @@
  - [[#prompt-a-user-for-yesno][Prompt a user for yes/no]]
  - [[#history-expasion][History Expasion]]
  - [[#mounting-a-volume][Mounting a Volume]]
- - [[#pseudo-tty][pseudo-tty]]
+ - [[#pseudo-terminals][Pseudo Terminals]]
  - [[#glob-dotfiles][Glob dotfiles]]
  - [[#apt][apt]]
  - [[#case][case]]
@@ -247,7 +247,7 @@ because it preallocates a bit of space for fsck to deposit files there. (...)
 If you accidentally delete lost+found, don't re-create it with mkdir, use mklost+found if available.
 #+END_QUOTE
 
-* pseudo-tty
+* Pseudo Terminals
 - https://www.quora.com/What-is-the-purpose-of-a-pseudo-tty
 
 if you run a process on the terminal,
