@@ -244,7 +244,7 @@ If that's all that happened, these files were slated for deletion anyway, you do
 #+BEGIN_QUOTE
 On many filesystems, the ~lost+found~ directory is a bit special
 because it preallocates a bit of space for ~fsck~ to deposit files there. (...)
-If you accidentally delete ~lost+found~, *don't re-create it with ~mkdir~, use ~mklost+found~ if available*.
+If you accidentally delete ~lost+found~, *don't re-create it with* ~mkdir~, *use* ~mklost+found~ *if available*.
 #+END_QUOTE
 
 * Pseudo Terminals
