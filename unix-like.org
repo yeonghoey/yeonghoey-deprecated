@@ -12,6 +12,7 @@
  - [[#glob-dotfiles][Glob dotfiles]]
  - [[#apt][apt]]
  - [[#case][case]]
+ - [[#du][du]]
  - [[#grep][grep]]
  - [[#here-document][here-document]]
  - [[#lsof][lsof]]
@@ -21,6 +22,7 @@
  - [[#sort][sort]]
  - [[#tar][tar]]
  - [[#tee][tee]]
+ - [[#watch][watch]]
  - [[#xargs][xargs]]
 
 * The Art of Command Line
@@ -385,6 +387,34 @@ There are some workarounds:
   esac
 #+END_SRC
 
+* du
+#+BEGIN_SRC shell
+  $ du
+  0       ./temp
+  24      .
+
+  $ du ./temp
+  0       ./temp
+
+  # -a stands for 'all files'
+  $ du -a  ./
+  8       ./404.html
+  8       ./CNAME
+  8       ./index.html
+  0       ./temp/a
+  0       ./temp/b
+  0       ./temp
+  24      .
+
+  # -h stands for 'human readable'
+  $ du -h
+  0B    ./temp
+  12K    .
+
+  # list file in order of size
+  $ du -a ./ | sort -n
+#+END_SRC
+
 * grep
 #+BEGIN_SRC shell
   $ echo hello world | grep hello
@@ -642,7 +672,6 @@ There are some workarounds:
   foo
   $ cat foo.txt
   foo
-
 #+END_SRC
 
 #+BEGIN_SRC shell
@@ -662,6 +691,13 @@ There are some workarounds:
 
   # 'tee' can be used to work around this  
   $ echo "foo" | sudo tee -a file
+#+END_SRC
+
+* watch
+#+BEGIN_SRC shell
+  watch ls        # run 'ls' every 2 seconds (default)
+  watch -d ls     # highlight differences
+  watch -n 60 ls  # every 60 seconds
 #+END_SRC
 
 * xargs
