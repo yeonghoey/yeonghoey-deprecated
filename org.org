@@ -71,7 +71,7 @@
   ,#+OPTIONS: email:nil
   ,#+OPTIONS: date:nil
 
-  ;; one-liner
+  # one-liner
   ,#+OPTIONS: ':t author:nil date:nil email:nil num:nil
 #+END_EXAMPLE
 
