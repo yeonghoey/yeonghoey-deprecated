@@ -288,6 +288,14 @@ There are some workarounds:
 #+END_SRC
 
 * apt
+** When 'apt-get update' fails
+
+- Check files in:
+  #+BEGIN_EXAMPLE
+    /etc/apt/sources.list
+    /etc/apt/sources.list.d/*.list
+  #+END_EXAMPLE
+
 **  Install java8
 - http://tecadmin.net/install-oracle-java-8-jdk-8-ubuntu-via-ppa/
  
@@ -301,14 +309,6 @@ There are some workarounds:
 
   sudo update-alternatives --config java
 #+END_SRC
-
-** When 'apt-get update' fails
-
-- Check files in:
-  #+BEGIN_EXAMPLE
-    /etc/apt/sources.list
-    /etc/apt/sources.list.d/*.list
-  #+END_EXAMPLE
 
 * case
 - http://tldp.org/LDP/Bash-Beginners-Guide/html/sect_07_03.html
