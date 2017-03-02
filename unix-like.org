@@ -6,6 +6,7 @@
  - [[#prompt-a-user-for-yesno][Prompt a user for yes/no]]
  - [[#history-expasion][History Expasion]]
  - [[#mounting-a-volume][Mounting a Volume]]
+ - [[#swap-spacesfiles][Swap spaces/files]]
  - [[#pseudo-terminals][Pseudo Terminals]]
  - [[#glob-dotfiles][Glob dotfiles]]
  - [[#apt][apt]]
@@ -247,6 +248,23 @@ On many filesystems, the ~lost+found~ directory is a bit special
 because it preallocates a bit of space for ~fsck~ to deposit files there. (...)
 If you accidentally delete ~lost+found~, *don't re-create it with* ~mkdir~, *use* ~mklost+found~ *if available*.
 #+END_QUOTE
+
+* Swap spaces/files
+#+BEGIN_SRC shell
+  $ mkswap /dev/hdb1
+  $ swapon /dev/hdb1
+#+END_SRC
+
+#+BEGIN_SRC shell
+  $ dd if=/dev/zero of=/swap_file bs=1024k count=num_mb
+  $ mkswap /swap_file
+  $ swapon /swap_file
+#+END_SRC
+
+#+BEGIN_SRC
+  $ swapoff -a  # turns off all swap spaces
+  $ rm -f /swap_file
+#+END_SRC
 
 * Pseudo Terminals
 - https://www.quora.com/What-is-the-purpose-of-a-pseudo-tty
