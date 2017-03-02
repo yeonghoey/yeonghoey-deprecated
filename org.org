@@ -65,17 +65,14 @@
 #+END_EXAMPLE
 
 #+BEGIN_EXAMPLE
-  ,#+TITLE: Test
   ,#+OPTIONS: ':t
-  ,#+OPTIONS: num:nil
   ,#+OPTIONS: author:nil
+  ,#+OPTIONS: num:nil
   ,#+OPTIONS: email:nil
   ,#+OPTIONS: date:nil
 
-  ,* A
-  ,** B
-  ,*** C
-  "Hello, world!"
+  # one-liner
+  ,#+OPTIONS: ':t author:nil date:nil email:nil num:nil
 #+END_EXAMPLE
 
 ** Omitting #+TITLE
@@ -208,8 +205,13 @@ delimited by whitespace or punctuation.
   | b | 2 |
 #+END_SRC
 
-* TODO Export
+* Export
 - http://orgmode.org/manual/Exporting.html
+- http://stackoverflow.com/questions/13363267/how-to-remove-footer-details-in-org-mode-html-export
+
+#+BEGIN_EXAMPLE
+  ,#+OPTIONS: author:nil html-postamble:nil num:nil timestamp:nil toc:nil
+#+END_EXAMPLE
 
 * Agenda
 - http://orgmode.org/manual/Capture-templates.html#Capture-templates
