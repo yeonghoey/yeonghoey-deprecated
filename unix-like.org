@@ -7,6 +7,7 @@
  - [[#history-expasion][History Expasion]]
  - [[#mounting-a-volume][Mounting a Volume]]
  - [[#swap-spacesfiles][Swap spaces/files]]
+ - [[#inode-structure][Inode Structure]]
  - [[#pseudo-terminals][Pseudo Terminals]]
  - [[#glob-dotfiles][Glob dotfiles]]
  - [[#apt][apt]]
@@ -188,31 +189,33 @@
 
 #+BEGIN_SRC shell
   # view your available disk devices and their mount points 
-  $ lsblk
+  [root]$ lsblk
   NAME  MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
   xvdf  202:80   0  100G  0 disk
   xvda1 202:1    0    8G  0 disk /
+
+  # check other details
+  [root]$ blkid
+  /dev/xvda1: LABEL="/" UUID="abcdefgh-1234-ijkl-4567-qwertyasdfgh" TYPE="ext4" PARTLABEL="Linux" PARTUUID="12321555-asda-asas-asdg-142khkhkhcsd"
 #+END_SRC
 
 #+BEGIN_SRC shell
-  $ sudo file -s /dev/xvda1
+  [root]$ file -s /dev/xvda1
   /dev/xvda1: Linux rev 1.0 ext4 filesystem data, UUID=1701d228-e1bd-4094-a14c-8c64d6819362, ...
 
-  # no file system
-  $ sudo file -s /dev/xvdf
-  /dev/xvdf: data
+  [root]$ file -s /dev/xvdf
+  /dev/xvdf: data  # no file system
 #+END_SRC
 
 #+BEGIN_SRC shell
-  $ sudo mkfs -t ext4 /dev/xvdf
-
-  $ sudo mkdir /my/path
-  $ sudo mount /dev/xvdf /my/path
+  [root]$ mkfs -t ext4 /dev/xvdf
+  [root]$ mkdir /my/path
+  [root]$ mount /dev/xvdf /my/path
 #+END_SRC
 
 #+BEGIN_SRC shell
   # Mount the volume permanently
-  $ sudo cp /etc/fstab /etc/fstab.orig  # backup
+  [root]$ cp /etc/fstab /etc/fstab.orig  # backup
 
   # /etc/fstab : columns are separated with ' ' or '\t'
   # ------------------------------------------------------------------------------
@@ -226,7 +229,7 @@
   # ------------------------------------------------------------------------------
 
   # mount with /etc/fstab manually
-  $ sudo mount -a
+  [root]$ mount -a
 #+END_SRC
 
 ** lost+found
@@ -251,19 +254,55 @@ If you accidentally delete ~lost+found~, *don't re-create it with* ~mkdir~, *use
 
 * Swap spaces/files
 #+BEGIN_SRC shell
-  $ mkswap /dev/hdb1
-  $ swapon /dev/hdb1
+  [root]$ mkswap /dev/hdb1
+  [root]$ swapon /dev/hdb1
 #+END_SRC
 
 #+BEGIN_SRC shell
-  $ dd if=/dev/zero of=/swap_file bs=1024k count=num_mb
-  $ mkswap /swap_file
-  $ swapon /swap_file
+  [root]$ dd if=/dev/zero of=/swap_file bs=1024k count=num_mb
+  [root]$ mkswap /swap_file
+  [root]$ swapon /swap_file
 #+END_SRC
 
-#+BEGIN_SRC
-  $ swapoff -a  # turns off all swap spaces
-  $ rm -f /swap_file
+#+BEGIN_SRC shell
+  [root]$ swapoff -a  # turns off all swap spaces
+  [root]$ rm -f /swap_file
+#+END_SRC
+
+* Inode Structure
+- http://unix.stackexchange.com/questions/4402/what-is-a-superblock-inode-dentry-and-a-file
+
+[[file:img/screenshot_2017-03-02_22-48-52.png]]
+
+#+BEGIN_QUOTE
+inodes starts at number 2 (root)
+
+inode12(dir_1)’s count is 2, because it’s parent and self-reference(.) pointing it.
+root(2) is only exception(expected 3 but 4), *because it’s pointed by superblock*;
+
+The *superblock* is essentially file system metadata and defines the file system type, size, status, and
+information about other metadata structures (metadata of metadata).
+#+END_QUOTE
+
+#+BEGIN_SRC shell
+  $ ls -i
+  624402 Applications   638157 Dropbox        606644 Pictures     19695291 nltk_data
+  606600 Desktop        606588 Library      19316918 PredictionIO  2688212 repos
+  606584 Documents      606640 Movies         606646 Public       24277126 screenshots
+  606586 Downloads      606642 Music        24707402 bin          22461472 venvs
+#+END_SRC
+
+#+BEGIN_SRC shell
+  $ touch test
+  $ stat test
+  File: 'test'
+  Size: 0               Blocks: 0          IO Block: 4096   regular empty file
+  Device: ca01h/51713d    Inode: 14999       Links: 1
+  Access: (0664/-rw-rw-r--)  Uid: (  500/ec2-user)   Gid: (  500/ec2-user)
+  Access: 2017-03-02 18:20:00.503961613 +0000
+  Modify: 2017-03-02 18:20:00.503961613 +0000
+  Change: 2017-03-02 18:20:00.503961613 +0000
+  Birth: -
 #+END_SRC
 
 * Pseudo Terminals
