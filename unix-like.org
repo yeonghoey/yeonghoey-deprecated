@@ -13,6 +13,7 @@
  - [[#grep][grep]]
  - [[#here-document][here-document]]
  - [[#lsof][lsof]]
+ - [[#mount][mount]]
  - [[#pgrep][pgrep]]
  - [[#set][set]]
  - [[#sort][sort]]
@@ -379,6 +380,30 @@ There are some workarounds:
   # numeric ip(-n) and port(-P)
   $ lsof -n -P | less
 #+END_SRC
+
+* mount
+- http://unix.stackexchange.com/questions/91960/can-anyone-explain-the-output-of-mount
+
+#+BEGIN_SRC shell
+  [root@]# mount
+  /dev/sda2 on / type ext4 (rw)
+  proc on /proc type proc (rw)
+  sysfs on /sys type sysfs (rw)
+  devpts on /dev/pts type devpts (rw,gid=5,mode=620)
+  tmpfs on /dev/shm type tmpfs (rw)
+  /dev/sda1 on /boot type ext4 (rw)
+  /dev/sda3 on /home type ext4 (rw)
+  none on /proc/sys/fs/binfmt_misc type binfmt_misc (rw)
+  sunrpc on /var/lib/nfs/rpc_pipefs type rpc_pipefs (rw)
+  gvfs-fuse-daemon on /root/.gvfs type fuse.gvfs-fuse-daemon (rw,nosuid,nodev)
+#+END_SRC
+
+: <spec> on <file> type <vfstype> (<mntopts>)
+
+| ~spec~    | the block device or remote filesystem to be mounted. |
+| ~file~    | he mount point for the filesystem.                   |
+| ~vfstype~ | the type of the filesystem.                          |
+| ~mntopts~ | the mount options associated with the filesystem.    |
 
 * pgrep
 - Same usages, but ~pkill~ will kill match processes
