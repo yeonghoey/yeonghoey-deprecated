@@ -1,0 +1,12 @@
+#+TITLE: AWS Command Line Interface
+
+* Table of Contents :TOC_1_gh:
+ - [[#ec2][ec2]]
+
+* ec2
+- http://docs.aws.amazon.com/cli/latest/reference/ec2/index.html#cli-aws-ec2
+
+#+BEGIN_SRC shell
+  # Make the instance terminable (Disable Termination Protection)
+  aws ec2 modify-instance-attribute --instance-id <value> --no-disable-api-termination
+#+END_SRC
