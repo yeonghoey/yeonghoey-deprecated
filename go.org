@@ -1,0 +1,21 @@
+#+TITLE: go
+
+* Table of Contents :TOC_1_gh:
+ - [[#error][error]]
+ - [[#log][log]]
+
+* error
+#+BEGIN_SRC go
+  fmt.Errorf("parsing %s as HTML: %v", url, err)
+#+END_SRC
+
+gopl book says:
+#+BEGIN_QUOTE
+Because error messages are frequently chained together,
+message strings should not be capitalized and newlines should be avoided.
+#+END_QUOTE
+
+* log
+#+BEGIN_SRC go
+  log.Fatalf("Site is down: %v\n", err)
+#+END_SRC
