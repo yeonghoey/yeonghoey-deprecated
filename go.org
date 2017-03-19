@@ -3,6 +3,7 @@
 * Table of Contents :TOC_1_gh:
  - [[#error][error]]
  - [[#log][log]]
+ - [[#documenting-packages][Documenting Packages]]
 
 * error
 #+BEGIN_SRC go
@@ -19,3 +20,19 @@ message strings should not be capitalized and newlines should be avoided.
 #+BEGIN_SRC go
   log.Fatalf("Site is down: %v\n", err)
 #+END_SRC
+
+* Documenting Packages
+- https://blog.golang.org/godoc-documenting-go-code
+
+#+BEGIN_SRC go
+  // Fprint formats using the default formats for its operands and writes to w.
+  // Spaces are added between operands when neither is a string.
+  // It returns the number of bytes written and any write error encountered.
+  func Fprint(w io.Writer, a ...interface{}) (n int, err error) {
+#+END_SRC
+
+gopl book says:
+#+BEGIN_QUOTE
+Go doc comments are always complete sentences, and the first sentence is
+usually a summary that starts with the name being declared.
+#+END_QUOTE
