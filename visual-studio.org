@@ -4,7 +4,7 @@
  - [[#shortcuts][Shortcuts]]
 
 * Shortcuts
-| ~Ctrl + ,~         | Navigate to          |
+| ~Ctrl + ,,~        | Navigate to          |
 | ~Ctrl + -~         | Navigate Backward    |
 | ~Ctrl + Shift + -~ | Navigate Forward     |
 | ~F12~              | Go to Definition     |
