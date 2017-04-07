@@ -2,11 +2,24 @@
 
 * Table of Contents :TOC_1_gh:
  - [[#ec2][ec2]]
+ - [[#s3][s3]]
 
 * ec2
-- http://docs.aws.amazon.com/cli/latest/reference/ec2/index.html#cli-aws-ec2
++ http://docs.aws.amazon.com/cli/latest/reference/ec2/index.html#cli-aws-ec2
 
 #+BEGIN_SRC shell
   # Make the instance terminable (Disable Termination Protection)
   aws ec2 modify-instance-attribute --instance-id <value> --no-disable-api-termination
+#+END_SRC
+
+* s3
++ http://docs.aws.amazon.com/cli/latest/reference/s3/index.html#available-commands
+
+#+BEGIN_SRC shell
+  aws s3 mv test.txt s3://mybucket/test2.txt
+  aws s3 mv s3://mybucket/test.txt s3://mybucket/test2.txt
+  aws s3 mv s3://mybucket/test.txt test2.txt
+  aws s3 mv s3://mybucket . --recursive
+  aws s3 mv myDir s3://mybucket/ --recursive --exclude "*.jpg"
+  aws s3 mv s3://mybucket/ s3://mybucket2/ --recursive --exclude "mybucket/another/*"
 #+END_SRC
