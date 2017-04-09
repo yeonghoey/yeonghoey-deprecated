@@ -137,6 +137,13 @@
   --- | --- | ---
   ,*Still* | `renders` | **nicely**
   1 | 2 | 3
+
+
+  Make mutliline cells by using inline HTML:
+
+  | Foo             | Bar          |
+  | ---             | ---          |
+  | Hello<br>World! | Good<br>Bye! |
 #+END_EXAMPLE
 
 * Quotes
