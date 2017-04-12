@@ -8,6 +8,7 @@
  - [[#list-tree][list-tree]]
  - [[#log][log]]
  - [[#tag][tag]]
+ - [[#worktree][worktree]]
 
 * Resolve conflicts
 - https://help.github.com/articles/resolving-a-merge-conflict-using-the-command-line/
@@ -132,3 +133,22 @@ and delete the branch manually after it merged.
   $ git tag -l | xargs git tag -d # remove all local tags
   $ git fetch -t                  # fetch remote tags
 #+END_SRC
+* worktree
+- https://stacktoheap.com/blog/2016/01/19/using-multiple-worktrees-with-git/
+
+#+BEGIN_SRC shell
+  # Basics
+  $ git fetch
+  $ git worktree add -b bugfix-1234 ../bugfix origin/master
+
+  # Temporary
+  $ git worktree add --detach ../project-build HEAD
+
+  # Cleanup
+  $ rm -rf ../bugfix && git worktree prune
+#+END_SRC
+
+- ~-b bugfix-1234~ option creates a new branch named ~bugfix-1234~
+- ~../bugfix~ is the new local copy
+- Based on ~origin/master~
+- ~--detach~ makes the working copy detached.
