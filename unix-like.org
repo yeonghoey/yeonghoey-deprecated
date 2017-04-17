@@ -9,6 +9,7 @@
    - [[#lsof][lsof]]
    - [[#mount][mount]]
    - [[#pgrep][pgrep]]
+   - [[#pkill][pkill]]
    - [[#set][set]]
    - [[#sort][sort]]
    - [[#tar][tar]]
@@ -152,15 +153,22 @@
 | ~mntopts~ | the mount options associated with the filesystem.    |
 
 ** pgrep
-- Same usages, but ~pkill~ will kill match processes
+- https://www.poftut.com/pgrep-pkill-command-tutorial-examples-linux/
 
 #+BEGIN_SRC shell
-  $ pgrep pytho
-  $ pgrep -f script.py  # match against full arugment lists
-  $ pgrep -l pytho      # Print pids along with their process names
-  $ pgrep -f -l .py     # Print pids along with their full argument lists
-  $ pgrep -x python     # requires exact match, substr is default
-  $ pkill -9 pytho      # You can also specify singal
+  pgrep pytho
+  pgrep -u root ssh  # root user's ssh
+  pgrep -f script.py # match against full arugment lists
+  pgrep -l pytho     # Print pids along with their process names
+  pgrep -f -l .py    # Print pids along with their full argument lists
+  pgrep -x python    # requires exact match, substr is default
+#+END_SRC
+
+** pkill
+- Same as ~pgrep~, but kills matching processes
+
+#+BEGIN_SRC shell
+  pkill -9 pytho     # You can also specify singal
 #+END_SRC
 
 ** set
