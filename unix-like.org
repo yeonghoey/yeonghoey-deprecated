@@ -767,6 +767,41 @@ There are some workarounds:
 #+END_EXAMPLE
 
 
+- For redirections and pipelining:
+- https://unix.stackexchange.com/questions/88490/how-do-you-use-output-redirection-in-combination-with-here-documents-and-cat
+
+#+BEGIN_SRC shell
+  cat <<EOF | sh
+  touch somefile
+  echo foo > somefile
+  EOF
+#+END_SRC
+
+#+BEGIN_SRC shell
+  (
+  cat <<EOF
+  touch somefile
+  echo foo > somefile
+  EOF
+  ) | sh
+#+END_SRC
+
+#+BEGIN_SRC shell
+  {
+  cat <<EOF
+  touch somefile
+  echo foo > somefile
+  EOF
+  } | sh
+#+END_SRC
+
+#+BEGIN_SRC shell
+  cat >out <<EOF
+  test
+  EOF
+#+END_SRC
+
+
 ** Getting the source directory
 - http://stackoverflow.com/questions/59895/getting-the-source-directory-of-a-bash-script-from-within
  
