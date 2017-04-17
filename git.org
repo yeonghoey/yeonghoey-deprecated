@@ -2,6 +2,7 @@
 
 * Table of Contents                                                :TOC_2_gh:
  - [[#references][References]]
+   - [[#add][add]]
    - [[#branch][branch]]
    - [[#flow][flow]]
    - [[#list-tree][list-tree]]
@@ -13,6 +14,25 @@
    - [[#purge-files-including-their-histories][Purge files including their histories]]
 
 * References
+** add
+#+BEGIN_SRC shell
+  $ echo hello > target-file
+  $ git add --patch
+  No chagnes.
+  $ git add --intent-to-add target-file
+  $ git add --patch
+  index e69de29..ce01362 100644
+  --- a/sub1/target-file
+  +++ b/sub1/target-file
+  @@ -0,0 +1 @@
+  +hello
+#+END_SRC
+
+#+BEGIN_SRC shell
+  # Mark all files including untracked to add
+  git add --intent-to-add --all
+#+END_SRC
+
 ** branch
 - http://railsware.com/blog/2014/08/11/git-housekeeping-tutorial-clean-up-outdated-branches-in-local-and-remote-repositories/
 
