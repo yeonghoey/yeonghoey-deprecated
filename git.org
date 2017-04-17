@@ -7,6 +7,7 @@
    - [[#flow][flow]]
    - [[#list-tree][list-tree]]
    - [[#log][log]]
+   - [[#pull][pull]]
    - [[#tag][tag]]
    - [[#worktree][worktree]]
  - [[#details][Details]]
@@ -104,6 +105,18 @@ and delete the branch manually after it merged.
   # There won't exist the file in <SHA> because it has been deleted.
   git checkout <SHA>^ -- <path-to-file>
 #+END_SRC
+** pull
+- http://stackoverflow.com/questions/30208928/can-git-pull-automatically-stash-and-pop-pending-changes
+
+#+BEGIN_SRC shell
+  git pull --rebase --autostash # git pull accepts '--autostash' from 2.9
+#+END_SRC
+
+#+BEGIN_SRC shell
+  git fetch
+  git rebase --autostash
+#+END_SRC
+
 ** tag
 *** Prune local git tags that don't exist on remote
 - https://demisx.github.io/git/2014/11/02/git-prune-local-tags-dont-exist-remote.html
