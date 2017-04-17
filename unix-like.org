@@ -1,7 +1,7 @@
 #+TITLE: Unix-like
 
 * Table of Contents                                                :TOC_2_gh:
- - [[#commands][Commands]]
+ - [[#references][References]]
    - [[#apt][apt]]
    - [[#case][case]]
    - [[#du][du]]
@@ -28,7 +28,7 @@
    - [[#here-document][Here document]]
    - [[#getting-the-source-directory][Getting the source directory]]
 
-* Commands
+* References
 ** apt
 *** When 'apt-get update' fails
 
