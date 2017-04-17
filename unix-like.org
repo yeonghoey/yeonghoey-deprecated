@@ -26,6 +26,7 @@
    - [[#pseudo-terminals][Pseudo Terminals]]
    - [[#glob-dotfiles][Glob dotfiles]]
    - [[#here-document][Here document]]
+   - [[#getting-the-source-directory][Getting the source directory]]
 
 * Commands
 ** apt
@@ -766,3 +767,11 @@ There are some workarounds:
 #+END_EXAMPLE
 
 
+** Getting the source directory
+- http://stackoverflow.com/questions/59895/getting-the-source-directory-of-a-bash-script-from-within
+ 
+#+BEGIN_SRC shell
+  DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd )"
+#+END_SRC
+
+Repalce ~BASH_SOURCE~ with ~$0~ for zsh, taking account of the [[http://stackoverflow.com/questions/35006457/choosing-between-0-and-bash-source][limitation]].
