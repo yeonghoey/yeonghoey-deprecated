@@ -24,9 +24,9 @@ is equivalent to:
   (make-local-variable 'xxx)   ;; make xxx local in this buffer only
 #+END_SRC
 
-If a variable is buffer-local, then
-~setq~ sets its local value in the current buffer and
-~setq-default~ sets the global default value.
+If a variable is buffer-local:
+- ~setq~ sets its local value in the current buffer
+- ~setq-default~ sets the global default value.
 
 * Details
 ** Char Syntax
