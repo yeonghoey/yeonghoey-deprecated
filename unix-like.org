@@ -5,6 +5,7 @@
    - [[#apt][apt]]
    - [[#case][case]]
    - [[#du][du]]
+   - [[#function][function]]
    - [[#grep][grep]]
    - [[#lsof][lsof]]
    - [[#mount][mount]]
@@ -108,6 +109,77 @@
   4.0K    CNAME
   4.0K    index.html
   0B    temp
+#+END_SRC
+
+** function
+- http://tldp.org/LDP/abs/html/functions.html
+- http://tldp.org/LDP/abs/html/complexfunct.html
+- http://ryanstutorials.net/bash-scripting-tutorial/bash-functions.php
+- https://google.github.io/styleguide/shell.xml?showone=Function_Comments#Function_Comments
+- http://stackoverflow.com/questions/18042279/how-to-exit-a-function-in-bash
+
+
+#+BEGIN_SRC shell
+  print_something() {
+      echo Hello $1
+  }
+  print_something Mars
+  print_something Jupiter
+#+END_SRC
+
+- The keyword ~function~ is *optional*, but must be used consistently throughout a project.
+- If you're writing a package, separate package names with ~::~. 
+
+#+BEGIN_SRC shell
+  # Single function
+  my_func() {
+      ...
+  }
+
+  # Part of a package
+  mypackage::my_func() {
+      ...
+  }
+#+END_SRC
+
+#+BEGIN_SRC shell
+  #######################################
+  # Cleanup files from the backup dir
+  # Globals:
+  #   BACKUP_DIR
+  #   ORACLE_SID
+  # Arguments:
+  #   None
+  # Returns:
+  #   None
+  #######################################
+  cleanup() {
+      ...
+  }
+#+END_SRC
+
+#+BEGIN_SRC shell
+  # If N is omitted, the return status is that of the
+  # last command executed within the function or script.
+  return [n]
+#+END_SRC
+
+#+BEGIN_QUOTE
+Note that if you have ~set -e~ set at the top of your script and
+your ~return 1~ or any other number besides ~0~, your entire script will exit. 
+#+END_QUOTE
+
+- By *default a variable is global.*  
+- When we create a local variable within a function, *it is only visible* within that function. 
+#+BEGIN_SRC shell
+  var_change () {
+      local var1='local 1'
+      echo Inside function: var1 is $var1 : var2 is $var2
+      var1='changed again'
+      var2='2 changed again'
+  }
+  var1='global 1'
+  var2='global 2'
 #+END_SRC
 
 ** grep
