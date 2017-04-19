@@ -1,14 +1,20 @@
-#+TITLE: Github
+#+TITLE: GitHub
 
-* Table of Contents                                                :TOC_2_gh:
- - [[#github-pages][Github Pages]]
-   - [[#types][Types]]
-   - [[#setting-up-a-custom-domain-of-aws-route-53][Setting up a custom domain of AWS Route 53]]
+* Table of Contents                                                :TOC_1_gh:
+ - [[#github-markup][GitHub Markup]]
+ - [[#github-pages][GitHub Pages]]
 
-* Github Pages
+* GitHub Markup
+- https://github.com/github/markup
+- https://github.com/gjtorikian/commonmarker
+- https://github.com/wallyqs/org-ruby
+
+* GitHub Pages
 ** Types
 - https://help.github.com/articles/user-organization-and-project-pages/
+  
 [[file:img/screenshot_2017-01-27_14-44-36.png]]
+
 ** Setting up a custom domain of AWS Route 53
 - https://help.github.com/articles/setting-up-an-apex-domain/
   
@@ -23,6 +29,7 @@
 
 **** Create CNAME record for ~www~
 - https://help.github.com/articles/about-supported-custom-domains/#www-subdomains
+
 [[file:img/screenshot_2017-01-08_18-30-36.png]]
 
 *** For Custom Subdomain
