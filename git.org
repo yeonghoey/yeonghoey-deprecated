@@ -12,6 +12,7 @@
    - [[#worktree][worktree]]
  - [[#details][Details]]
    - [[#get-git-root-directory][Get git root directory]]
+   - [[#run-commands-while-not-in-a-git-directory][Run commands while not in a git directory]]
    - [[#resolve-conflicts][Resolve conflicts]]
    - [[#purge-files-including-their-histories][Purge files including their histories]]
 
@@ -152,6 +153,13 @@ and delete the branch manually after it merged.
 
 #+BEGIN_SRC shell
   git rev-parse --show-toplevel
+#+END_SRC
+
+** Run commands while not in a git directory
+- http://stackoverflow.com/questions/5083224/git-pull-while-not-in-a-git-directory
+
+#+BEGIN_SRC shell
+  git -C ~/foo status  # equivalent to (cd ~/foo && git status)
 #+END_SRC
 
 ** Resolve conflicts
