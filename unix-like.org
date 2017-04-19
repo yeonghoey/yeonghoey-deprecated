@@ -181,19 +181,21 @@ your ~return 1~ or any other number besides ~0~, your entire script will exit.
   }
   var1='global 1'
   var2='global 2'
+  # only var2 changed
 #+END_SRC
 
 #+BEGIN_SRC shell
-  #!/bin/bash
-
   foo() {
-      return 0 # return returns a value from a function.
-      # exit 1   # exit abandons the current shell.
+    return 0 # return returns a value from a function.
+  }
+  bar() {
+    exit 1 # exit abandons the current shell.
   }
 
   foo
-
   echo 'hi'
+  bar
+  echo 'bye'
 #+END_SRC
 
 ** grep
