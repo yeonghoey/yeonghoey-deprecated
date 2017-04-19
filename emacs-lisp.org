@@ -1,13 +1,35 @@
 #+TITLE: Emacs Lisp
 
 * Table of Contents                                                :TOC_2_gh:
- - [[#char-syntax][Char Syntax]]
- - [[#local-variableslet][Local Variables(let)]]
- - [[#interactive][Interactive]]
- - [[#snippets][Snippets]]
-   - [[#my-trans-en-ko][my-trans-en-ko]]
+ - [[#references][References]]
+   - [[#setq][setq]]
+ - [[#details][Details]]
+   - [[#char-syntax][Char Syntax]]
+   - [[#local-variableslet][Local Variables(let)]]
+   - [[#interactive][Interactive]]
+   - [[#snippets][Snippets]]
 
-* Char Syntax
+* References
+** setq
+- http://stackoverflow.com/questions/18172728/the-difference-between-setq-and-setq-default-in-emacs-lisp
+- https://emacs.stackexchange.com/questions/24940/what-does-setq-local-do-and-when-should-i-use-it
+
+#+BEGIN_SRC emacs-lisp
+  (setq-local xxx ...)
+#+END_SRC
+
+is equivalent to:
+#+BEGIN_SRC emacs-lisp
+  (defvar xxx ...)             ;; declare xxx with global scope
+  (make-local-variable 'xxx)   ;; make xxx local in this buffer only
+#+END_SRC
+
+If a variable is buffer-local, then
+~setq~ sets its local value in the current buffer and
+~setq-default~ sets the global default value.
+
+* Details
+** Char Syntax
 - https://www.gnu.org/software/emacs/manual/html_node/elisp/Basic-Char-Syntax.html
 - Prefix ~?~ before a character.
 
@@ -25,7 +47,7 @@
   ?\\ ⇒ 92                ; backslash character, \
   ?\d ⇒ 127               ; delete character, DEL
 #+END_SRC
-* Local Variables(let)
+** Local Variables(let)
 - https://www.gnu.org/software/emacs/manual/html_node/elisp/Local-Variables.html
  
 #+BEGIN_SRC emacs-lisp
@@ -43,11 +65,11 @@
   ⇒ (1 1)
 #+END_SRC
 
-* Interactive
+** Interactive
 - https://www.gnu.org/software/emacs/manual/html_node/elisp/Using-Interactive.html
  
-* Snippets
-** my-trans-en-ko
+** Snippets
+*** my-trans-en-ko
 #+BEGIN_SRC emacs-lisp
   (defun my-trans-en-ko (start end)
     (interactive "r")
