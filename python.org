@@ -114,6 +114,13 @@ or the empty string when there were no arguments.
        +-- BytesWarning
 #+END_EXAMPLE
 
+*** raise MyException vs raise MyException()
+- http://stackoverflow.com/questions/16706956/is-there-a-difference-between-raise-exception-and-raise-exception-without
+- The short answer is that both ~raise MyException~ and ~raise MyException()~ do the same thing.
+- This first form auto instantiates your exception.
+- So, use ~raise MyException~ when there are no arguments. 
+
+
 ** list
 - https://docs.python.org/2/library/stdtypes.html#mutable-sequence-types
 - https://docs.python.org/2/library/stdtypes.html#sequence-types-str-unicode-list-tuple-bytearray-buffer-xrange
