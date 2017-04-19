@@ -167,10 +167,11 @@
 #+BEGIN_QUOTE
 Note that if you have ~set -e~ set at the top of your script and
 your ~return 1~ or any other number besides ~0~, your entire script will exit. 
+~exit~ abandons the current shell.
 #+END_QUOTE
 
 - By *default a variable is global.*  
-- When we create a local variable within a function, *it is only visible* within that function. 
+- When we create a local variable within a function, *it is only visible* within that function.
 #+BEGIN_SRC shell
   var_change () {
       local var1='local 1'
@@ -180,6 +181,19 @@ your ~return 1~ or any other number besides ~0~, your entire script will exit.
   }
   var1='global 1'
   var2='global 2'
+#+END_SRC
+
+#+BEGIN_SRC shell
+  #!/bin/bash
+
+  foo() {
+      return 0 # return returns a value from a function.
+      # exit 1   # exit abandons the current shell.
+  }
+
+  foo
+
+  echo 'hi'
 #+END_SRC
 
 ** grep
