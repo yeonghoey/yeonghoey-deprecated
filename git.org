@@ -19,7 +19,10 @@
 
 * References
 ** add
+*** intent-to-add
 - https://robots.thoughtbot.com/intent-to-add
+- ~git add --intent-to-add~,
+  the specified untracked files will be added to the index, *but without content.*
 
 #+BEGIN_SRC shell
   $ echo hello > target-file
