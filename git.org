@@ -10,6 +10,7 @@
    - [[#pull][pull]]
    - [[#tag][tag]]
    - [[#worktree][worktree]]
+   - [[#gitignore][gitignore]]
  - [[#details][Details]]
    - [[#get-git-root-directory][Get git root directory]]
    - [[#run-commands-while-not-in-a-git-directory][Run commands while not in a git directory]]
@@ -146,6 +147,9 @@ and delete the branch manually after it merged.
 - ~../bugfix~ is the new local copy
 - Based on ~origin/master~
 - ~--detach~ makes the working copy detached.
+
+** gitignore
+- https://www.atlassian.com/git/tutorials/gitignore#git-ignore-patterns
 
 * Details
 ** Get git root directory
