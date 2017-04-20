@@ -1,22 +1,24 @@
 #+TITLE: DNS 
 
-* Table of Contents :TOC_1_gh:
- - [[#summary][Summary]]
- - [[#soa-records][SOA Records]]
- - [[#a-and-aaaa-records][A and AAAA Records]]
- - [[#cname-records][CNAME Records]]
- - [[#alias-records][ALIAS Records]]
- - [[#mx-records][MX Records]]
- - [[#ns-records][NS Records]]
- - [[#ptr-records][PTR Records]]
+* Table of Contents :TOC_2_gh:
+ - [[#outline][Outline]]
+ - [[#records][Records]]
+   - [[#soa][SOA]]
+   - [[#a-and-aaaa][A and AAAA]]
+   - [[#cname][CNAME]]
+   - [[#alias][ALIAS]]
+   - [[#mx][MX]]
+   - [[#ns][NS]]
+   - [[#ptr][PTR]]
  - [[#references][References]]
 
-* Summary
+* Outline
 [[file:img/screenshot_2017-04-21_07-48-53.png]]
 
 [[file:img/screenshot_2017-04-21_07-52-32.png]]
 
-* SOA Records
+* Records
+** SOA
 #+BEGIN_EXAMPLE
   domain.com.  IN SOA ns1.domain.com. admin.domain.com. (
                                               12083   ; serial number
@@ -32,7 +34,7 @@
 - ~admin.domain.com~ is an email address. The "@" is replaced with a dot in the email address
 - Other settings for managing master and slaves
 
-* A and AAAA Records
+** A and AAAA
 #+BEGIN_EXAMPLE
   ns1                 IN  A       111.222.111.222
   ns1.domain.com.     IN  A       111.222.111.222  ;  They are equivalent
@@ -43,7 +45,7 @@
 
 - ~AAAA~ records for IPv6
 
-* CNAME Records
+** CNAME
 #+BEGIN_EXAMPLE
   www         IN  CNAME   server1
 #+END_EXAMPLE
@@ -52,12 +54,12 @@
 - Comes with *some performance losses* because they require an additional query to the server
 - Recommended to provide an alias for a resource outside of the current zone.
 
-* ALIAS Records
+** ALIAS
 - Some DNS providers like AWS Route 53 provides customized ~ALIAS~ records
 - With ~ALIAS~ records the additional step for looking up the name is done by the server
 - Can coexist with other records on that name
 
-* MX Records
+** MX
 #+BEGIN_EXAMPLE
           IN  MX  10  mail1.domain.com.
           IN  MX  50  mail2.domain.com.
@@ -67,7 +69,7 @@
 
 - Used to define the mail exchanges that are used for the domain
 
-* NS Records
+** NS
 #+BEGIN_EXAMPLE
           IN  NS     ns1.domain.com.
           IN  NS     ns2.domain.com.
@@ -77,11 +79,12 @@
 
 - This record type defines the name servers that are used for this zone
 
-* PTR Records
+** PTR
 #+BEGIN_EXAMPLE
   444.333.222.111.in-addr.arpa.   33692   IN  PTR host.example.com.
 #+END_EXAMPLE
 
+- Pointer to a canonical name
 - Used define a name associated with an IP address
 
 * References
