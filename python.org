@@ -12,10 +12,10 @@
    - [[#subprocesses][subprocesses]]
  - [[#details][Details]]
    - [[#comparison][Comparison]]
+   - [[#eafp-lbyl][EAFP, LBYL]]
    - [[#final-class][Final class]]
    - [[#packaging][Packaging]]
    - [[#source-code-encodings][Source Code Encodings]]
-   - [[#eafp-lbyl][EAFP, LBYL]]
 
 * References
 ** dict
@@ -421,6 +421,27 @@ CPython implementation detail: Objects of different types except numbers are ord
 objects of the same types that don't support proper comparison are ordered by their address.
 #+END_QUOTE
 
+** EAFP, LBYL
+- https://docs.python.org/3/glossary.html#term-eafp
+- https://docs.python.org/3/glossary.html#term-lbyl
+
+#+BEGIN_SRC python
+  # EAFP (Easier to ask for forgiveness than permission)
+  try:
+      return mapping[key]
+  except KeyError:
+      pass
+
+
+  # LBYL (Look Before you leap)
+  if key in mapping:
+      return mapping[key]
+#+END_SRC
+
+#+BEGIN_QUOTE
+*LBYL* can fail if another thread removes the key after the test, but before the lookup.
+This issue can be solved with locks or by using the *EAFP* approach.
+#+END_QUOTE
 ** Final class
 - http://stackoverflow.com/questions/2825364/final-classes-in-python-3-x-something-guido-isnt-telling-me
 
@@ -596,24 +617,3 @@ So in conclusion, out of all these options, I would recommend Setuptools, unless
   # -*- coding: utf-8 -*-
 #+END_SRC
 
-** EAFP, LBYL
-- https://docs.python.org/3/glossary.html#term-eafp
-- https://docs.python.org/3/glossary.html#term-lbyl
-
-#+BEGIN_SRC python
-  # EAFP (Easier to ask for forgiveness than permission)
-  try:
-      return mapping[key]
-  except KeyError:
-      pass
-
-
-  # LBYL (Look Before you leap)
-  if key in mapping:
-      return mapping[key]
-#+END_SRC
-
-#+BEGIN_QUOTE
-*LBYL* can fail if another thread removes the key after the test, but before the lookup.
-This issue can be solved with locks or by using the *EAFP* approach.
-#+END_QUOTE
