@@ -28,6 +28,7 @@
    - [[#no-integer-variable][No integer variable]]
    - [[#no-list-of-maps][No list of maps]]
  - [[#use-cases][Use Cases]]
+   - [[#migrate-existing-aws-infra-with-terraforming][Migrate existing AWS Infra with terraforming]]
    - [[#change-an-aws-ec2-instance-type-without-destroying-recreating-it][Change an AWS ec2 instance type without destroying-recreating it]]
 
 * Configurations
@@ -305,6 +306,9 @@ Because the actual schema is:
 #+END_SRC
 
 * Use Cases
+** Migrate existing AWS Infra with terraforming
+- https://github.com/dtan4/terraforming
+
 ** Change an AWS ec2 instance type without destroying-recreating it
 - https://github.com/hashicorp/terraform/issues/1579
 - https://github.com/hashicorp/terraform/issues/2423
