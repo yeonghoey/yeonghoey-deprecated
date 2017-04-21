@@ -7,6 +7,7 @@
    - [[#local-exec][local-exec]]
    - [[#remote-exec][remote-exec]]
    - [[#archive_file][archive_file]]
+   - [[#template_file][template_file]]
  - [[#commands][Commands]]
    - [[#plan][plan]]
    - [[#apply][apply]]
@@ -22,7 +23,7 @@
    - [[#interpolation][Interpolation]]
    - [[#modules][Modules]]
  - [[#limitations][Limitations]]
-   - [[#no-dynamic-interpolation-over-count][No dynamic interpolation over ~count~]]
+   - [[#no-dynamic-interpolation-over-count][No dynamic interpolation over count]]
    - [[#no-integer-variable][No integer variable]]
    - [[#no-list-of-maps][No list of maps]]
  - [[#use-cases][Use Cases]]
@@ -111,6 +112,20 @@ To work around this, use ~ignore_changes~
     filename         = "${data.archive_file.code.output_path}"
     source_code_hash = "${data.archive_file.code.output_base64sha256}"
     ...
+  }
+#+END_EXAMPLE
+
+** template_file
+- https://www.terraform.io/docs/providers/template/index.html
+- Use ~$$~ in ~template~ to escape ~$~
+
+#+BEGIN_EXAMPLE
+  data "template_file" "curl" {
+    count    = "${var.count}"
+    template = "curl http://$${ip}"
+    vars {
+      ip = "${element(aws_instance.cluster.*.private_ip, count.index)}"
+    }
   }
 #+END_EXAMPLE
 
@@ -224,7 +239,7 @@ you can reference existing security groups, VPCs, and the like by defining them 
 - With *Local File Paths*, Terraform will *create a symbolic link to the original directory.* Therefore, any changes are automatically available.
 
 * Limitations
-** No dynamic interpolation over ~count~
+** No dynamic interpolation over count
 - https://github.com/hashicorp/terraform/issues/1497#issuecomment-105874601
 
 For now, you can't use interpolation for referencing other resources
