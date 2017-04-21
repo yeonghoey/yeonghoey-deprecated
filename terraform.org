@@ -1,12 +1,12 @@
 #+TITLE: Terraform
 * Table of Contents                                                :TOC_2_gh:
  - [[#configurations][Configurations]]
-   - [[#archive_file][archive_file]]
    - [[#ignore_changes][ignore_changes]]
-   - [[#local-exec][local-exec]]
-   - [[#null_resource][null_resource]]
    - [[#path][path]]
+   - [[#null_resource][null_resource]]
+   - [[#local-exec][local-exec]]
    - [[#remote-exec][remote-exec]]
+   - [[#archive_file][archive_file]]
  - [[#commands][Commands]]
    - [[#plan][plan]]
    - [[#apply][apply]]
@@ -29,23 +29,6 @@
    - [[#change-an-aws-ec2-instance-type-without-destroying-recreating-it][Change an AWS ec2 instance type without destroying-recreating it]]
 
 * Configurations
-** archive_file
-- https://www.terraform.io/docs/providers/archive/d/archive_file.html
-- Useful to provision resources which require zip files.
-#+BEGIN_EXAMPLE
-  data "archive_file" "code" {
-    type        = "zip"
-    source_file = "${path.module}/main.py"
-    output_path = "${path.module}/lambda.zip"
-  }
-  resource "aws_lambda_function" "main" {
-    function_name    = "foo"
-    filename         = "${data.archive_file.code.output_path}"
-    source_code_hash = "${data.archive_file.code.output_base64sha256}"
-    ...
-  }
-#+END_EXAMPLE
-
 ** ignore_changes
 - https://www.terraform.io/docs/configuration/resources.html
 - https://github.com/hashicorp/terraform/issues/4944
@@ -76,18 +59,6 @@ To work around this, use ~ignore_changes~
     }
   }
 #+END_EXAMPLE
-** local-exec
-- https://www.terraform.io/docs/provisioners/local-exec.html
-#+BEGIN_EXAMPLE
-  provisioner "local-exec" {
-    command = "run.sh ${var.args}"
-  }
-#+END_EXAMPLE
-
-** null_resource
-- https://www.terraform.io/docs/provisioners/null_resource.html
-- Allows to run provionsers not directly associated with a single existing resource
-
 ** path
 - https://www.terraform.io/docs/configuration/interpolation.html#path-information
 
@@ -95,6 +66,18 @@ To work around this, use ~ignore_changes~
   source_file = "${path.cwd}/main.py"   # Path to the current working directory
   source_file = "${path.root}/main.py"  # Path to the root module
   source_file = "${path.module}/main.py" # Path to the current module
+#+END_EXAMPLE
+
+** null_resource
+- https://www.terraform.io/docs/provisioners/null_resource.html
+- Allows to run provionsers not directly associated with a single existing resource
+
+** local-exec
+- https://www.terraform.io/docs/provisioners/local-exec.html
+#+BEGIN_EXAMPLE
+  provisioner "local-exec" {
+    command = "run.sh ${var.args}"
+  }
 #+END_EXAMPLE
 
 ** remote-exec
@@ -111,6 +94,23 @@ To work around this, use ~ignore_changes~
     inline = [
       "curl -sSL https://get.docker.com/ | sh",
     ]
+  }
+#+END_EXAMPLE
+
+** archive_file
+- https://www.terraform.io/docs/providers/archive/d/archive_file.html
+- Useful to provision resources which require zip files.
+#+BEGIN_EXAMPLE
+  data "archive_file" "code" {
+    type        = "zip"
+    source_file = "${path.module}/main.py"
+    output_path = "${path.module}/lambda.zip"
+  }
+  resource "aws_lambda_function" "main" {
+    function_name    = "foo"
+    filename         = "${data.archive_file.code.output_path}"
+    source_code_hash = "${data.archive_file.code.output_base64sha256}"
+    ...
   }
 #+END_EXAMPLE
 
