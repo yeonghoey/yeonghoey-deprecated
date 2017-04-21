@@ -43,7 +43,7 @@
 
 ** element
 - https://www.terraform.io/docs/configuration/interpolation.html#element-list-index-
-- For ~index~, ~index~ modulo ~len(list)~ is used if ~index~ is greater than ~len(list)~
+- if ~index~ is greater than ~len(list)~, ~index~ modulo ~len(list)~ is used 
 
 #+BEGIN_EXAMPLE
   vars {
