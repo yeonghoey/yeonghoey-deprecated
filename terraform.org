@@ -1,6 +1,14 @@
 #+TITLE: Terraform
 * Table of Contents                                                :TOC_2_gh:
- - [[#usage][Usage]]
+ - [[#configurations][Configurations]]
+   - [[#path][path]]
+   - [[#ignore_changes][ignore_changes]]
+ - [[#commands][Commands]]
+   - [[#plan][plan]]
+   - [[#apply][apply]]
+   - [[#import][import]]
+   - [[#state][state]]
+   - [[#taint][taint]]
  - [[#concepts][Concepts]]
    - [[#terraform-files][Terraform files]]
    - [[#resources-and-data-sources][Resources and Data Sources]]
@@ -8,24 +16,92 @@
    - [[#variable-files][Variable files]]
    - [[#resource-addressing][Resource Addressing]]
    - [[#interpolation][Interpolation]]
- - [[#dynamic-interpolation-cant-be-used-over-count][Dynamic interpolation can't be used over ~count~]]
- - [[#change-an-aws-ec2-instance-type-without-destroying-recreating-it][Change an AWS ec2 instance type without destroying-recreating it]]
- - [[#ignore_changes][ignore_changes]]
+   - [[#modules][Modules]]
+ - [[#limitations][Limitations]]
+   - [[#no-dynamic-interpolation-over-count][No dynamic interpolation over ~count~]]
+   - [[#no-integer-variable][No integer variable]]
+   - [[#no-list-of-maps][No list of maps]]
+ - [[#use-cases][Use Cases]]
+   - [[#change-an-aws-ec2-instance-type-without-destroying-recreating-it][Change an AWS ec2 instance type without destroying-recreating it]]
 
-* Usage
+* Configurations
+** path
+- https://www.terraform.io/docs/configuration/interpolation.html#path-information
+
+#+BEGIN_EXAMPLE
+  source_file = "${path.cwd}/main.py"   # Path to the current working directory
+  source_file = "${path.root}/main.py"  # Path to the root module
+  source_file = "${path.module}/main.py" # Path to the current module
+#+END_EXAMPLE
+
+** ignore_changes
+- https://www.terraform.io/docs/configuration/resources.html
+- https://github.com/hashicorp/terraform/issues/4944
+
+There was a problem when I defined multiple ~aws_eip~ s which are associated to ~aws_instance~ s.
+
+#+BEGIN_EXAMPLE
+  resource "aws_instance" "foo" {
+    count = 10
+    ..
+  }
+
+  resource "aws_eip" "bar" {
+    count = 10
+    instance = "${element(aws_instance.foo.*.i, count.index}"
+  }
+#+END_EXAMPLE
+
+Terraform plans to change the all association when I only change the ~count~.
+To work around this, use ~ignore_changes~
+
+#+BEGIN_EXAMPLE
+  resource "aws_eip" "bar" {
+    count = 10
+    instance = "${element(aws_instance.foo.*.i, count.index}"
+    lifecycle {
+      ignore_changes = ["instance"]
+    }
+  }
+#+END_EXAMPLE
+* Commands
+- https://www.terraform.io/docs/commands/index.html
+
+** plan
 #+BEGIN_SRC shell
-  $ terraform plan
+  terraform plan
+  terraform plan -var 'access_key=foo' -var 'secret_key=bar'
+  terraform plan -var 'amis={us-east-1 = "foo", us-west-2 = "bar"}'
+  terraform plan -out=my.plan
+#+END_SRC
 
-  # Passing variables as runtime arguments
-  $ terraform plan -var 'access_key=foo' -var 'secret_key=bar'
-  $ terraform plan -var 'amis={ us-east-1 = "foo", us-west-2 = "bar" }'
+** apply
+#+BEGIN_SRC shell
+  terraform apply
+  terraform apply 'my.plan'
+#+END_SRC
 
-  $ terraform plan -out=my.plan
+** import
+#+BEGIN_SRC shell
+  terraform import aws_instance.main i-abcd1234
+#+END_SRC
 
-  $ terraform apply
-  $ terraform apply 'my.plan'  # pass plan output file to ensure what happens
+** state
+*** mv
+- https://www.terraform.io/docs/commands/state/mv.html
 
-  $ terraform import aws_instance.my_server i-abcd1234
+#+BEGIN_SRC shell
+  # from ./terraform.tfstate:aws_instance.main
+  # to new/terraform.tfstate:aws_instance.server
+  terraform state mv -state-out new/terraform.tfstate \
+            aws_instance.main \
+            aws_instance.server
+#+END_SRC
+
+** taint
+#+BEGIN_SRC shell
+  terraform taint aws_instance.main                                                                              1 ↵
+  terraform taint -module=my_module aws_instance.main                                                                              1 ↵
 #+END_SRC
 
 * Concepts
@@ -82,7 +158,7 @@ you can reference existing security groups, VPCs, and the like by defining them 
 
 ** Interpolation
 - https://www.terraform.io/docs/configuration/interpolation.html
- 
+
 #+BEGIN_EXAMPLE
   ${self.private_ip_address}  # attributes of their own
   ${aws_instance.web.id}
@@ -92,14 +168,20 @@ you can reference existing security groups, VPCs, and the like by defining them 
   .. and many more including some functions
 #+END_EXAMPLE
 
-* Dynamic interpolation can't be used over ~count~
+** Modules
+- https://www.terraform.io/docs/modules/create.html
+- When you run ~terraform apply~, the current working directory holding the Terraform files is called the *root module*.
+- With *Local File Paths*, Terraform will *create a symbolic link to the original directory.* Therefore, any changes are automatically available.
+
+* Limitations
+** No dynamic interpolation over ~count~
 - https://github.com/hashicorp/terraform/issues/1497#issuecomment-105874601
 
 For now, you can't use interpolation for referencing other resources
 to specify ~count~ because of the way that terraform handles ~count~.
 
 #+BEGIN_EXAMPLE
-  variable my_count { 
+  variable my_count {
     default = 10
   }
 
@@ -119,7 +201,35 @@ before the primary graph walk, which means we can't support "computed" counts ri
 (A "computed" value in TF is one that's flagged as not known until all its dependencies are calculated.)
 #+END_QUOTE
 
-* Change an AWS ec2 instance type without destroying-recreating it
+** No integer variable
+- https://github.com/hashicorp/terraform/issues/6254
+
+** No list of maps
+- https://github.com/hashicorp/terraform/issues/7705
+- The type of most mapping arguments are actually the list of maps
+
+#+BEGIN_EXAMPLE
+  variable "cluster_config" {
+    type = "map"
+  }
+
+  resource aws_elasticsearch_domain "main" {
+    cluster_config = "${var.cluster_config}"  # Not supported
+  }
+#+END_EXAMPLE
+
+Because the actual schema is:
+#+BEGIN_SRC go
+  "cluster_config": {
+	  Type:     schema.TypeList,
+	  Optional: true,
+	  Computed: true,
+	  Elem: &schema.Resource{
+		  Schema: map[string]*schema.Schema{
+#+END_SRC
+
+* Use Cases
+** Change an AWS ec2 instance type without destroying-recreating it
 - https://github.com/hashicorp/terraform/issues/1579
 - https://github.com/hashicorp/terraform/issues/2423
 
@@ -134,13 +244,13 @@ For syncing, you have to remove its state from ~tfstate~ and ~import~ it again.
 Follow the steps below:
 
 1. Stop the target instance and change its instance type to what you desire.
-   [[file:img/screenshot_2017-01-31_13-41-13.png]] 
+   [[file:img/screenshot_2017-01-31_13-41-13.png]]
 
 2. Update your ~tf~ file as you changed:
   #+BEGIN_EXAMPLE
     resource "aws_instance" "my_instance" {
       (...)
-      instance_type = "t2.mirco"  # as you changed at step 1 
+      instance_type = "t2.mirco"  # as you changed at step 1
       (...)
     }
   #+END_EXAMPLE
@@ -169,34 +279,3 @@ If ~plan~ shows some unexpected changes, you can just remove the instance from t
   #+BEGIN_EXAMPLE
     $ terraform import aws_instance.my_instance i-abcdefg012345678
   #+END_EXAMPLE
-
-* ignore_changes
-- https://www.terraform.io/docs/configuration/resources.html
-- https://github.com/hashicorp/terraform/issues/4944
-
-There was a problem when I defined multiple ~aws_eip~ s which are associated to ~aws_instance~ s.
-
-#+BEGIN_EXAMPLE
-  resource "aws_instance" "foo" {
-    count = 10
-    ..
-  }
-
-  resource "aws_eip" "bar" {
-    count = 10
-    instance = "${element(aws_instance.foo.*.i, count.index}"
-  }
-#+END_EXAMPLE
-
-Terraform plans to change the all association when I only change the ~count~.
-To work around this, use ~ignore_changes~
-
-#+BEGIN_EXAMPLE
-  resource "aws_eip" "bar" {
-    count = 10
-    instance = "${element(aws_instance.foo.*.i, count.index}"
-    lifecycle {
-      ignore_changes = ["instance"]
-    }
-  }
-#+END_EXAMPLE
