@@ -1,8 +1,9 @@
 #+TITLE: Terraform
 * Table of Contents                                                :TOC_2_gh:
  - [[#configurations][Configurations]]
-   - [[#ignore_changes][ignore_changes]]
    - [[#path][path]]
+   - [[#element][element]]
+   - [[#ignore_changes][ignore_changes]]
    - [[#null_resource][null_resource]]
    - [[#local-exec][local-exec]]
    - [[#remote-exec][remote-exec]]
@@ -30,6 +31,25 @@
    - [[#change-an-aws-ec2-instance-type-without-destroying-recreating-it][Change an AWS ec2 instance type without destroying-recreating it]]
 
 * Configurations
+** path
+- https://www.terraform.io/docs/configuration/interpolation.html#path-information
+
+#+BEGIN_EXAMPLE
+  source_file = "${path.cwd}/main.py"   # Path to the current working directory
+  source_file = "${path.root}/main.py"  # Path to the root module
+  source_file = "${path.module}/main.py" # Path to the current module
+#+END_EXAMPLE
+
+** element
+- https://www.terraform.io/docs/configuration/interpolation.html#element-list-index-
+- For ~index~, ~index~ modulo ~len(list)~ is used if ~index~ is greater than ~len(list)~
+
+#+BEGIN_EXAMPLE
+  vars {
+    ip = "${element(aws_instance.cluster.*.private_ip, count.index)}"
+  }
+#+END_EXAMPLE
+
 ** ignore_changes
 - https://www.terraform.io/docs/configuration/resources.html
 - https://github.com/hashicorp/terraform/issues/4944
@@ -60,15 +80,6 @@ To work around this, use ~ignore_changes~
     }
   }
 #+END_EXAMPLE
-** path
-- https://www.terraform.io/docs/configuration/interpolation.html#path-information
-
-#+BEGIN_EXAMPLE
-  source_file = "${path.cwd}/main.py"   # Path to the current working directory
-  source_file = "${path.root}/main.py"  # Path to the root module
-  source_file = "${path.module}/main.py" # Path to the current module
-#+END_EXAMPLE
-
 ** null_resource
 - https://www.terraform.io/docs/provisioners/null_resource.html
 - Allows to run provionsers not directly associated with a single existing resource
