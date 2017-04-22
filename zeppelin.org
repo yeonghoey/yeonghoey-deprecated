@@ -38,10 +38,9 @@
 
 #+BEGIN_EXAMPLE
   ${checkbox:fruit=apple|banana,apple|banana|orange}
-  >> apple,banana 
-
+  > apple,banana 
   ${checkbox( and ):fruit=apple|banana,apple|banana|orange}
-  >> apple and banana 
+  > apple and banana 
 #+END_EXAMPLE
 
 * zeppelin-env.sh
