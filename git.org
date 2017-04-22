@@ -8,10 +8,11 @@
    - [[#list-tree][list-tree]]
    - [[#log][log]]
    - [[#pull][pull]]
+   - [[#rm][rm]]
    - [[#tag][tag]]
    - [[#worktree][worktree]]
    - [[#gitignore][gitignore]]
- - [[#details][Details]]
+ - [[#how-to][How to]]
    - [[#get-git-root-directory][Get git root directory]]
    - [[#run-commands-while-not-in-a-git-directory][Run commands while not in a git directory]]
    - [[#resolve-conflicts][Resolve conflicts]]
@@ -122,6 +123,14 @@ and delete the branch manually after it merged.
   git rebase --autostash
 #+END_SRC
 
+** rm
+- http://stackoverflow.com/questions/6964297/untrack-files-from-git
+
+#+BEGIN_SRC shell
+  # Untrack <file> recursively
+  $ git rm -r --cached <file>
+#+END_SRC
+
 ** tag
 *** Prune local git tags that don't exist on remote
 - https://demisx.github.io/git/2014/11/02/git-prune-local-tags-dont-exist-remote.html
@@ -153,7 +162,7 @@ and delete the branch manually after it merged.
 ** gitignore
 - https://www.atlassian.com/git/tutorials/gitignore#git-ignore-patterns
 
-* Details
+* How to
 ** Get git root directory
 - http://stackoverflow.com/questions/957928/is-there-a-way-to-get-the-git-root-directory-in-one-command
 
