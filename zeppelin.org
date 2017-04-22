@@ -8,6 +8,9 @@
  - [[#zeppelin-envsh][zeppelin-env.sh]]
 
 * Dynamic Form
+- https://zeppelin.apache.org/docs/0.7.1/manual/dynamicform.html
+- [[https://github.com/apache/zeppelin/blob/master/spark/src/main/java/org/apache/zeppelin/spark/ZeppelinContext.java][GitHub Code Reference]]
+
 ** Text input form
 #+BEGIN_EXAMPLE
   ${formName}
@@ -19,6 +22,11 @@
   ${name=Yeongho}
 #+END_EXAMPLE
 
+#+BEGIN_SRC scala
+  println("Hello "+z.input("name"))
+  println("Hello "+z.input("name", "sun"))
+#+END_SRC
+
 ** Select form
 #+BEGIN_EXAMPLE
   ${formName=defaultValue,option1|option2...}
@@ -29,6 +37,16 @@
   ${fruit=apple,apple|banana|orange}
   ${fruit=apple,1(apple)|2(banana)|3(orange)}
 #+END_EXAMPLE
+
+#+BEGIN_SRC scala
+  println("Hello "+z.select("day", Seq(("1","mon"),
+                                       ("2","tue"),
+                                       ("3","wed"),
+                                       ("4","thurs"),
+                                       ("5","fri"),
+                                       ("6","sat"),
+                                       ("7","sun"))))
+#+END_SRC
 
 ** Checkbox form
 #+BEGIN_EXAMPLE
@@ -42,6 +60,11 @@
   ${checkbox( and ):fruit=apple|banana,apple|banana|orange}
   > apple and banana 
 #+END_EXAMPLE
+
+#+BEGIN_SRC scala
+  val options = Seq(("apple","Apple"), ("banana","Banana"), ("orange","Orange"))
+  println("Hello "+z.checkbox("fruit", options).mkString(" and "))
+#+END_SRC
 
 * zeppelin-env.sh
 - https://github.com/apache/zeppelin/blob/master/conf/zeppelin-env.sh.template
