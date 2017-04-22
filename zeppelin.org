@@ -1,7 +1,41 @@
 #+TITLE: Apache Zeppelin
 
 * Table of Contents :TOC_2_gh:
+ - [[#dynamic-form][Dynamic Form]]
+   - [[#text-input-form][Text input form]]
+   - [[#select-form][Select form]]
+   - [[#checkbox-form][Checkbox form]]
  - [[#zeppelin-envsh][zeppelin-env.sh]]
+
+* Dynamic Form
+** Text input form
+#+BEGIN_EXAMPLE
+  ${formName}
+  ${name}
+
+  ${formName=defaultValue}
+  ${name=Yeongho}
+#+END_EXAMPLE
+
+** Select form
+#+BEGIN_EXAMPLE
+  ${formName=defaultValue,option1|option2...}
+  ${fruit=apple,apple|banana|orange}
+
+  ${formName=defaultValue,option1(DisplayName)|option2(DisplayName)...}
+  ${fruit=apple,1(apple)|2(banana)|3(orange)}
+#+END_EXAMPLE
+
+** Checkbox form
+#+BEGIN_EXAMPLE
+  ${checkbox:formName=defaultValue1|defaultValue2...,option1|option2...}
+  ${checkbox:fruit=apple|banana,apple|banana|orange}
+  >> apple,banana 
+
+  ${checkbox(delimiter):formName=...}:
+  ${checkbox( and ):fruit=apple|banana,apple|banana|orange}
+  >> apple and banana 
+#+END_EXAMPLE
 
 * zeppelin-env.sh
 - https://github.com/apache/zeppelin/blob/master/conf/zeppelin-env.sh.template
