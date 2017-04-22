@@ -1,10 +1,8 @@
 #+TITLE: Apache Zeppelin
 
-* Table of Contents :TOC_2_gh:
+* Table of Contents :TOC_1_gh:
  - [[#dynamic-form][Dynamic Form]]
-   - [[#text-input-form][Text input form]]
-   - [[#select-form][Select form]]
-   - [[#checkbox-form][Checkbox form]]
+ - [[#interpreter-installation][Interpreter Installation]]
  - [[#zeppelin-envsh][zeppelin-env.sh]]
 
 * Dynamic Form
@@ -64,6 +62,15 @@
 #+BEGIN_SRC scala
   val options = Seq(("apple","Apple"), ("banana","Banana"), ("orange","Orange"))
   println("Hello "+z.checkbox("fruit", options).mkString(" and "))
+#+END_SRC
+
+* Interpreter Installation
+- https://zeppelin.apache.org/docs/0.7.1/manual/interpreterinstallation.html
+
+#+BEGIN_SRC shell
+  ./bin/install-interpreter.sh --all
+  ./bin/install-interpreter.sh --name md,shell,jdbc,python
+  ./bin/install-interpreter.sh --list
 #+END_SRC
 
 * zeppelin-env.sh
