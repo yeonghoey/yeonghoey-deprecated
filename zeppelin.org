@@ -27,12 +27,14 @@
 #+END_EXAMPLE
 
 ** Checkbox form
+: ${checkbox:formName=defaultValue1|defaultValue2...,option1|option2...}
 #+BEGIN_EXAMPLE
-  ${checkbox:formName=defaultValue1|defaultValue2...,option1|option2...}
   ${checkbox:fruit=apple|banana,apple|banana|orange}
   >> apple,banana 
+#+END_EXAMPLE
 
-  ${checkbox(delimiter):formName=...}:
+: ${checkbox(delimiter):formName=...}:
+#+BEGIN_EXAMPLE
   ${checkbox( and ):fruit=apple|banana,apple|banana|orange}
   >> apple and banana 
 #+END_EXAMPLE
