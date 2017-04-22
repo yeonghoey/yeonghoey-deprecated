@@ -1,9 +1,22 @@
 #+TITLE: AWS IAM
 
 * Table of Contents :TOC_2_gh:
- - [[#basics][Basics]]
+ - [[#concepts][Concepts]]
+   - [[#roles][Roles]]
+   - [[#policies-evaluation-logic][Policies Evaluation Logic]]
 
-* Basics
+* Concepts
+** Roles
+- http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html
+
+#+BEGIN_QUOTE
+With some AWS SDKs, the developer can use a provider that manages the temporary security credentials transparently.
+Alternatively, the application can get the temporary credentials directly from the instance metadata of the EC2 instance.
+#+END_QUOTE
+
+[[file:img/screenshot_2017-04-22_22-38-40.png]]
+
+** Policies Evaluation Logic
 - http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html
 
 [[file:img/screenshot_2017-02-19_14-05-01.png]]
