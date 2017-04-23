@@ -5,6 +5,7 @@
    - [[#apt][apt]]
    - [[#case][case]]
    - [[#du][du]]
+   - [[#for][for]]
    - [[#function][function]]
    - [[#grep][grep]]
    - [[#lsof][lsof]]
@@ -18,6 +19,7 @@
    - [[#watch][watch]]
    - [[#xargs][xargs]]
  - [[#details][Details]]
+   - [[#arithmetic-expansion][Arithmetic expansion]]
    - [[#getting-the-source-directory][Getting the source directory]]
    - [[#glob-dotfiles][Glob dotfiles]]
    - [[#here-document][Here document]]
@@ -109,6 +111,51 @@
   4.0K    CNAME
   4.0K    index.html
   0B    temp
+#+END_SRC
+
+** for
+- https://www.cyberciti.biz/faq/bash-for-loop/
+- https://google.github.io/styleguide/shell.xml?showone=Loops#Loops
+
+
+- Put ~; do~ and ~; then~ on the same line as the ~while~, ~for~ or ~if~.
+- Use a for loop if you are confident that the input will not contain spaces or special characters (usually, this means not user input).
+
+#+BEGIN_SRC shell
+  for i in 1 2 3 4 5; do
+    echo "$i"
+  done
+
+  for file in ~/repos/* ; do
+    echo "$file"
+  done
+
+  # continue and break
+  for i in 1 2 3; do
+    if [[ "$i" == 1 ]]; then
+      continue
+    fi
+    if [[ "$i" == 3 ]]; then
+      break
+    fi
+    echo "$i"
+  done
+
+  for (( i=1; i<=5; i++)); do
+    echo "$i"
+  done
+#+END_SRC
+
+#+BEGIN_SRC shell
+  # requires bash v3.0+
+  for i in {1..5}; do
+    echo "$i"
+  done
+
+  # requires bash v4.0+
+  for i in {0..10..2}; do
+    echo "$i"
+  done
 #+END_SRC
 
 ** function
@@ -504,6 +551,14 @@ your ~return 1~ or any other number besides ~0~, your entire script will exit.
 #+END_SRC
 
 * Details
+** Arithmetic expansion
+- https://www.gnu.org/software/bash/manual/bashref.html#Arithmetic-Expansion
+- https://www.gnu.org/software/bash/manual/bashref.html#Shell-Arithmetic
+
+#+BEGIN_SRC shell
+  $(( expression ))
+#+END_SRC
+
 ** Getting the source directory
 - http://stackoverflow.com/questions/59895/getting-the-source-directory-of-a-bash-script-from-within
  
