@@ -265,7 +265,7 @@ your ~return 1~ or any other number besides ~0~, your entire script will exit.
 
   set +x # Use + rather than -  to turn off.
 
-  set -- "foo" "bar" # set the positional parameters
+  set -- 'foo' 'bar' # set the positional parameters
   echo "$1, $2"      # 'foo, bar'
 #+END_SRC
 
