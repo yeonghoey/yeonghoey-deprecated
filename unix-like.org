@@ -35,6 +35,7 @@
    - [[#redirection][Redirection]]
    - [[#swap-spacesfiles][Swap spaces/files]]
    - [[#the-art-of-command-line][The Art of Command Line]]
+   - [[#-vs-][$* vs $@]]
 
 * Primitives
 ** Arithmetic expansion
@@ -75,12 +76,33 @@
 
 ** array
 - https://www.gnu.org/software/bash/manual/bashref.html#Arrays
+- http://tldp.org/LDP/Bash-Beginners-Guide/html/sect_10_02.html
 
 #+BEGIN_SRC shell
   name[subscript]=value
   declare -a nameo
   declare -a name[subscript]
+  name=(value1 value2 … )
 #+END_SRC
+
+#+BEGIN_SRC shell
+  $ array=(one two three)
+
+  $ echo ${array[*]}
+  one two three
+
+  $ echo $array[*]
+  one[*]
+
+  $ echo ${array[2]}
+  three
+
+  $ array[3]=four
+
+  $ echo ${array[*]}
+  one two three four
+#+END_SRC
+
 ** case
 - http://tldp.org/LDP/Bash-Beginners-Guide/html/sect_07_03.html
 
@@ -1000,5 +1022,36 @@ Use the flag of ~-T~ for explicitly disabling ~pty~.
 
   # sum of all numbers in the third column
   awk '{ x += $3 } END { print x }' myfile
+#+END_SRC
+
+** $* vs $@
+- http://stackoverflow.com/questions/12314451/accessing-bash-command-line-args-vs
+
+#+BEGIN_SRC shell
+  $ set -- "arg  1" "arg  2" "arg  3"
+
+  $ for word in $*; do echo "$word"; done
+  arg
+  1
+  arg
+  2
+  arg
+  3
+
+  $ for word in $@; do echo "$word"; done
+  arg
+  1
+  arg
+  2
+  arg
+  3
+
+  $ for word in "$*"; do echo "$word"; done
+  arg  1 arg  2 arg  3
+
+  $ for word in "$@"; do echo "$word"; done
+  arg  1
+  arg  2
+  arg  3
 #+END_SRC
 
