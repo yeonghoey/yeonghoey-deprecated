@@ -1032,15 +1032,6 @@ Use the flag of ~-T~ for explicitly disabling ~pty~.
 - https://www.gnu.org/software/bash/manual/bashref.html#Special-Parameters
 - Use ~​"$@"​~ for most cases
 
-| Syntax | Effective result          |
-|--------+---------------------------|
-| $*     | $1 $2 $3 ... ${N}         |
-| $@     | $1 $2 $3 ... ${N}         |
-| "$*"   | "$1c$2c$3c...c${N}"       |
-| "$@"   | "$1" "$2" "$3" ... "${N}" |
-
-where ~c~ is the first character of ~$IFS~
-
 #+BEGIN_SRC shell
   $ set -- "arg  1" "arg  2" "arg  3"
 
