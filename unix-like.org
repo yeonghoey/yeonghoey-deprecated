@@ -257,11 +257,16 @@ your ~return 1~ or any other number besides ~0~, your entire script will exit.
 #+END_SRC
 
 ** set
-- http://ss64.com/bash/set.html
+- https://www.gnu.org/software/bash/manual/html_node/The-Set-Builtin.html
  
 #+BEGIN_SRC shell
-  set -e  # Exit immediately when a command fails
-  set -x  # Print a trace of simple commands
+  set -e # Exit immediately when a command fails
+  set -x # Print a trace of simple commands
+
+  set +x # Use + rather than -  to turn off.
+
+  set -- "foo" "bar" # set the positional parameters
+  echo "$1, $2"      # 'foo, bar'
 #+END_SRC
 
 * Commands
