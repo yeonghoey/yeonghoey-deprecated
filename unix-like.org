@@ -92,7 +92,7 @@
   one two three
 
   $ echo "$array[@]"
-  one[*]
+  one[@]
 
   $ echo "${array[2]}"
   three
