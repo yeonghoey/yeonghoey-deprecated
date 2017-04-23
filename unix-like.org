@@ -1030,7 +1030,7 @@ Use the flag of ~-T~ for explicitly disabling ~pty~.
 ** $* vs $@
 - http://stackoverflow.com/questions/12314451/accessing-bash-command-line-args-vs
 - https://www.gnu.org/software/bash/manual/bashref.html#Special-Parameters
-- Use ~"$@"~ for most cases
+- Use ~​"$@"​~ for most cases
 
 #+BEGIN_SRC shell
   $ set -- "arg  1" "arg  2" "arg  3"
