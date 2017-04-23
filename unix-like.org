@@ -88,18 +88,18 @@
 #+BEGIN_SRC shell
   $ array=(one two three)
 
-  $ echo ${array[*]}
+  $ echo "${array[@]}"
   one two three
 
-  $ echo $array[*]
+  $ echo "$array[@]"
   one[*]
 
-  $ echo ${array[2]}
+  $ echo "${array[2]}"
   three
 
   $ array[3]=four
 
-  $ echo ${array[*]}
+  $ echo "${array[@]}"
   one two three four
 #+END_SRC
 
