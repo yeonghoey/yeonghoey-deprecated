@@ -2,7 +2,7 @@
 
 * Table of Contents                                                :TOC_2_gh:
  - [[#primitives][Primitives]]
-   - [[#arithmetic-expansion][Arithmetic expansion]]
+   - [[#arithmetic-expansion][Arithmetic Expansion]]
    - [[#brace-expansion][Brace Expansion]]
    - [[#shell-parameter-expansion][Shell Parameter Expansion]]
    - [[#array][array]]
@@ -38,7 +38,7 @@
    - [[#-vs-][$* vs $@]]
 
 * Primitives
-** Arithmetic expansion
+** Arithmetic Expansion
 - https://www.gnu.org/software/bash/manual/bashref.html#Arithmetic-Expansion
 - https://www.gnu.org/software/bash/manual/bashref.html#Shell-Arithmetic
 
