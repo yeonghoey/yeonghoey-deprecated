@@ -270,7 +270,7 @@ your ~return 1~ or any other number besides ~0~, your entire script will exit.
   fi
 #+END_SRC
 
-[[file:img/screenshot_2017-04-24_12-09-42.png]]
+[[file:img/screenshot_2017-04-24_12-19-35.png]]
 
 [[file:img/screenshot_2017-04-24_12-10-01.png]]
 
