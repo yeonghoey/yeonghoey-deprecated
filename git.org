@@ -4,6 +4,7 @@
  - [[#references][References]]
    - [[#add][add]]
    - [[#branch][branch]]
+   - [[#diff][diff]]
    - [[#flow][flow]]
    - [[#list-tree][list-tree]]
    - [[#log][log]]
@@ -17,6 +18,7 @@
    - [[#run-commands-while-not-in-a-git-directory][Run commands while not in a git directory]]
    - [[#resolve-conflicts][Resolve conflicts]]
    - [[#purge-files-including-their-histories][Purge files including their histories]]
+   - [[#how-to-git-commit-nothing-without-an-error][How to git commit nothing without an error]]
 
 * References
 ** add
@@ -72,6 +74,12 @@
 #+BEGIN_SRC shell
   # prune when fetching
   $ git fetch --prune
+#+END_SRC
+
+** diff
+#+BEGIN_SRC shell
+  git diff --exit-code # Exits 0: no differences, 1: differences
+  git diff --quiet     # No outputs. Implies --exit-code
 #+END_SRC
 
 ** flow
@@ -226,3 +234,15 @@ cd yeonghoey.git
 git reflog expire --expire=now --all && git gc --prune=now --aggressive
 git push
 #+END_SRC
+** How to git commit nothing without an error
+- http://stackoverflow.com/questions/8123674/how-to-git-commit-nothing-without-an-error
+
+#+BEGIN_SRC shell
+  if ! git diff --quiet --cached; then
+    git commit --verbose
+  fi
+
+  # or just
+  git diff --quiet --cached || git commit
+#+END_SRC
+
