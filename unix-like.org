@@ -9,6 +9,7 @@
    - [[#case][case]]
    - [[#for][for]]
    - [[#function][function]]
+   - [[#if][if]]
    - [[#set][set]]
  - [[#commands][Commands]]
    - [[#apt][apt]]
@@ -186,7 +187,7 @@
 #+END_SRC
 
 - The keyword ~function~ is *optional*, but must be used consistently throughout a project.
-- If you're writing a package, separate package names with ~::~. 
+- If you're writing a package, separate package names with ~::~.
 
 #+BEGIN_SRC shell
   # Single function
@@ -224,11 +225,11 @@
 
 #+BEGIN_QUOTE
 Note that if you have ~set -e~ set at the top of your script and
-your ~return 1~ or any other number besides ~0~, your entire script will exit. 
+your ~return 1~ or any other number besides ~0~, your entire script will exit.
 ~exit~ abandons the current shell.
 #+END_QUOTE
 
-- By *default a variable is global.*  
+- By *default a variable is global.*
 - When we create a local variable within a function, *it is only visible* within that function.
 #+BEGIN_SRC shell
   var_change () {
@@ -256,9 +257,37 @@ your ~return 1~ or any other number besides ~0~, your entire script will exit.
   echo 'bye'
 #+END_SRC
 
+** if
+- http://tldp.org/LDP/Bash-Beginners-Guide/html/sect_07_01.html
+
+#+BEGIN_SRC shell
+  if commands; then
+    commands
+  [elif commands; then
+    commands ...]
+  [else
+    commands]
+  fi
+#+END_SRC
+
+[[file:img/screenshot_2017-04-24_12-09-42.png]]
+
+[[file:img/screenshot_2017-04-24_12-10-01.png]]
+
+*** [[, [ and test
+- http://mywiki.wooledge.org/BashFAQ/031
+- ~[~ and ~test~ are available in POSIX shells
+- ~[[~ works only in Bash, Zsh and the Korn shell, and is more powerful
+- ~[[~ is preferred over ~[~, ~test~ (from [[https://google.github.io/styleguide/shell.xml][Google Shell Style Guide]])
+
+[[file:img/screenshot_2017-04-24_12-12-29.png]]
+
+- Special primitives that ~[[~ is defined to have, but ~[~ may be lacking
+[[file:img/screenshot_2017-04-24_12-12-57.png]]
+
 ** set
 - https://www.gnu.org/software/bash/manual/html_node/The-Set-Builtin.html
- 
+
 #+BEGIN_SRC shell
   set -e # Exit immediately when a command fails
   set -x # Print a trace of simple commands
@@ -281,7 +310,7 @@ your ~return 1~ or any other number besides ~0~, your entire script will exit.
 
 ***  Install java8
 - http://tecadmin.net/install-oracle-java-8-jdk-8-ubuntu-via-ppa/
- 
+
 #+BEGIN_SRC shell
   sudo add-apt-repository ppa:webupd8team/java
   sudo apt-get update
@@ -423,7 +452,7 @@ your ~return 1~ or any other number besides ~0~, your entire script will exit.
 ** tar
 - http://www.tecmint.com/18-tar-command-examples-in-linux/
 - http://askubuntu.com/questions/122141/whats-the-difference-between-tar-gz-and-gz-or-tar-7z-and-7z
- 
+
 | flag      | mnemonic         |
 |-----------+------------------|
 | ~-c~      | create           |
@@ -512,7 +541,7 @@ your ~return 1~ or any other number besides ~0~, your entire script will exit.
   a target/path
   a target/path/b.txt
 #+END_EXAMPLE
------ 
+-----
 #+BEGIN_SRC shell
   # Don't need any option for extracting compressed tar
   $ tar -xvf target.tar.gz
@@ -545,7 +574,7 @@ your ~return 1~ or any other number besides ~0~, your entire script will exit.
 
 ** tee
 - https://shapeshed.com/unix-tee/
- 
+
 #+BEGIN_SRC shell
   $ echo 'foo' | tee foo.txt
   foo
@@ -568,7 +597,7 @@ your ~return 1~ or any other number besides ~0~, your entire script will exit.
   $ echo 'foo' >> file
   zsh: permission denied: file
 
-  # 'tee' can be used to work around this  
+  # 'tee' can be used to work around this
   $ echo "foo" | sudo tee -a file
 #+END_SRC
 
@@ -632,7 +661,7 @@ your ~return 1~ or any other number besides ~0~, your entire script will exit.
 * Details
 ** Getting the source directory
 - http://stackoverflow.com/questions/59895/getting-the-source-directory-of-a-bash-script-from-within
- 
+
 #+BEGIN_SRC shell
   DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd )"
 #+END_SRC
@@ -827,7 +856,7 @@ information about other metadata structures (metadata of metadata).
 - https://en.wikipedia.org/wiki/Fstab
 
 #+BEGIN_SRC shell
-  # view your available disk devices and their mount points 
+  # view your available disk devices and their mount points
   [root]$ lsblk
   NAME  MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
   xvdf  202:80   0  100G  0 disk
@@ -894,7 +923,7 @@ If you accidentally delete ~lost+found~, *don't re-create it with* ~mkdir~, *use
 ** Prompt a user for yes/no
 - http://stackoverflow.com/questions/3231804/in-bash-how-to-add-are-you-sure-y-n-to-any-command-or-alias/3231821#3231821
 - http://stackoverflow.com/questions/226703/how-do-i-prompt-for-yes-no-cancel-input-in-a-linux-shell-script
- 
+
 #+BEGIN_SRC shell
   read -p "Are you sure you want to continue? <y/N> " prompt
   if [[ "$prompt" =~ [yY](es)* ]]
@@ -1064,4 +1093,3 @@ Use the flag of ~-T~ for explicitly disabling ~pty~.
   arg  2
   arg  3
 #+END_SRC
-
