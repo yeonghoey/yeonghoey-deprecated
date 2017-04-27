@@ -1,2 +1,2 @@
 # Deprecated
-SEE: https://github.com/yeonghoey/notes
+Moved: https://github.com/yeonghoey/notes
