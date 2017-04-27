@@ -1,3 +1,2 @@
-# yeonghoey
-
-A personal knowledge base
+# Deprecated
+SEE: https://github.com/yeonghoey/notes
